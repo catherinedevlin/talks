@@ -1,0 +1,153 @@
+
+Professionalization
+  quality
+  alienation
+
+    hospital food
+
+    People increasingly know that data is important
+    and effects them.
+
+    And it's a mystery to them.
+
+
+    18f cynicism
+      the disclaimer
+
+    polling stats
+
+    not asking you to trust your government!
+
+    not just government -
+      or other aspects of communal life
+
+
+    learned helplessness - abdicate informed
+      sinclair
+
+
+  so where were we?
+  oh, yeah, we were complaining about the dark side of
+    developing a ruling caste armed with ill-understood powers
+
+  irony: what drew me into Python was the amateur friendliness
+
+  let's talk about chickens.
+
+  small farms, food gardens
+
+  these don't replace big industrial farming
+
+  but they do improve awareness, connectivity
+
+  what if we had small, organic, local data farming?
+
+What do I mean?  What can we teach amateurs about using data ?
+
+
+  getting data
+    apis
+
+      define it.  That's a very jargony term.
+      api use
+      open data hubs
+        data.gov
+          FEC
+          Crime Data Explorer
+          USASpending
+        beware intimidating quantity
+      api use
+      api finding
+
+  getting from other sources
+    automate the boring
+    csv
+    scraping
+    basic pdfs
+    bulk data processing (what did I mean here?)
+
+
+  analyzing it
+    seeing theory
+    visualizing: Altair
+    but this is probably not the biggest.  most people are not itching for
+      detail beyond maybe an average.  qualitative
+
+  projects
+    local views of national data
+    amalgamate local entries : guides, directories, calendars
+      local events
+      local libraries
+      local parks
+
+
+
+
+teaching
+
+  traditional
+    math / abstract
+    websites
+    games
+    but everybody is affected by data
+  who
+    students (see Jessica's keynote)
+    local government (see tweet)
+    journalists
+    small businesspeople
+    activists
+  how
+    data carpentry
+    julia evans
+    code for dayton
+    jupyter notebooks
+    seeing theory
+    beware
+      weeding
+      jargon (API)
+    Open Data Institute
+      https://theodi.org/article/open-data-skills-framework/
+
+make it easy
+  package the data better
+    quilt
+    use standards
+
+
+  write better packages
+  wrap existing packages
+    requests
+    wrap existing APIs: twitter API
+  connect existing packages
+    ipython-sql
+  improve docs
+    file documentation issues
+  speak
+    local groups
+    non-software groups
+  blog
+  signal-boost
+    signal-boost good sources, not just tools
+    make curated
+
+ambitions
+  kitchen computer?
+  civic engagement
+  fear of disenfranchisement, data breaches, big institutions
+    informed fear
+    uninformed fear == learned helplessness
+  strengten local
+  empower buying
+  diversity and participation in design
+    diverse teams
+    people give feedback when they understand
+    broader pipeline
+  open data
+    it's more valuable when it's consumed more
+
+    consumers create demand
+    food labels
+    no pdfs
+  date ethics
+    awareness of bias
+
