@@ -1,0 +1,118 @@
+
+Professionalization
+  quality
+  alienation
+
+    hospital food
+
+    People increasingly know that data is important
+    and effects them.
+
+    And it's a mystery to them.
+
+
+    18f cynicism
+      the disclaimer
+
+    polling stats
+
+    not asking you to trust your government!
+
+    not just government -
+      or other aspects of communal life
+
+
+    learned helplessness - abdicate informed
+      sinclair
+
+
+  so where were we?
+  oh, yeah, we were complaining about the dark side of
+    developing a ruling caste armed with ill-understood powers
+
+  irony: what drew me into Python was the amateur friendliness
+
+
+
+amateurize
+  chickens, eggs
+  small farms
+    more aware consumers
+  not rocket science
+  why we love python
+
+teaching
+
+  traditional
+    math / abstract
+    websites
+    games
+    but everybody is affected by data
+  who
+    students (see Jessica's keynote)
+    local government (see tweet)
+    journalists
+    small businesspeople
+    activists
+  how
+    data carpentry
+    julia evans
+    code for dayton
+    jupyter notebooks
+    seeing theory
+    beware
+      weeding
+      jargon (API)
+    Open Data Institute
+      https://theodi.org/article/open-data-skills-framework/
+  what
+    open data hubs
+      beware intimidating quantity
+    api use
+    automate the boring
+    csv
+    scraping
+    bulk data processing
+    basic pdfs
+  projects
+    local views of national data
+    make local directories
+    open data census
+
+make it easy
+  write better packages
+  wrap existing packages
+    requests
+    twitter API
+  connect existing packages
+    ipython-sql
+  improve docs
+    file documentation issues
+  speak
+    local groups
+    non-software groups
+  blog
+  signal-boost
+    make curated
+
+ambitions
+  kitchen computer?
+  civic engagement
+  fear of disenfranchisement, data breaches, big institutions
+    informed fear
+    uninformed fear == learned helplessness
+  strengten local
+  empower buying
+  diversity and participation in design
+    diverse teams
+    people give feedback when they understand
+    broader pipeline
+  open data
+    it's more valuable when it's consumed more
+
+    consumers create demand
+    food labels
+    no pdfs
+  date ethics
+    awareness of bias
+

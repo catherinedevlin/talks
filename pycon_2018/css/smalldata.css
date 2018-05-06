@@ -61,3 +61,7 @@ a {
     top: 95%;
     font-size: 50%;
 }
+
+.strike {
+    text-decoration: line-through;
+  }
