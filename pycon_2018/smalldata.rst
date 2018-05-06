@@ -20,6 +20,7 @@ WELCOME TO OHIO
 
 .. image:: img/ohio.svg
    :height: 600px
+   :alt: Ohio flag
 
 .. note::
 
@@ -27,11 +28,9 @@ WELCOME TO OHIO
 
 ----
 
-PyOhio
-------
-
 .. image:: img/pyohio2018.jpg
    :height: 600px
+   :alt: PyOhio
 
 .. note::
 
@@ -40,14 +39,14 @@ PyOhio
 ----
 
 .. image:: img/dayton-to-cleveland.png
+   :height: 600px
+   :alt: Route from Dayton to Cleveland
 
 ----
 
-Data Is The New Oil
--------------------
-
 .. image:: img/new_oil.png
    :height: 600px
+   :alt: Data Is The New Oil
 
 ----
 
@@ -64,12 +63,19 @@ Data Is The New Oil
 ----
 
 Professionalization
+-------------------
 
 Data Science
 
 Technique, tools, standards...
 
 (Salaries!)
+
+.. note::
+
+    The more data science becomes reality rather than a marketing term...
+    the more we can change the world - and get paid to do so, which is
+    nice.
 
 ----
 
@@ -78,16 +84,12 @@ Data janissaries?
 
 .. image:: img/janissaries.jpg
    :height: 600px
-
-----
-
-.. image:: img/hospital_food.jpg
-   :height: 600px
+   :alt: Janissaries
 
 .. note::
 
-    If you're sick and a friend cooks you dinner, it's the
-    sweetest thing in the world.
+    But change the world to what?  Are we serving the world in general?
+    Or are we going to be enforcers of the dominance of a new ruling caste?
 
 ----
 
@@ -97,10 +99,24 @@ Data janissaries?
 
 .. note::
 
-    If we all believe that data is a new, controlling power in the world,
-    and 90% of us believe that power is out of our control or even comprehension,
+    Because most people agree that data is important and powerful, but they
+    also feel very cut off from it.
+
+    If there's a new, controlling power in the world, and you feel that power
+    is beyond your ability to control or influence or even understand,
     that's a very alienating feeling.  That's a feeling that it's not your
     world anymore.
+
+----
+
+.. image:: img/hospital_food.jpg
+   :height: 600px
+   :alt: Hospital food
+
+.. note::
+
+    If you're sick and a friend cooks you dinner, it's the
+    sweetest thing in the world.
 
 ----
 
@@ -110,13 +126,25 @@ Pew Research:
 
     The backdrop for this lack of confidence in communications security is low levels of trust in key sectors that Americans associate with data collection and monitoring.
 
+.. note::
+
+    Feeling a little attacked here.  Feeling a little hurt.  Feeling a little hurt at being lumped together with advertisers, actually...
+
 ----
 
-18F
----
+Specifically,
+
+    91% of Americans “agree” or “strongly agree” that people have lost control over how personal information is collected and used by all kinds of entities.
+
+    18% of adults believe that the government in Washington can be trusted to do what is right either all (2%) or most (16%) of the time
+
+Government can “never” be trusted: 21% no college, 9% at least some college
+
+----
 
 .. image:: img/18f.svg
    :height: 300px
+   :alt: 18F logo
 
 .. note::
 
@@ -129,23 +157,25 @@ Pew Research:
     You should consider doing a tour among the amazing Pythonistas
     of 18F.  It's been the best experience of my professional life.
 
-----
+    My apologies to non-Americans for the US-centric portions of this
+    talk, but it's very likely that you have similar dynamics going on
+    in your own country, and you may have 18F-like agencies as well.
 
-Not 18F
--------
+----
 
 .. image:: img/not-18f2.png
    :height: 300px
+   :alt: 18F logo with Forbidden bar
 
 .. note::
 
     Not an 18F talk
 
-    I am on vacation.
+    My personal views, not those of U. S. Government.
+
+    I am on vacation, on my own dime.
 
     If my supervisor calls, you haven't seen me.
-
-
 
 ----
 
@@ -154,6 +184,7 @@ USASpending.gov
 
 .. image:: img/usaspending-frontend.png
    :height: 600px
+   :alt: USASpending.gov screenshot
 
 ----
 
@@ -162,6 +193,7 @@ USASpending.gov API
 
 .. image:: img/usaspending-api.png
    :height: 600px
+   :alt: USASpending.gov API screenshot
 
 ----
 
@@ -173,7 +205,6 @@ USASpending.gov API
     shown me how low expectations around the government has become.
 
     Which is sad, because it's our government!
-
 
 ----
 
@@ -187,6 +218,11 @@ Manage your government.
 
     We are your employees.
 
+    And I'm really not talking about government specifically, that's just
+    that statistics I was able to find.  I'm talking about all forms of
+    society-wide cooperative activity, this whole "being an effective social
+    species" thing.
+
 ----
 
 .. code:: python
@@ -199,25 +235,19 @@ Manage your government.
 .. note::
 
     People think of cynicism as a defense against manipulation,
-    but it's actually how we are manipulated - into inaction,
-    into selfishness, into withdrawl.  Cynicism divides us and
-    conquers us, which is why some groups deliberately foster it.
+    and it is a defense mechanism,
+    but it's one that backfires: it lets us be manipulated.
 
-    Some people want that cynicism, disengagement, despair, passivity.
+    Cautious skepticism is a defense, cynicism is a defense mechanism.
+
+    The disengagement,
+    despair, and passivity that cynicism breeds divides us and conquers
+    us.  And there are groups specifically breeding cynicism for exactly
+    that reason.
 
     https://arstechnica.com/tech-policy/2018/04/trump-praises-sinclair-for-spreading-fake-news-warning-on-tv-stations/
 
     0:50
-
-----
-
-Manage your society.
-
-Data is a tool.
-
-.. note::
-
-    Being a participant in society, not a consumer
 
 ----
 
@@ -226,6 +256,7 @@ Chickens
 
 .. image:: img/chickens.jpg
    :height: 600px
+   :alt: chickens
 
 .. note::
 
@@ -241,6 +272,7 @@ Mile Creek Farm CSA
 
 .. image:: img/milecreek3.jpg
    :height: 600px
+   :alt: harvesting vegetables
 
 .. note::
 
@@ -265,11 +297,12 @@ Mile Creek Farm CSA
 
 ----
 
-Data Creek Farm
----------------
+Community-supported dataculture
+-------------------------------
 
 .. image:: img/datacreek3.jpg
    :height: 600px
+   :alt: harvesting data
 
 .. note::
 
@@ -283,9 +316,10 @@ Data Creek Farm
     with organic, sustainably, humanely grown integers,
     strings, floats, and decimals.
 
-    In other words, can we have a movement to democratize
-    use of data that's like the movement to democratize
-    the growth of food?
+    Remember how those statistics about mistrust got a little bit
+    better with education?  My hope is that education and activity
+    that specifically brings people contact with the data supply
+    can do for data what it does for food.
 
 ----
 
@@ -294,6 +328,7 @@ Why Python?
 
 .. image:: img/jupyter.png
    :height: 300px
+   :alt: Jupyter logo
 
 .. note::
 
@@ -316,7 +351,6 @@ Skills
 - Gathering
 - Processing
 - Combining
-- Transferring
 - Visualizing
 
 ----
@@ -328,8 +362,9 @@ You are still an *empowerer*.
 
 .. note::
 
-    ... Bear with me, because you will gradually see why I think
-    you have a big part in this whether you teach or not.
+    If you're on the verge of tuning out because you think this is
+    an educator, you are not excused.  Everybody is part of the
+    effort, as you'll see as I go on.
 
 ----
 
@@ -338,6 +373,7 @@ Programming: Not rocket science
 
 .. image:: img/rocketry2.jpg
    :height: 600px
+   :alt: Midwest Propulsion Group rocket experiment
 
 .. note::
 
@@ -349,18 +385,26 @@ Programming: Not rocket science
     in danger of violating UN Security Council resolutions.
 
     But even though they're a very talented, dedicated, amazing group,
-    they're not going into space.  Earth has no beginners' level orbit.
+    they're not going into space.
 
-    Without millions of dollars in spending, your rockets are not
-    going to be space rockets.
+    Without millions of dollars in funding, your rockets are not
+    going to be space rockets.  Earth has no Beginners' Orbit.
 
 ----
 
-More like cooking
------------------
+More like gardening
+-------------------
 
-.. image:: img/cooking.jpg
+.. image:: img/gardening.jpg
    :height: 600px
+   :alt: White House Kitchen Garden planting
+
+.. note::
+
+    You can garden at any level.  You can raise one lousy basil plant
+    on your windowsill, or you can grow and can a whole year's worth
+    of vegetables and sell your surplus at the farmer's market, or
+    anywhere in between.
 
 ----
 
@@ -370,6 +414,7 @@ Programming intros
 - Math / abstract
 - Websites
 - Games
+- Data
 
 .. note::
 
@@ -413,11 +458,11 @@ email
     Most people feel overwhelmed by email.  It was the first form of
     information overload.
 
-    This is a huge source of personally relevant (maybe) data for most
-    people.
-
     The filters etc. provided by email providers are nowhere near as
     sophisticated and specific as the programs they could
+
+    This is a huge source of personally relevant (maybe) data for most
+    people.
 
 ----
 
@@ -430,10 +475,9 @@ twitter-scraper_ by Kenneth Reitz
 
 .. note::
 
-    Social media is an obvious target because so much
-    work has been done by companies or third-parties or sleazy
-    political organizations, but individuals
-    haven't yet taken hold of their own social media destiny.
+    Social media is probably the most commonly known source of data for
+    companies to mine, which is all the more reason to help people
+    work with their own social media data.
 
     Who is near my physically?  Who may be interested in an organization
     or an upcoming event I'm interested in?  Who's announced weekend plans?
@@ -441,6 +485,9 @@ twitter-scraper_ by Kenneth Reitz
 
     Are there hours of the day when I'm more likely to make misspellings
     or threaten foreign countries?
+
+    It's such a familiar realm that it's easy to rouse people's curiosity
+    about.
 
 ----
 
@@ -476,14 +523,13 @@ Webscraping
 
     Local Resources, businesses, organizations, governmental bodies -
     they tend to publish independently on scattered, obscure websites.
-    Can you help them with that?
+    Many of them use a Facebook page as their only web presence, with
+    important information buried deep in the feed.
+    Can you unbury it?
 
-    Changes to Federal websites often make the news.  But do you know
-    what your state government is up to?  Your county?  Your city?
-
-    Also, many small businesses and institutions use Facebook as their
-    *only* web presence, which can make their information hard to access.
-    Can you rescue their semi-hidden information?
+    When there's a significant change on a Federal website, it often
+    makes the news.  But do you know what's changing in your state,
+    your county, your city?
 
     And speaking of information rescue...
 
@@ -529,8 +575,12 @@ Self-generated data
 .. note::
 
     What APIs are
+
     How to find them
+
     How to use them
+
+    These are secrets we've been hoarding!
 
 ----
 
@@ -566,6 +616,10 @@ Open data hubs
 
 .. _OpenData Census: http://us-cities.survey.okfn.org/
 
+.. image:: img/open_data_census.png
+   :height: 600px
+   :alt: Open Data Census screenshot
+
 .. note::
 
     It improves data access locally, encourages your city
@@ -574,10 +628,13 @@ Open data hubs
 ----
 
 Presenting the info
+-------------------
 
 - Publishing: static site generation (Jekyll, Pelican, etc.)
 
 - Visualizing: matplotlib, Bokeh, altair-viz...
+
+- Mapping: Leaflet (Folium)
 
 .. note::
 
@@ -585,6 +642,32 @@ Presenting the info
 
     Full-fledged web development skills are optional here,
     unless that's the way they really want to go.
+
+----
+
+Re-presenting data
+------------------
+
+Dayton LotLinker_
+
+.. _LotLinker: http://www.lotlinker.com/
+
+.. image:: img/lotlinker.png
+   :height: 600px
+   :alt: LotLinker screenshot
+
+.. note::
+
+    Dayton has abandoned, forfeited houses that you can buy from the city
+    for about $2500, but the information about those houses was only available
+    through a spreadsheet that was not a very good interface for finding places
+    to consider.
+
+    So Code for Dayton, our local Code for America brigade, processed that
+    spreadsheet into a Leaflet map and published is as lotlinker.com.
+
+    As you can see, we have room for all of you, so if you want to carpool to
+    next PyCon from your new house in Dayton, let me know.
 
 ----
 
@@ -612,6 +695,7 @@ Catherine Bracy - PyCon 2015 keynote
 
 .. image:: img/c4a.png
    :height: 600px
+   :alt: Catherine Bracy at PyOhio 2015
 
 ----
 
@@ -632,6 +716,7 @@ Local Governments
 
 .. image:: img/city_employees.png
    :height: 600px
+   :alt: Tweet regarding teaching to city employees
 
 ----
 
@@ -643,15 +728,19 @@ help bring about this revolution?"
 - Teach
 - Write
 
-  - books
-  - articles
   - blog
+  - articles
+  - books
+
+    - Automate The Boring Stuff
 
 .. note::
 
     Yes You Can!
 
     Small local publications, business publications...
+
+    Automate the Boring Stuff by Al Sweigart
 
 ----
 
@@ -693,7 +782,9 @@ help bring about this revolution?"
 ----
 
 - Speak
+
   - not here
+
 - Signal-boost
 
 .. note::
@@ -709,6 +800,7 @@ help bring about this revolution?"
 ----
 
 Open that data
+--------------
 
 .. note::
 
@@ -734,13 +826,17 @@ Make it easier
 
 ----
 
-Package your data
-
-Repackage others' data
+OKI's `data packages`_
+----------------------
 
 - OKI's `data packages`_
 
 .. _data packages: https://frictionlessdata.io/data-packages/
+
+
+.. image:: img/data_packages.png
+   :height: 600px
+   :alt: Data Packages screenshot
 
 .. note::
 
@@ -764,22 +860,13 @@ Write the docs!
 - Join projects
 - File documentation PRs
 - Create examples
+- Answer questions
 
 Ignorance is precious
 
 .. note::
 
     ... which is, of course, the name of a conference
-
-----
-
-Ambitions
-
-.. note::
-
-    In between the immediate goals - creating a new website full
-    of local data - and the final goal - a better world with an
-    engaged public - what are the hoped-for connecting developments?
 
 ----
 
@@ -790,6 +877,7 @@ Honeywell 316 `Kitchen Minicomputer`_
 
 .. image:: img/kitchen_computer.png
    :height: 600px
+   :alt: Kitchen Minicomputer
 
 .. note::
 
@@ -806,7 +894,19 @@ Honeywell 316 `Kitchen Minicomputer`_
 
 ----
 
+Ambitions
+---------
+
+.. note::
+
+    In between the immediate goals - creating a new website full
+    of local data - and the final goal - a better world with an
+    engaged public - what are the hoped-for connecting developments?
+
+----
+
 Civic engagement
+----------------
 
 - Sense of ownership
 - Habits of participation
@@ -821,6 +921,7 @@ Civic engagement
 ----
 
 Data ethics
+-----------
 
 Diverse communities
 
@@ -837,6 +938,7 @@ Diverse communities
 ----
 
 Smarter data consumers
+----------------------
 
 .. note::
 
@@ -846,8 +948,10 @@ Smarter data consumers
 ----
 
 Create open data demand
+-----------------------
 
 .. image:: img/ingredients.jpg
+   :alt: ingredients list from food label
 
 .. note::
 
@@ -878,12 +982,13 @@ Strengthen local institutions
 
 ----
 
-# TODO: close with human interest story
+# TODO: close with heartwarming story
 
 ----
 
 .. image:: img/Kimber.jpg
    :height: 600px
+   :alt: Kimber the dog
 
 .. note::
 
@@ -925,6 +1030,7 @@ Duck, turkey, pork, banana, peanut, fish, salmon, peas, oats, tomato and berries
 
 .. image:: img/Kimber.jpg
    :height: 600px
+   :alt: Kimber the dog
 
 .. note::
 
@@ -933,7 +1039,19 @@ Duck, turkey, pork, banana, peanut, fish, salmon, peas, oats, tomato and berries
 ----
 
 Questions?
+----------
 
+@catherinedevlin
+
+catherine.devlin@gmail.com
+
+github.com/catherinedevlin
+
+.. note::
+
+    I'm consistently branded, easy to find,
+    you know where I live, and I'm staying for
+    sprints.
 
 ----
 

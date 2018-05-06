@@ -1,4 +1,7 @@
-
+.step {
+    font-weight: bold;
+    font-family: Verdana, Arial, "Sans-serif";
+}
 
 body {
     font-size: 200%;
@@ -17,7 +20,6 @@ pre {
 }
 
 h1, h2, h3, h4 {
-    font-weight: normal;
     margin-bottom: 0.3em;
     margin-top: 0.3em;
 }
@@ -32,7 +34,6 @@ ul {
 
 li {
     font-family: serif;
-    font-weight: normal;
     margin-bottom: 0.3em;
     margin-top: 0.3em;
     padding-left: 0.3em;
