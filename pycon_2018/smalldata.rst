@@ -13,6 +13,8 @@ Catherine Devlin
 
 PyCon 2018
 
+github.com/catherinedevlin/talks
+
 ----
 
 WELCOME TO OHIO
@@ -35,6 +37,8 @@ WELCOME TO OHIO
 .. note::
 
     Last weekend in July.
+
+    CFP closes on Tuesday, the 15th
 
 ----
 
@@ -118,6 +122,12 @@ Data janissaries?
     If you're sick and a friend cooks you dinner, it's the
     sweetest thing in the world.
 
+    The sense of a loss of understanding and connection
+    breeds alienation.  It's happened to hospital food,
+    it's happened to the handling of data, and I'm afraid
+    that, partially due to the centrality of data,
+    it's happening to our institutions in general.
+
 ----
 
 Pew Research:
@@ -139,6 +149,15 @@ Specifically,
     18% of adults believe that the government in Washington can be trusted to do what is right either all (2%) or most (16%) of the time
 
 Government can “never” be trusted: 21% no college, 9% at least some college
+
+.. note::
+
+    18% is really low.  You could get 18% positive responsed to
+    "Would you like a pot of boiling vinegar thrown in your face?"
+
+    That's the level of mistrust you might expect in Vichy France.
+
+    But we're not under a foreign power.  This is our own government.
 
 ----
 
@@ -351,7 +370,7 @@ Skills
 - Gathering
 - Processing
 - Combining
-- Visualizing
+- Presenting
 
 ----
 
@@ -501,6 +520,16 @@ Webscraping
 .. _BeautifulSoup: https://www.crummy.com/software/BeautifulSoup/
 .. _requests-html: https://github.com/kennethreitz/requests-html
 
+.. note::
+
+    Webscraping is getting data from websites that weren't
+    designed to provide data to your programs, but only to
+    be used by human eyeballs.  So it's a little tricky,
+    but there are huge quantities of data locked up in it,
+    and we have some good libraries to help us unlock it.
+
+    These three in particular are pretty beginner-friendly
+
 ----
 
 .. role:: strike
@@ -588,7 +617,6 @@ Open data hubs
 --------------
 
 - data.gov
-- `Open Data Census`_
 - `Humanitarian Data Exchange`_
 - `curated API lists`_
 - `Open Data Census`_
@@ -667,7 +695,7 @@ Dayton LotLinker_
     spreadsheet into a Leaflet map and published is as lotlinker.com.
 
     As you can see, we have room for all of you, so if you want to carpool to
-    next PyCon from your new house in Dayton, let me know.
+    PyCon 2019 from your new house in Dayton, let me know.
 
 ----
 
@@ -696,6 +724,9 @@ Catherine Bracy - PyCon 2015 keynote
 .. image:: img/c4a.png
    :height: 600px
    :alt: Catherine Bracy at PyOhio 2015
+
+.. note::
+
 
 ----
 
@@ -1045,7 +1076,7 @@ Questions?
 
 catherine.devlin@gmail.com
 
-github.com/catherinedevlin
+github.com/catherinedevlin/talks
 
 .. note::
 
