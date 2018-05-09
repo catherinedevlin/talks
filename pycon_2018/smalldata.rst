@@ -459,6 +459,7 @@ Projects
 ----
 
 `csv`
+-----
 
 .. note::
 
@@ -471,6 +472,7 @@ Projects
 ----
 
 email
+-----
 
 .. note::
 
@@ -724,8 +726,6 @@ Catherine Bracy - PyCon 2015 keynote
 .. image:: img/c4a.png
    :height: 600px
    :alt: Catherine Bracy at PyOhio 2015
-
-.. note::
 
 
 ----
