@@ -110,6 +110,11 @@ Data janissaries?
 
     Make a stratified world more stratified?
 
+    "Professional" can mean "good", or "professional" 
+    can mean the opposite of "amateur", and amateurs 
+    are good.  Without amateurs, professionals vanish 
+    behind a curtain of mystery and alienation. 
+
 ----
 
 .. image:: img/hospital_food.jpg
@@ -227,8 +232,8 @@ Manage your government.
     We need your feedback and your involvement and 
     your engagement and your management. 
 
-    And your society in general.  Don't despair.  
-    Don't disengage.  Don't get cynical. 
+    But too many people are disengaged - from their 
+    governments, even from their societies - by cynicism.
 
 ----
 
@@ -400,6 +405,12 @@ Projects
 
 .. note::
 
+    They say that about 2/3 of the species on earth are 
+    microbes.  I'm pretty sure that 2/3 of the data on 
+    earth is spreadsheets.
+
+    And what's a spreadsheet but a CSV generator?
+
     This should be one of the main teaching libraries.
 
     Almost everybody's life is touched by spreadsheets.
@@ -427,8 +438,7 @@ email
     program could be.
 
     This is a huge source of personally relevant (maybe) data for most
-    people.  Or, that is, 1% personally relevant and 99% completely 
-    irrelevant, and helping them do that sort will give them power.
+    people.  
 
 ----
 
@@ -527,22 +537,6 @@ Webscraping
     they tend to publish independently on scattered, obscure websites.
     Can you unbury it?
 
-    And speaking of information rescue...
-
-----
-
-Self-generated data
--------------------
-
-- Files
-- Photos
-
-.. note::
-
-    Most people with a personal computer have lost track of what is on it.
-    They feel intimidated even by data of their own generation.  Data 
-    handling skills could help them organize and de-duplicate it.
-
 ----
 
 APIs
@@ -640,8 +634,6 @@ Jekyll, Pelican, GH Pages...
 
 Visualizing 
 -----------
-
-- prettyprinting
 
 - matplotlib, Bokeh... 
   
@@ -909,7 +901,7 @@ OKI's `data packages`_
 
     So far, only a small fraction of data is published that way,
     and only a few people know how to use those tools, so this
-    leads lots of signal-boosting!
+    needs lots of signal-boosting!
 
 ----
 
@@ -1032,7 +1024,7 @@ Strengthen local institutions
 
 .. note::
 
-    Near-exclusive acccess to data-handling skill has been
+    Near-exclusive access to data-handling skill has been
     one advantage of big and global institutions over small
     and local ones.  So breaking that monopoly can help 
     rebalance those scales. 
@@ -1045,7 +1037,8 @@ Strengthen local institutions
 Contents:
 ---------
 
-One (1) hearwarming closing story 
+One (1) shamelessly sentimental 
+closing story 
 
 ----
 
@@ -1085,11 +1078,10 @@ Duck, turkey, pork, banana, peanut, fish, salmon, peas, oats, tomato and berries
 
 ----
 
-1. Find API
-2. Download brand/flavors
-3. Extract and normalize ingredient lists
-4. compare to `ALLERGIES`
-5. generate list of safe foods
+1. Scraped PetSmart webpage
+1. Extract and normalize ingredient lists
+1. compare to `ALLERGIES`
+1. generate list of safe foods
 
 ----
 
