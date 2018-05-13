@@ -13,7 +13,7 @@ Catherine Devlin
 
 PyCon 2018
 
-github.com/catherinedevlin/talks
+GH: catherinedevlin/talks
 
 ----
 
@@ -21,17 +21,13 @@ WELCOME TO OHIO
 ===============
 
 .. image:: img/ohio.svg
-   :height: 600px
+   :height: 500px
    :alt: Ohio flag
-
-.. note::
-
-    I love our flag.
 
 ----
 
 .. image:: img/pyohio2018.jpg
-   :height: 600px
+   :height: 500px
    :alt: PyOhio
 
 .. note::
@@ -43,20 +39,22 @@ WELCOME TO OHIO
 ----
 
 .. image:: img/dayton-to-cleveland.png
-   :height: 600px
+   :height: 500px
    :alt: Route from Dayton to Cleveland
 
 ----
 
 .. image:: img/new_oil.png
-   :height: 600px
+   :height: 500px
    :alt: Data Is The New Oil
 
 ----
 
-- Fosters authoritarianism
-- Degrades environment
-- Trail of abandoned boomtowns
+- Authoritarianism
+- Pollution 
+- Climate change
+- War 
+- Ghost ex-boomtowns
 
 .. note::
 
@@ -77,9 +75,21 @@ Technique, tools, standards...
 
 .. note::
 
-    The more data science becomes reality rather than a marketing term...
-    the more we can change the world - and get paid to do so, which is
-    nice.
+    Professionalization of data handling fosters 
+    commercial success, which in turn funds more 
+    professionalization.
+
+    And there's a lot that's very good about that.
+
+    But hold on: who uses big data?  Big institutions
+    use big data.  Do they use it to everyone's 
+    benefit?
+
+    Sometimes yes, sometimes no, but all of the 
+    time, most people feel distanced from and 
+    mystified by what's being done with data.
+
+    So when we celebrate our power to change the world...
 
 ----
 
@@ -87,13 +97,29 @@ Data janissaries?
 -----------------
 
 .. image:: img/janissaries.jpg
-   :height: 600px
+   :height: 500px
    :alt: Janissaries
 
 .. note::
 
-    But change the world to what?  Are we serving the world in general?
-    Or are we going to be enforcers of the dominance of a new ruling caste?
+    But change the world to what?  
+    
+    Are we going to serve the public in general, or a controlling elite?
+
+    Are we going to just help a dominant class dominate?
+
+    Make a stratified world more stratified?
+
+----
+
+.. image:: img/hospital_food.jpg
+   :height: 500px
+   :alt: Hospital food
+
+.. note::
+
+    If you're sick and a friend cooks you dinner, it's the
+    sweetest thing in the world.
 
 ----
 
@@ -103,69 +129,25 @@ Data janissaries?
 
 .. note::
 
-    Because most people agree that data is important and powerful, but they
-    also feel very cut off from it.
+    Most people understand that data has a huge role in the 
+    modern world, predicting it, guiding it, guiding them.
 
-    If there's a new, controlling power in the world, and you feel that power
-    is beyond your ability to control or influence or even understand,
-    that's a very alienating feeling.  That's a feeling that it's not your
-    world anymore.
+    But they feel they have no control or even understanding 
+    of what's being done.  It's all behind-the-curtain wizardy.
 
-----
-
-.. image:: img/hospital_food.jpg
-   :height: 600px
-   :alt: Hospital food
-
-.. note::
-
-    If you're sick and a friend cooks you dinner, it's the
-    sweetest thing in the world.
-
-    The sense of a loss of understanding and connection
-    breeds alienation.  It's happened to hospital food,
-    it's happened to the handling of data, and I'm afraid
-    that, partially due to the centrality of data,
-    it's happening to our institutions in general.
-
-----
-
-Pew Research:
-
-    Americans’ lack of confidence in communications security is accompanied by low levels of trust in government and advertisers
-
-    The backdrop for this lack of confidence in communications security is low levels of trust in key sectors that Americans associate with data collection and monitoring.
-
-.. note::
-
-    Feeling a little attacked here.  Feeling a little hurt.  Feeling a little hurt at being lumped together with advertisers, actually...
-
-----
-
-Specifically,
-
-    91% of Americans “agree” or “strongly agree” that people have lost control over how personal information is collected and used by all kinds of entities.
-
-    18% of adults believe that the government in Washington can be trusted to do what is right either all (2%) or most (16%) of the time
-
-Government can “never” be trusted: 21% no college, 9% at least some college
-
-.. note::
-
-    18% is really low.  You could get 18% positive responsed to
-    "Would you like a pot of boiling vinegar thrown in your face?"
-
-    That's the level of mistrust you might expect in Vichy France.
-
-    But we're not under a foreign power.  This is our own government.
+    That's a very alienating feeling.  It makes people feel 
+    like their society is not their own.
 
 ----
 
 .. image:: img/18f.svg
-   :height: 300px
+   :height: 400px
    :alt: 18F logo
 
 .. note::
+
+    I work for one of the biggest institutions of all, the 
+    U. S. Government.
 
     18F is a U. S. Federal agency that helps other Federal agencies build
     and buy software better, using the technology and the techniques
@@ -183,7 +165,7 @@ Government can “never” be trusted: 21% no college, 9% at least some college
 ----
 
 .. image:: img/not-18f2.png
-   :height: 300px
+   :height: 400px
    :alt: 18F logo with Forbidden bar
 
 .. note::
@@ -202,28 +184,33 @@ USASpending.gov
 ---------------
 
 .. image:: img/usaspending-frontend.png
-   :height: 600px
+   :height: 500px
    :alt: USASpending.gov screenshot
 
+.. note:: 
+
+    I've gotten to
+    work on some really great projects, mostly about helping 
+    the public get at their data: Federal Election Commission,
+    the FBI's Crime Data Explorer.
+ 
 ----
 
 USASpending.gov API
 -------------------
 
 .. image:: img/usaspending-api.png
-   :height: 600px
+   :height: 500px
    :alt: USASpending.gov API screenshot
 
-----
+.. note:: 
 
-"I bet they don't want to let that out!"
-
-.. note::
-
-    18F is an incredibly idealistic place, but being there has
-    shown me how low expectations around the government has become.
-
-    Which is sad, because it's our government!
+    We and many others are working to make more 
+    public data fully and truly open, the way it 
+    ought to be.  But data can't just be pushed, 
+    it needs to be pulled, too.  People need 
+    the skills and the attitude of engagement 
+    to complete the circuit, to use that data. 
 
 ----
 
@@ -237,10 +224,11 @@ Manage your government.
 
     We are your employees.
 
-    And I'm really not talking about government specifically, that's just
-    that statistics I was able to find.  I'm talking about all forms of
-    society-wide cooperative activity, this whole "being an effective social
-    species" thing.
+    We need your feedback and your involvement and 
+    your engagement and your management. 
+
+    And your society in general.  Don't despair.  
+    Don't disengage.  Don't get cynical. 
 
 ----
 
@@ -254,19 +242,18 @@ Manage your government.
 .. note::
 
     People think of cynicism as a defense against manipulation,
-    and it is a defense mechanism,
-    but it's one that backfires: it lets us be manipulated.
+    but it isn't.  Cautious skepticism is a defense; cynicism, 
+    defaulting to mistrust, is a defense mechanism, and makes 
+    us easier to manipulate.
 
-    Cautious skepticism is a defense, cynicism is a defense mechanism.
-
-    The disengagement,
-    despair, and passivity that cynicism breeds divides us and conquers
-    us.  And there are groups specifically breeding cynicism for exactly
-    that reason.
-
-    https://arstechnica.com/tech-policy/2018/04/trump-praises-sinclair-for-spreading-fake-news-warning-on-tv-stations/
-
-    0:50
+    Cynicism breeds disengagement, despair, and passivity,
+    which divides us, neutralizes us, conquers us.  
+    
+    There are lots of causes of cynicism, including groups 
+    intentionally fostering it to make us easier to manipulate, 
+    but I'm convinced that one big cause is this disconnection 
+    from the world of data that helps so much to steer the 
+    world.
 
 ----
 
@@ -274,7 +261,7 @@ Chickens
 --------
 
 .. image:: img/chickens.jpg
-   :height: 600px
+   :height: 500px
    :alt: chickens
 
 .. note::
@@ -290,7 +277,7 @@ Mile Creek Farm CSA
 -------------------
 
 .. image:: img/milecreek3.jpg
-   :height: 600px
+   :height: 500px
    :alt: harvesting vegetables
 
 .. note::
@@ -302,17 +289,13 @@ Mile Creek Farm CSA
     all creating small-scale, local alternate channels to that
     mainstream food industry.
 
-    The starry-eyed ones may imagine replacing the conventional
-    food industry, but most believe than even a small-scale alternative
-    can improve the world - engagement, familiarity, mindfulness.
+    It's probably not going to replace the conventional food 
+    industry, but every little bit of close and personal contact
+    with the food supply you can give people increases their 
+    engagement, familiarity, knowledge, mindfulness.
 
-    They are democratizing the food supply.
-
-    They're not democratizing it completely.  Most people still don't
-    garden.  Most food still comes through the industrial food pipeline.
-    But every little bit of extra contact that people have with food
-    production makes a difference.  2% is better than 1%.  5% is better
-    than 2%.
+    Democratizing the food supply, even a little, is worth 
+    doing.
 
 ----
 
@@ -320,47 +303,27 @@ Community-supported dataculture
 -------------------------------
 
 .. image:: img/datacreek3.jpg
-   :height: 600px
+   :height: 500px
    :alt: harvesting data
 
 .. note::
 
-    So imagine rows of data sprouting in the sun behind
-    ordinary people's homes.
+    So imagine home data gardens full of fresh, ripe, 
+    organic, sustainably and humanely raised 
+    lists and dictionaries and integers and decimals.
 
-    Imagine little community orchards bursting
-    with fresh, ripe JSON.
+    Imagine a small data movement democratizing 
+    the use of data a little bit like the local 
+    food movement.
 
-    Imagine community data markets with baskets brimming over
-    with organic, sustainably, humanely grown integers,
-    strings, floats, and decimals.
+    If people - lots of people - gain personal 
+    experience in gathering and processing data, 
+    even in small and simple ways,
+    can that make them more knowledgable and 
+    engaged in a society that's increasingly 
+    data-driven? 
 
-    Remember how those statistics about mistrust got a little bit
-    better with education?  My hope is that education and activity
-    that specifically brings people contact with the data supply
-    can do for data what it does for food.
-
-----
-
-Why Python?
------------
-
-.. image:: img/jupyter.png
-   :height: 300px
-   :alt: Jupyter logo
-
-.. note::
-
-    Many of us were drawn to Python specifically because it's
-    so amateur-friendly.
-
-    Many of the biggest tools in the professional data science
-    community was made by physical scientists, not computer
-    scientists.
-
-    So, of all people, we in the Python world ought to be
-    the ones to keep amateurs access to data.
-
+    Let's do experiment.
 
 ----
 
@@ -372,77 +335,51 @@ Skills
 - Combining
 - Presenting
 
+.. note::
+
+    By beginner data programming, I'm talking about some 
+    very basic skills.  I'm not talking about running 
+    Scikit-learn against your hadoop cluster.  I'm not 
+    even talking about querying PostgreSQL.  
+   
+    I'm talking about pulling some data into maybe a list 
+    of dictionaries, applying some basic Python to it 
+    from there.  Stuff that people can plausibly start on 
+    within a few hours of `print "Hello, World!"`
+
+----
+
+Empower whom?
+
+  - students (Jessica McKellar 2014 keynote)
+  - journalists
+  - small businesses
+  - activists and organizers
+
+.. note::
+
+    I mean, aside from everyone, of course.
+
+----
+
+Local Governments
+
+.. image:: img/city_employees.png
+   :height: 500px
+   :alt: Tweet regarding teaching to city employees
+
 ----
 
 Not a teacher?
 --------------
 
-You are still an *empowerer*.
+Nobody wants your excuses.
 
 .. note::
 
     If you're on the verge of tuning out because you think this is
     an educator, you are not excused.  Everybody is part of the
     effort, as you'll see as I go on.
-
-----
-
-Programming: Not rocket science
--------------------------------
-
-.. image:: img/rocketry2.jpg
-   :height: 600px
-   :alt: Midwest Propulsion Group rocket experiment
-
-.. note::
-
-    I don't mean programming isn't hard.  It is hard.  But...
-
-    This is an experiment by the Midwest Propulsion Group,
-    an organization in Dayton
-    that takes model rocketry to the point where they're
-    in danger of violating UN Security Council resolutions.
-
-    But even though they're a very talented, dedicated, amazing group,
-    they're not going into space.
-
-    Without millions of dollars in funding, your rockets are not
-    going to be space rockets.  Earth has no Beginners' Orbit.
-
-----
-
-More like gardening
--------------------
-
-.. image:: img/gardening.jpg
-   :height: 600px
-   :alt: White House Kitchen Garden planting
-
-.. note::
-
-    You can garden at any level.  You can raise one lousy basil plant
-    on your windowsill, or you can grow and can a whole year's worth
-    of vegetables and sell your surplus at the farmer's market, or
-    anywhere in between.
-
-----
-
-Programming intros
-------------------
-
-- Math / abstract
-- Websites
-- Games
-- Data
-
-.. note::
-
-    We have a huge wealth of introductory Python material:
-    Classes, books, articles, blog posts...
-
-    but the vast majority of it seems to be in these three
-    categories, and I think we should add a fourth:
-    data handling.
 
 ----
 
@@ -465,6 +402,12 @@ Projects
 
     This should be one of the main teaching libraries.
 
+    Almost everybody's life is touched by spreadsheets.
+    Some people's lives are saturated in spreadsheets.
+    And, when you save a spreadsheet as a CSV, the 
+    transition to programmable data is very clear, zero 
+    mystery.
+
     There are more specialized libraries for handling spreadsheets,
     but this is a minimal-mystery approach straight out of the
     Standard Library.
@@ -480,41 +423,71 @@ email
     information overload.
 
     The filters etc. provided by email providers are nowhere near as
-    sophisticated and specific as the programs they could
+    sophisticated and specific as even a beginner's data-handling 
+    program could be.
 
     This is a huge source of personally relevant (maybe) data for most
-    people.
+    people.  Or, that is, 1% personally relevant and 99% completely 
+    irrelevant, and helping them do that sort will give them power.
 
 ----
 
 social media
 ------------
 
-twitter-scraper_ by Kenneth Reitz
+.. note::
+
+    When big data makes the news, they're often talking about 
+    social media, and it's a big part of most people's lives,
+    so the fact that they can analyze their own social media 
+    world in any way they can imagine should be inspiring.
+    
+    Which of my friends share an interest?  Which of them share 
+    an interest but don't yet know each other?  
+    Who's announced weekeng plans?  Who's going to PyOhio?
+    Who's actually a bot?
+
+    Are there hours of the day when I'm more likely to make misspellings
+    or threaten foreign countries?
+
+----
+
+twitter-scraper_
+----------------
 
 .. _twitter-scraper: https://github.com/kennethreitz/twitter-scraper
 
 .. note::
 
-    Social media is probably the most commonly known source of data for
-    companies to mine, which is all the more reason to help people
-    work with their own social media data.
+    Speaking of social media, twitter's API is needlessly 
+    complex and a barrier to newbies.  
 
-    Who is near my physically?  Who may be interested in an organization
-    or an upcoming event I'm interested in?  Who's announced weekend plans?
-    Who can I hitch a ride to PyOhio with?
+    But there's a new Kenneth Reitz package - and if you know 
+    Kenneth Reitz, I can stop talking right there - avoids all 
+    needless complexities.
 
-    Are there hours of the day when I'm more likely to make misspellings
-    or threaten foreign countries?
+---- 
 
-    It's such a familiar realm that it's easy to rouse people's curiosity
-    about.
+#pyconopenspaces collector
+--------------------------
+
+.. note::
+
+    In fact, I intend to use it during the sprints to 
+    write a little hashtag miner to generate a table 
+    from the #pyconopenspaces hashtag.
+
+    If you want a short break from your main sprint, 
+    we can work on it together.  It'll be useful for 
+    next year, and it'll be good practice for what 
+    we want to show people.
 
 ----
 
 Webscraping
+-----------
 
-- requests_
+- requests_     
 - BeautifulSoup_
 - requests-html_
 
@@ -530,7 +503,9 @@ Webscraping
     but there are huge quantities of data locked up in it,
     and we have some good libraries to help us unlock it.
 
-    These three in particular are pretty beginner-friendly
+    These three in particular are nice beginner-friendly
+    tools.  `requests-html` is pretty new - it's another 
+    fine Kenneth Reitz product.
 
 ----
 
@@ -538,53 +513,26 @@ Webscraping
     :class: strike
 
 :strike:`World Wide` Web
+------------------------
 
 - Local directories
 - Local event calendars
-- Change detection
 
 .. note::
 
     One of the nice things you can do with scraping is assemble
     and then republish locally relevant information.
 
-    Is The World Wide part the worst thing about the Web?
-    Global can crowd out local, or just suck your attention away
-    from your own community.
-
     Local Resources, businesses, organizations, governmental bodies -
     they tend to publish independently on scattered, obscure websites.
-    Many of them use a Facebook page as their only web presence, with
-    important information buried deep in the feed.
     Can you unbury it?
-
-    When there's a significant change on a Federal website, it often
-    makes the news.  But do you know what's changing in your state,
-    your county, your city?
 
     And speaking of information rescue...
 
 ----
 
-PDFs
-
-.. note::
-
-    PDFs are visual presentations of data which should only be published
-    alongside a useful form of that data.  Too many people don't understand
-    that, and think that posting a PDF alone amounts to opening their data.
-    That's like giving a zoo a pair of beanie babies for their endangered
-    species breeding program.
-
-    Extracting usable data from the PDF memory hole is a big challenge, so
-    I hesitate to even suggest it for beginners, but they're inevitably
-    going to encounter it a lot, so we need to give them someplace to start.
-    If nothing else, they can help spread the word that this live-embalming
-    of data has got to stop.
-
-----
-
 Self-generated data
+-------------------
 
 - Files
 - Photos
@@ -592,36 +540,40 @@ Self-generated data
 .. note::
 
     Most people with a personal computer have lost track of what is on it.
-    They feel intimidated even by data of their own generation.  Code
-    could help them organize and de-dupe.
+    They feel intimidated even by data of their own generation.  Data 
+    handling skills could help them organize and de-duplicate it.
 
 ----
 
-- APIs
+APIs
+----
 
-  - Governments
-  - Social media
-  - Vendors
+- Governments
+- Social media
+- Vendors
 
 .. note::
 
-    What APIs are
+    It's easy to consume and use data when it's provided 
+    by web APIs.  That's why they exist, after all.
 
-    How to find them
+    Maybe the hardest thing about them is knowing that 
+    they exist.  It's kind of a pity that we hide this 
+    beginner-friendly data resource behind a cryptic and 
+    intimidating acronym.
 
-    How to use them
-
-    These are secrets we've been hoarding!
+    So let people know!  And help them find APIs that 
+    interest them.
 
 ----
 
 Open data hubs
 --------------
 
-- data.gov
-- `Humanitarian Data Exchange`_
-- `curated API lists`_
-- `Open Data Census`_
+    - data.gov
+    - `Humanitarian Data Exchange`_
+    - `curated API lists`_
+    - `Open Data Census`_
 
 .. _Open Data Census: http://us-cities.survey.okfn.org/
 .. _Humanitarian Data Exchange: https://data.humdata.org/
@@ -633,11 +585,13 @@ Open data hubs
 
 .. note::
 
-    There is an open data movement that urges institutions to
-    publish data and curates a variety of directories to
-    open data sources.
+    There are so many directories of APIs that we really 
+    need a directory of directories.  As a Fed, I need to 
+    point out data.gov, for instance.  
 
-    Pick out something specific and guide them to it.
+    Actually, some of the nicest directory take the form 
+    of simple hand-curated lists in GitHub repositories, 
+    so websearch around on some of those.
 
 ----
 
@@ -647,31 +601,53 @@ Open data hubs
 .. _OpenData Census: http://us-cities.survey.okfn.org/
 
 .. image:: img/open_data_census.png
-   :height: 600px
+   :height: 500px
    :alt: Open Data Census screenshot
 
 .. note::
 
-    It improves data access locally, encourages your city
-    to do more, and helps volunteers practice finding data
+    The Open Data Census is a volunteer-curated grid of 
+    open data resources for various types of city data 
+    for a wide array of cities.  
+    
+    It's useful as a source 
+    of data, obviously, and volunteering to help populate 
+    the Census is itself a great exercise in building 
+    data-hunting skills and helping citizens get to know 
+    their cities' digital presence.
 
 ----
 
 Presenting the info
 -------------------
 
-- Publishing: static site generation (Jekyll, Pelican, etc.)
+.. note:: 
 
-- Visualizing: matplotlib, Bokeh, altair-viz...
+    With minimal effort.  Not full-fledged web dev 
 
-- Mapping: Leaflet (Folium)
+----
 
-.. note::
+Static sites
+------------
 
-    Minimalist presentations so you can get back to the data
+Jekyll, Pelican, GH Pages... 
 
-    Full-fledged web development skills are optional here,
-    unless that's the way they really want to go.
+`The New Dynamic`_ 
+
+.. _`The New Dynamic`: https://www.thenewdynamic.org/
+
+----
+
+Visualizing 
+-----------
+
+- prettyprinting
+
+- matplotlib, Bokeh... 
+  
+- altair-viz
+
+- Leaflet (Folium) maps
 
 ----
 
@@ -683,7 +659,7 @@ Dayton LotLinker_
 .. _LotLinker: http://www.lotlinker.com/
 
 .. image:: img/lotlinker.png
-   :height: 600px
+   :height: 500px
    :alt: LotLinker screenshot
 
 .. note::
@@ -702,11 +678,12 @@ Dayton LotLinker_
 ----
 
 `More ideas`_
+-------------
 
 .. _More ideas: http://opendatahandbook.org/value-stories/
 
 .. image:: img/value_stories.png
-   :height: 600px
+   :height: 500px
 
 .. note::
 
@@ -721,75 +698,33 @@ Dayton LotLinker_
 Code for America
 ----------------
 
-Catherine Bracy - PyCon 2015 keynote
+2015: Catherine Bracy
 
 .. image:: img/c4a.png
-   :height: 600px
+   :height: 500px
    :alt: Catherine Bracy at PyOhio 2015
 
-
 ----
 
-Empower whom?
-
-  - students (Jessica McKellar 2014 keynote)
-  - journalists
-  - small businesses
-  - activists and organizers
-
-.. note::
-
-    I mean, aside from everyone, of course.
-
-----
-
-Local Governments
-
-.. image:: img/city_employees.png
-   :height: 600px
-   :alt: Tweet regarding teaching to city employees
-
-----
-
-"How can I, a mere humble Pythonista with a bag full of PyCon swag,
+"How can I, a humble Pythonista with a bag full of PyCon swag,
 help bring about this revolution?"
 
 ----
 
-- Teach
-- Write
+Teach
+-----
 
-  - blog
-  - articles
-  - books
+.. note:: 
 
-    - Automate The Boring Stuff
+    Not necessarily as a teacher as such, though that's 
+    especially awesome!
 
-.. note::
+    Workshops at library
 
-    Yes You Can!
+    One-time guest presenters - I did an hour at a 
+    Dayton high school on using a RESTful API
 
-    Small local publications, business publications...
-
-    Automate the Boring Stuff by Al Sweigart
-
-----
-
-`Julia Evans`_
---------------
-
-.. _Julia Evans: https://drawings.jvns.ca/
-
-.. image:: img/pipes.svg
-   :height: 600px
-
-.. note::
-
-    And while we're thinking about teaching and writing, I
-    want to point you to Julia Evans' amazing Unix cartoons
-    to urge you to expand your thinking about what teaching
-    and writing can mean and what's actually useful and
-    inviting to beginners.
+    Groups like Girl Develop It 
 
 ----
 
@@ -810,18 +745,68 @@ help bring about this revolution?"
     great program to train Data Carpentry instructors - worth
     checking out.
 
+---- 
+
+Write 
+-----
+
 ----
 
-- Speak
+.. image:: img/automate_cover_medium.png 
+   :height: 500px
+   :alt: Book, _Automate the Boring Stuff with Python_
 
-  - not here
+---- 
 
-- Signal-boost
+- blog
+- articles
 
 .. note::
 
-    Do not underestimate how badly a variety of local groups want
-    speakers!  Not necessarily Business groups, community groups,
+    Yes You Can!
+
+    Small local publications, business publications...
+
+
+----
+
+`Julia Evans`_
+--------------
+
+.. _Julia Evans: https://drawings.jvns.ca/
+
+.. image:: img/pipes.svg
+   :height: 500px
+
+.. note::
+
+    I want to point you to Julia Evans' great Unix cartoons
+    as an example of how effective writing or drawing can 
+    be when it's very informal and very fun.  So don't get 
+    writers' block thinking you're writing a doctoral 
+    dissertation.
+
+----
+
+Speak 
+-----
+
+(not here)
+
+.. note::
+
+    Go speak to people who aren't programmers yet.  Go to the 
+    business groups, the activist groups, the professional 
+    organizations, and give them a taste.  
+
+    Most groups love new speakers.
+
+----
+
+Signal-boost
+------------
+
+.. note::
 
     With most software problems, finding the right package to do it
     with is half the battle.  The other half is finding good tutorials
@@ -830,16 +815,34 @@ help bring about this revolution?"
 
 ----
 
+Make it easier
+--------------
+
+.. note::
+
+    So far, I've been talking about how to raise people's skills
+
+    But it's even more important to demand less of them
+
+----
+
 Open that data
 --------------
 
 .. note::
 
-    You are in a position to make the case
+    Wherever you work, wherever you volunteer, wherever 
+    you live, wherever you vote - have they opened up 
+    their data?  You have influence there and can be a 
+    voice for openness.
+
+    You have knowledge and can make the case for 
+    openness clearly.  Please do!
 
 ----
 
-Make it easier
+Easier code
+-----------
 
 - Improve the API
 - Wrap existing packages
@@ -847,42 +850,17 @@ Make it easier
 
 .. note::
 
-    Lots of software is structured with APIs that conform to the
-    internal nature of the problem.  But an API can instead conform
+    Many packages are built with APIs that conform to the
+    gigantic brains of the experts who created them, 
+    and who are not bothered by their complexity.
+
+    But an API can instead conform
     to the expectations of a person who doesn't yet understand the
     domain.
 
-    Find or be a newbie, keep track of your guesses, and make the
-    guesses right!
-
-----
-
-OKI's `data packages`_
-----------------------
-
-- OKI's `data packages`_
-
-.. _data packages: https://frictionlessdata.io/data-packages/
-
-
-.. image:: img/data_packages.png
-   :height: 600px
-   :alt: Data Packages screenshot
-
-.. note::
-
-    Data availability is not really boolean.  Lots of data is
-    technically open or available, but actually difficult to
-    find, download, and use.
-
-    data-packages is a container format to wrap data and metadata
-    together in a way that makes it easier to discover and lets
-    people write tools to automate the process of getting it.
-
-    So far, only a small fraction of data is published that way,
-    and only a few people know how to use those tools, so this
-    leads lots of signal-boosting!
-
+    Find or be a newbie, keep track of their uninformed guesses, 
+    their wishes, and make those wishes come true! 
+    
 ----
 
 Write the docs!
@@ -893,11 +871,45 @@ Write the docs!
 - Create examples
 - Answer questions
 
+.. note::
+
+    .. which is, of course, the name of a conference
+
+----
+
 Ignorance is precious
 
 .. note::
 
-    ... which is, of course, the name of a conference
+    .. Never waste precious ignorance 
+
+----
+
+OKI's `data packages`_
+
+.. _data packages: https://frictionlessdata.io/data-packages/
+
+
+.. image:: img/data_packages.png
+   :height: 500px
+   :alt: Data Packages screenshot
+
+.. note::
+
+    Ease of use applies to data, not just software.
+
+    Data availability is not really boolean.  Lots of data is
+    technically open or available, but actually difficult to
+    find it and use it.
+
+    data-packages is a container format to wrap data and metadata
+    together in a way that makes it easier to discover and lets
+    people write tools to automate the process of getting 
+    into your Python program to work with.
+
+    So far, only a small fraction of data is published that way,
+    and only a few people know how to use those tools, so this
+    leads lots of signal-boosting!
 
 ----
 
@@ -907,7 +919,7 @@ Honeywell 316 `Kitchen Minicomputer`_
 .. _Kitchen Minicomputer: http://www.computerhistory.org/revolution/minicomputers/11/362
 
 .. image:: img/kitchen_computer.png
-   :height: 600px
+   :height: 500px
    :alt: Kitchen Minicomputer
 
 .. note::
@@ -930,9 +942,10 @@ Ambitions
 
 .. note::
 
-    In between the immediate goals - creating a new website full
-    of local data - and the final goal - a better world with an
-    engaged public - what are the hoped-for connecting developments?
+    So let's think of some of the pathways by which we hope to 
+    connect immediate goals to ultimate goals.  How is a small 
+    data movement supposed to foster a more engaged society? 
+
 
 ----
 
@@ -949,12 +962,18 @@ Civic engagement
     When you nag them for data they haven't released yet, that's
     deeper engagement.
 
+    When you point others toward the civic information 
+    you've re-published or analyzed or visualized 
+
+    When you urge action based on what's been found 
+
 ----
 
 Data ethics
 -----------
 
-Diverse communities
+Diversity 
+---------
 
 .. note::
 
@@ -962,9 +981,12 @@ Diverse communities
     people have experience even with small-scale data handling,
     the more people will understand its importance.
 
-    Employees and informed outside feedback contributes to an
-    institution's sense of data ethics, and broadening that
-    base of feedback can produce a wider, truer sense of ethics.
+    All data handling helps you appreciate the complexity 
+    of data, the approximations always included, 
+
+    The more variety of people can contribute informed feedback 
+    to data-handling efforts, the more viewpoints go into the 
+    ethical decisions. 
 
 ----
 
@@ -986,16 +1008,22 @@ Create open data demand
 
 .. note::
 
-    Knowing that data you've opened is being used is enormously
-    motivating.  If you use data from an 18F-built API and we
-    find out, it makes our day.
+    I mentioned it earlier:
+    Open data producers need opend data users.  They justify 
+    the effort of opening up data sources.  
+
+    And, by the way, when you use an open data source, it's 
+    very heartening let the publishers know.  At 18F, anytime
+    we hear of data we've helped open up being put to use, 
+    we're thrilled.
 
     As using data becomes the norm, it becomes less acceptable
     not to open up data.  Imagine a can of food with no ingredient
-    label.  Even if that were legal - would you buy it?  Probably
+    label.  Would you buy it?  Probably
     not, because ingredient labels have taught us to feel entitled
-    to that data, whatever we do or don't do with it.
-
+    to that data, even if we don't plan to use it.
+    
+    I want to grow that kind of sense of entitlement.
 
 ----
 
@@ -1005,20 +1033,24 @@ Strengthen local institutions
 .. note::
 
     Near-exclusive acccess to data-handling skill has been
-    one advantage of big and global organizations over small
-    and local ones.
+    one advantage of big and global institutions over small
+    and local ones.  So breaking that monopoly can help 
+    rebalance those scales. 
 
     Not just businesses: can your community library, theater
-    troupe, etc. compete for attention?
+    troupe, bowling league, garage bands compete for attention?
 
 ----
 
-# TODO: close with heartwarming story
+Contents:
+---------
+
+One (1) hearwarming closing story 
 
 ----
 
 .. image:: img/Kimber.jpg
-   :height: 600px
+   :height: 500px
    :alt: Kimber the dog
 
 .. note::
@@ -1036,6 +1068,8 @@ Duck, turkey, pork, banana, peanut, fish, salmon, peas, oats, tomato and berries
    fine-print monstrosities.  And there are dozens of dog
    food companies with multiple brands each.
 
+   That's a lot of hairy anti-joins 
+
 ----
 
 .. code:: python
@@ -1051,16 +1085,16 @@ Duck, turkey, pork, banana, peanut, fish, salmon, peas, oats, tomato and berries
 
 ----
 
-- Found API
-- Downloaded dog food brand/flavors
-- Extracted and normalized ingredient lists
-- compared to `ALLERGIES`
-- generated list of safe foods
+1. Find API
+2. Download brand/flavors
+3. Extract and normalize ingredient lists
+4. compare to `ALLERGIES`
+5. generate list of safe foods
 
 ----
 
 .. image:: img/Kimber.jpg
-   :height: 600px
+   :height: 500px
    :alt: Kimber the dog
 
 .. note::
@@ -1069,16 +1103,20 @@ Duck, turkey, pork, banana, peanut, fish, salmon, peas, oats, tomato and berries
 
 ----
 
-Questions?
-----------
+Data to the people!
+-------------------
 
 @catherinedevlin
 
 catherine.devlin@gmail.com
 
-github.com/catherinedevlin/talks
+GH: /catherinedevlin/talks
 
 .. note::
+
+    Go forth, bring the data to the people 
+    and the people to the data, and let's do 
+    our part in saving the world.
 
     I'm consistently branded, easy to find,
     you know where I live, and I'm staying for
