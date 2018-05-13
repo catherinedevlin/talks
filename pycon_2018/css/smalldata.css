@@ -15,11 +15,12 @@ p {
 }
 
 blockquote {
-    font-size: 125%;
+    font-size: 50%;
 }
 
 pre {
     text-align: left;
+    font-size: 150%;
 }
 
 h1, h2, h3, h4 {
@@ -70,3 +71,7 @@ a {
 .strike {
     text-decoration: line-through;
   }
+
+ol {
+    font-size: 100%;
+    }
