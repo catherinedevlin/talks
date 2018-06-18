@@ -1,0 +1,24 @@
+---
+imports:
+  - requests
+  - yaml
+  - json
+---
+code: |
+  api_response = requests.get('http://outside:3000/films')
+  films = api_response.json()
+---
+table: films_table
+rows: films
+columns:
+  - Title: row_item['title']
+  - Desc: row_item['description']
+
+---
+
+mandatory: True
+question: You should watch these.
+
+  ${ films_table }
+
+---

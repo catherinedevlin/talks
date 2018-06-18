@@ -1,0 +1,41 @@
+---
+imports:
+  - requests
+  - yaml
+  - json
+---
+code: |
+  api_response = requests.get('http://outside:3000/films')
+  films = api_response.json()
+---
+table: films_table
+rows: films
+columns:
+  - Title: row_item['title']
+  - Desc: row_item['description']
+---
+mandatory: True
+question: Films to watch
+
+  ${ films_table }
+
+subquestion: Suggest another film.
+fields:
+  - Title: title
+  - Description: desc
+---
+code: |
+  api_response = requests.post('http://outside:3000/films', json={'title': title, 'description': desc })
+  api_response = requests.get('http://outside:3000/films')
+  new_films = api_response.json()
+---
+table: new_films_table
+rows: new_films
+columns:
+  - Title: row_item['title']
+  - Desc: row_item['description']
+---
+mandatory: True
+question: Thank you for your submission!
+
+  ${ new_films_table }

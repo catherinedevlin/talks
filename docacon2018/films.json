@@ -1,0 +1,14 @@
+{
+  "films": [
+    {
+      "id": 1,
+      "title": "Totoro",
+      "description": "Funny things in the woods."
+    },
+    {
+      "title": "Castle in the Sky",
+      "description": "Soft steampunk",
+      "id": 2
+    }
+  ]
+}

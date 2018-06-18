@@ -1,0 +1,34 @@
+---
+imports:
+  - requests
+  - yaml
+  - json
+---
+code: |
+  json_data = """
+  [
+    {
+      "title": "Totoro",
+      "description": "Funny things in the woods."
+    },
+    {
+      "title": "Castle in the Sky",
+      "description": "Soft steampunk"
+    }
+  ]"""
+  films = json.loads(json_data)
+---
+table: films_table
+rows: films
+columns:
+  - Title: row_item['title']
+  - Desc: row_item['description']
+
+---
+
+mandatory: True
+question: You should watch these.
+
+  ${ films_table }
+
+---
