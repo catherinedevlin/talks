@@ -1,0 +1,81 @@
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Racing+Sans+One|Satisfy);
+
+body {
+    font-size: 160%;
+    text-align: center;
+    font-family: Arial, Sans-serif;
+}
+
+p {
+    font-weight: normal;
+    margin-bottom: 0.3em;
+    margin-top: 0.3em;
+    text-align: center;
+    font-size: 160%;
+}
+
+blockquote {
+    font-size: 50%;
+}
+
+pre {
+    text-align: left;
+    font-size: 150%;
+}
+
+h1, h2, h3, h4 {
+    margin-bottom: 0.3em;
+    margin-top: 0.3em;
+}
+
+h1 {
+    font-size: 200%;
+}
+
+tt {
+    font-size: 160%
+}
+
+ul {
+    list-style-position: inside;
+    font-size: 160%;
+}
+
+li {
+    font-family: Arial, Sans-serif;
+    margin-bottom: 0.3em;
+    margin-top: 0.3em;
+    padding-left: 0.3em;
+    line-height: 1.8em;
+    text-align: left;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+.header img {
+    opacity: 0.2;
+    width: 25%;
+    position: absolute;
+    left: 0;
+}
+
+.footer {
+    position: absolute;
+    top: 95%;
+    font-size: 50%;
+}
+
+.strike {
+    text-decoration: line-through;
+  }
+
+ol {
+    font-size: 100%;
+    }

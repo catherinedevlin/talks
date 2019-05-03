@@ -1,0 +1,55 @@
+---
+question: |
+  Can you provide a vehicle?
+yesno: vehicle
+---
+question: Vehicle type 
+field: vehicle_type
+choices:
+  - Car: car
+    default: True
+  - Canoe: canoe
+  - Zeppelin: zeppelin
+---
+code: |
+  max_capacity = {'zeppelin': 40, 
+  'canoe': 3, 'car': 5}[vehicle_type]
+---
+question: Vehicle capacity 
+fields:
+  - Number of persons: capacity
+    datatype: range
+    min: 2
+    max: ${max_capacity}
+    default: 4
+under: |
+  Include driver in capacity count.
+---
+question: From where?
+subquestion: |
+  Which direction will you approach 
+  Columbus from?
+fields:
+  - Direction: direction
+    choices: 
+      - Northeast / I-71
+      - East / I-70
+      - Southwest / I-71
+      - West / I-70
+---
+question: Thank you
+subquestion: |
+  We hope you enjoy your trip to PyOhio!
+  
+  We will look for carpool partners for you
+  approaching Columbus from the ${direction}.
+  
+  % if vehicle:
+  Thank you for offering to provide your ${vehicle_type}
+  for up to ${ nice_number(capacity) } people.
+  % endif
+  
+buttons:
+  - Exit: exit
+mandatory: True
+---
