@@ -1,4 +1,4 @@
-# Make these function calls work...
+# These function calls don't quite work.  Fix them!
 
 uniforms = {'Thelma': '4', 'Twi': '21', 'Dottie': '9'}
 

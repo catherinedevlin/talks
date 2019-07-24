@@ -3,7 +3,7 @@
 
 uniforms = {'Thelma': '4', 'Twi': '21', 'Dottie': '9'}
 
-# This will fail!  Why?
+# This doesn't do what we expect.  Why?
 sum = uniforms['Thelma'] + uniforms['Twi']
 print(sum)
 
