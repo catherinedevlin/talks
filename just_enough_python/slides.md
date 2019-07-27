@@ -22,7 +22,9 @@ Programming is social.
 - Remove fear & spark joy 
 - Comfortable in the community 
 
-.notes: If you put "Python" on your resume, you're lying
+## Presenter Notes 
+
+If you put "Python" on your resume, you're lying
 
 --- 
 
@@ -85,9 +87,9 @@ E: extra credit
 
 Put both stickers up 
 
-Remove one when you finish B 
+Remove Blue when you finish B (B - Blue)
 
-Remove the other when you finish C
+Remove Red other when you finish C (C - Crimson)
 
 --- 
 
@@ -144,7 +146,9 @@ Object
 - iterable 
 - generator
  
-.notes: Loopable, because it remembers
+## Presenter Notes 
+
+Loopable, because it remembers
 
 --- 
 
@@ -154,9 +158,11 @@ Object
 - cache
 - queue
 
-.notes: your desk vs. your bookshelf
+## Presenter Notes
+ 
+your desk vs. your bookshelf
 
-.notes: orders on the wheel at a diner 
+orders on the wheel at a diner 
 
 --- 
 
@@ -177,7 +183,9 @@ Domain Specific Language
 
 Generally "declarative"
 
-.notes: Describes the state you want to get to 
+## Presenter Notes
+
+Describes the state you want to get to 
 
 ---
 
@@ -187,9 +195,11 @@ Generally "declarative"
 - decorator: `@`
 - annotations 
 
-.notes: psychologist couch 
+## Presenter Notes
 
-.notes: aftermarket cup holder
+psychologist couch 
+
+aftermarket cup holder
 
 --- 
 
@@ -197,7 +207,9 @@ Generally "declarative"
 
 Read Evaluate Print Loop
 
-.notes: improv comedy 
+## Presenter Notes
+
+improv comedy 
 
 --- 
 
@@ -314,7 +326,9 @@ Taping a show vs. running the station
 - async 
 - callback 
 
-.notes: scavenger hunt 
+## Presenter Notes
+
+scavenger hunt 
 
 --- 
 
@@ -350,6 +364,8 @@ Taping a show vs. running the station
 --- 
 
 # serialize
+
+![chess](img/chess.jpg)
 
 - JSON 
 - XML
@@ -442,3 +458,5 @@ You did it!
 "Pancake!" by noricum is licensed under CC BY-SA 2.0 
 
 "Wren 2018 CG Kitchen Projects" by Pikcells Ltd is licensed under CC BY-NC-ND 4.0 
+
+"Chess" by dougienisbet is licensed under CC BY-NC 2.0 
