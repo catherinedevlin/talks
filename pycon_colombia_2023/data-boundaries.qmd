@@ -1,0 +1,1536 @@
+---
+title: "Data Boundaries"
+author: "Catherine Devlin"
+format: revealjs
+footer: "https://github.com/catherinedevlin/talks/tree/master/pycon_colombia_2023"
+---
+
+# Data Boundaries
+
+@catherine.devlin@tech.lgb
+
+# [Quipu](https://essentials.neh.gov/projects/quipus-inca-language-knots) 
+
+![Quipu](https://essentials.neh.gov/sites/default/files/quipu_v1.jpg)
+
+::: {.notes}
+
+You will sometimes hear that the Inca had no 
+"writing system", because they had no way to 
+write down text.
+
+But they *did* have quipu, sometimes called 
+"Incan string writing", a system for recording 
+numerical information.
+
+Quipu are actually a decimal numbering system - 
+the number and type of knots in a cluster represent
+a digit, and the placement of that cluster on 
+the string indicate whether it's ones, tens, 
+hundreds...
+
+:::
+
+
+## [Data comes first](https://www.bbc.com/news/business-39870485) 
+
+![cuneiform tablet](https://ichef.bbci.co.uk/news/976/cpsprodpb/D5AA/production/_96089645_hi039302263.jpg.webp)
+
+
+::: {.notes}
+
+Elsewhere, in places like Mesopotamia that 
+developed writing systems for prose, they 
+didn't start out for writing prose.  They 
+started out for recording data.  Records of 
+production, taxation, debt, and so on.
+
+If you want to build an advanced civilization, 
+you can write down prose... if you feel like 
+it.  But recording *data* is not optional - 
+it's a must.
+
+::: 
+
+## [type: int](https://www.nature.com/articles/d41586-021-01429-6)
+
+![notched piece of bone](img/bone.png)
+
+::: {.notes}
+
+Or, maybe, not such an advanced society.  This 
+piece of bone is from a Neanderthal camp in 
+France from 60,000 years ago.  It is believed 
+that these notches were made... 
+
+... you guessed it, to record data.
+
+:::
+
+# What is data? 
+
+::: {.notes}
+
+So data is a big, big deal, 
+
+:::
+
+## "Computer" 
+
+~~What is the sum 1 to 22?~~
+
+- What's the weather?
+- When is the library open?
+
+## "Data Machine"?
+
+Where is data in the tutorials?
+
+In the beginners' examples?
+
+::: {.notes}
+
+Go through some Python tutorials.
+
+Go through some sample code.
+
+Even formal programming classes tend to postpone 
+data as long as possible.
+
+Why, if it's so central?  It's like a 
+horseback riding club that avoids talking 
+about horses.
+:::
+
+## Zen violation 
+
+> There should be one-- and preferably only one --obvious way to do it.
+
+![word cloud of data terms](data-words.png)
+
+- not one 
+- not obvious 
+
+## Zoom out 
+
+::: {.notes}
+
+In the process of learning programming,
+by the time you're finally learning about how to 
+store and access data, you and your instructor are pretty tired. 
+Nobody is up to a big-picture analysis.  They probably 
+show you a single approach because a through look at the 
+possible decisions to be made. 
+
+Sometimes there isn't much guidance for the first 
+set of decisions - the material you find assumes 
+that those decisions have been made, and just 
+helps you with implementation
+
+:::
+
+Big picture 
+
+Lesser-known nooks and crannies
+
+# Relationships
+
++----------+------------------------+-----------------------+
+|  nombre  | diámetro_ecuatorial_km | período_de_rotación_d |
++----------+------------------------+-----------------------+
+| Mercurio |          4878          |         58.65         |
+|  Venus   |         12100          |         243.0         |
+|  Tierra  |         12756          |          1.0          |
+|  Marte   |          6794          |          1.03         |
+| Júpiter  |         142800         |          0.41         |
++----------+------------------------+-----------------------+
+
+Data from [Royal Museums Greenwich](https://www.rmg.co.uk/stories/topics/solar-system-data)
+
+::: {.notes}
+
+If you're a normal human, you'll call these rows 
+"rows", and you'll call this table a "table".
+
+But if you want to show off what a data hipster 
+you are, you'll call the rows "tuples", and the try it! 
+table a "relation".  Why?
+:::
+
+## Not data
+
+Venus 
+
+224.7 días
+
+::: {.notes}
+
+This name and this quantity are not data.
+
+Even though it has units!  
+:::
+
+## Now it's data 
+
+Venus **orbita alrededor del sol en** 224,7 días.
+
+::: {.notes}
+
+I have described the relationship between "Venus" and
+"224.7 days", and now it's data.
+
+It's the connection that makes it mean something - anything!
+
+:::
+
+## Table tells us the relationships
+
+![planetary data table](planet-table.png)
+
+
+::: {.notes}
+
+... between names of objects, quantities, etc.; 
+the relationships make them into data.
+
+:::
+
+# Shapes of relationships
+
+... and how we access the data
+
+(usually)
+
+## Key:Value 
+
+![phone book listings](phonebook.jpg)
+
+::: {.notes}
+
+Key: string, or at least hashable 
+
+Value: simple or complex
+
+:::
+
+## Key-value access
+
+    import dbm
+    with dbm.open('período_sideral_d.dbm', 'c') as db:
+        db['Marte'] = str(686.98)
+        print(db['Marte'])
+
+    b'686.98'
+
+::: {.notes}
+
+Implementations fast and simple 
+
+Correspondence to dicts is great: "querying" is simply 
+referring to a key
+
+:::
+
+## Shelf 
+
+    import shelve
+    with shelve.open('planetas_shelf') as db:
+        db['Marte'] = {'diám_km': 6794, 'año_d': 686.98}
+        print(db['Marte']['diám_km'])
+
+    6794
+
+::: {.notes}
+
+Still a key-value store, but the values can:
+
+Store actual Python objects, including data structures 
+like dicts,  instead of just byte sequences 
+
+Still need to know each object's key, though; the only 
+"query" would be to fetch each object into memory and 
+examine each value.
+
+
+:::
+
+## Document databasess 
+
+    {
+        "Venus": {
+            "masas_de_tierra": 0.82
+        },
+        "Tierra": {
+            "masas_de_tierra": 1.0,
+            "lunas": [
+            "Luna"
+            ]
+        },
+        "Marte": {
+            "masas_de_tierra": 0.11,
+            "lunas": [
+            "Deimos",
+            "Fobos"
+            ]
+        }
+    }
+
+
+::: {.notes}
+
+Related to key:value, each document is basically an elaborate 
+value.  May literally be a piece of JSON text, with all that
+flexibility, or at least can be visualized that way.
+
+:::
+
+## Plain-Python procedural "query"
+
+[sistema_solar.json](sistema_solar.json)
+
+    resultado = {}
+    for nombre_del_planeta, planeta in sistema_solar.items():
+        for nombre_de_luna, luna in planeta.get('lunas', {}).items():
+            if luna['diámetro_media_km'] > 2000:
+                resultado[nombre_de_luna] = luna['diámetro_media_km']
+    resultado
+
+    {'Luna': 3476.0,
+    'Io': 3652.0,
+    'Europa': 3138.0,
+    'Ganímedes': 5262.0,
+    'Calisto': 4800.0,
+    'Titán': 5150.0,
+    'Tritón': 3500.0}
+
+::: {.notes}
+
+Here, we have a JSON file - a sort of basic document database.
+The top level is a dict, so essentially it is a document store 
+indexed by a string key.
+
+We can "query" it by bringing the whole thing into memory, then 
+writing Python to navigate through each document, picking out 
+the ones that meet our criteria, and the portion of each document 
+that we want to report on.
+
+This is the essence of what querying is, and this method has some 
+advantages.  It uses only plain Python - you didn't have to learn 
+anything new here.
+
+Of course, it takes hand-writing a lot of code, and will be slow 
+if you have a lot of records.
+
+:::
+
+## aside: JSONl: line-delimited JSON 
+
+    {"nombre": "Venus", "masas_de_tierra": 0.82}
+    {"nombre": "Tierra", "masas_de_tierra": 1.0, "lunas": ["Luna"]}
+    {"nombre": "Marte", "y": 0.11, "lunas": ["Deimos", "Fobos"]}
+
+::: {.notes}
+
+A standard JSON file must be read entirely into memory - 
+if your whole database is an enormous JSON file, that's very bad
+
+JSONL is just a slight variation on the format that writes one 
+item per line, so that it can be read or written lazily 
+
+No standard library support, but libraries like `jsonlines` and 
+Pandas support it
+
+:::
+
+## Document query DSLs 
+
+MongoDB query-by-example
+
+    db.planetas.find({'diám_km': {'$gt': 10000},
+                      'año_d': {'$lt': 500}}
+
+## jq 
+
+    jq.compile('.[] | {nombre: .nombre, mes: [.lunas[]?.rev_d]}'
+            ).input(sistema_solar).all()
+
+    [{'nombre': 'Mercurio', 'mes': []},
+    {'nombre': 'Venus', 'mes': []},
+    {'nombre': 'Tierra', 'mes': [27.322]},
+    {'nombre': 'Marte', 'mes': [0.319, 1.262]},
+    {'nombre': 'Júpiter',
+    'mes': [0.295,
+    0.298,
+    0.498,
+    0.675,
+
+::: {.notes}
+
+DSL for selecting elements - not Python-specific
+
+Different database creators implement query languages differently
+
+Both filtering and navigating within the document
+
+Useful for Python objects, JSON docs, document databases
+
+Python libraries implementing it 
+
+::: 
+
+## Rectangles
+
++----------+------------------------+-----------------------+
+|  nombre  | diámetro_ecuatorial_km | período_de_rotación_d |
++----------+------------------------+-----------------------+
+| Mercurio |          4878          |         58.65         |
+|  Venus   |         12100          |         243.0         |
+|  Tierra  |         12756          |          1.0          |
+|  Marte   |          6794          |          1.03         |
+| Júpiter  |         142800         |          0.41         |
++----------+------------------------+-----------------------+
+
+::: {.notes}
+
+Intuitive and omnipresent.
+
+Spreadsheets 
+
+Clipboard with a sign-up form
+
+:::
+
+
+## Joins: why
+
++----------+--------+------+
+|  nombre  | masa_t | luna |
++----------+--------+------+
+| Mercurio |  0.06  | None |
+|  Venus   |  0.82  | None |
+|  Tierra  |  1.0   | Luna |
++----------+--------+------+
+
+
+## uh-oh
+
++----------+--------+--------+--------+
+|  nombre  | masa_t | luna_1 | luna_2 |
++----------+--------+--------+--------+
+| Mercurio |  0.06  |  None  |  None  |
+|  Venus   |  0.82  |  None  |  None  |
+|  Tierra  |  1.0   |  Luna  |  Luna  |
+|  Marte   |  0.11  | Deimos | Deimos |
++----------+--------+--------+--------+
+
+## denormalized
+
++----------+--------+--------+
+|  nombre  | masa_t |  luna  |
++----------+--------+--------+
+| Mercurio |  0.06  |  None  |
+|  Venus   |  0.82  |  None  |
+|  Tierra  |  1.0   |  Luna  |
+|  Marte   |  0.11  | Deimos |
+|  Marte   |  0.11  | Fobos  |
++----------+--------+--------+
+
+::: {.notes}
+
+In principle, this works.
+
+There are some very wide, very repetitive Spreadsheets
+
+Mass of Mars stored in two places:
+Duplication / bulk 
+Danger of inconsistency 
+
+Not so bad here, but... 
+
+:::
+
+## Si, es tan mala
+
++----------+--------+-----------+
+|  nombre  | masa_t |    luna   |
++----------+--------+-----------+
+| Mercurio |  0.06  |    None   |
+|  Venus   |  0.82  |    None   |
+|  Tierra  |  1.0   |    Luna   |
+|  Marte   |  0.11  |   Deimos  |
+|  Marte   |  0.11  |   Fobos   |
+| Júpiter  | 317.89 |  Adrastea |
+| Júpiter  | 317.89 |  Amaltea  |
+| Júpiter  | 317.89 |   Ananké  |
+| Júpiter  | 317.89 |  Calisto  |
+| Júpiter  | 317.89 |   Carmen  |
+| Júpiter  | 317.89 |   Elara   |
+| Júpiter  | 317.89 |   Europa  |
+| Júpiter  | 317.89 | Ganímedes |
+| Júpiter  | 317.89 |  Himalaya |
+| Júpiter  | 317.89 |     Io    |
+| Júpiter  | 317.89 |    Leda   |
+| Júpiter  | 317.89 |  Lisitia  |
+| Júpiter  | 317.89 |   Metis   |
+| Júpiter  | 317.89 |  Pasifae  |
+| Júpiter  | 317.89 |   Sinope  |
+| Júpiter  | 317.89 |   Thebe   |
++----------+--------+-----------+
+
+---
+
+## Normalize 
+
++----------+--------+
+|  nombre  | masa_t |
++----------+--------+
+| Mercurio |  0.06  |
+|  Venus   |  0.82  |
+|  Tierra  |  1.0   |
+|  Marte   |  0.11  |
++----------+--------+
+
++-----------+---------+
+|   nombre  | planeta |
++-----------+---------+
+|    Luna   |  Tierra |
+|   Fobos   |  Marte  |
+|   Deimos  |  Marte  |
++-----------+---------+
+
+::: {.notes}
+
+A far more elegant solution, but it introduces some of its 
+own kinds of pain.
+::: 
+
+## Rectangles as dataframes
+
+    planetas.loc['Marte', 'año_d']
+
+686.98
+
+    planetas[planetas.año_d > 1000] \
+        [['máx_ua', 'diám_km', 'año_d']]
+
+|         |   máx_ua |   diám_km |    año_d |
+|:--------|---------:|----------:|---------:|
+| Júpiter |     5.45 |    142800 |  4331.86 |
+| Saturno |    10.07 |    120000 | 10760.3  |
+| Urano   |    20.09 |     52400 | 30684.7  |
+| Neptuno |    30.32 |     48400 | 60189.5  |
+
+Pandas, Polars, agate, Dask, Ray, Modin, [more](https://github.com/jcmkk3/awesome-dataframes)
+
+::: {.notes}
+
+DataFrame object that supports LOTS of methods
+
+Also repurposes square-bracket syntax for location and filtering
+
+::: 
+
+## Joining DataFrames
+
+    lunas.join(planetas, 'planeta', lsuffix='_l', rsuffix='_p'
+              )[['planeta', 'masas_t']]
+
+|           | planeta   |   masas_t |
+|:----------|:----------|----------:|
+| Luna      | Tierra    |     1     |
+| Fobos     | Marte     |     0.11  |
+| Deimos    | Marte     |     0.11  |
+| Metis     | Júpiter   |   317.89  |
+| Adrastea  | Júpiter   |   317.89  |
+| Amaltea   | Júpiter   |   317.89  |
+| Thebe     | Júpiter   |   317.89  |
+
+## SQL 
+
+SELECT p.nombre AS planeta,
+       p.diámetro_ecuatorial_km AS planeta_d_km,
+       l.nombre AS luna,
+       l.diámetro_media_km AS luna_d_km
+FROM   Planetas p
+JOIN   lunas l ON (l.planeta = p.nombre)
+WHERE  l.diámetro_media_km > 2000
+
++---------+--------------+-----------+-----------+
+| planeta | planeta_d_km |    luna   | luna_d_km |
++---------+--------------+-----------+-----------+
+|  Tierra |    12756     |    Luna   |   3476.0  |
+| Júpiter |    142800    |     Io    |   3652.0  |
+| Júpiter |    142800    |   Europa  |   3138.0  |
+| Júpiter |    142800    | Ganímedes |   5262.0  |
+| Júpiter |    142800    |  Calisto  |   4800.0  |
+| Saturno |    120000    |   Titán   |   5150.0  |
+| Neptuno |    48400     |   Tritón  |   3500.0  |
++---------+--------------+-----------+-----------+
+
+
+::: {.notes}
+
+SQL handles those joins mentioned before
+
+::: 
+
+## SQL from Python 
+
+- [DB-API2](https://cewing.github.io/training.codefellows/lectures/day21/intro_to_dbapi2.html)
+- [Records](https://github.com/kennethreitz/records) by Kenneth Reitz
+
+Hold that thought...
+
+::: {.notes}
+
+Much more to say about SQL later!
+
+::: 
+
+## ORMs
+
+Object-Relational Mappers
+
+[Python Guide's Databases page](https://docs.python-guide.org/scenarios/db/)
+
+::: {.notes}
+
+The most famous way of blurring the border between Python objects 
+and SQL is with Object-Relational Mappers.  In fact, a lot of people 
+simply *assume* that you will use an ORM.
+
+The Hitchhiker's Guide to Python describes the best-known of them.  
+
+:::
+
+--- 
+
+    engine = sa.create_engine('sqlite:///planetas.db')
+    with sa.orm.Session(engine) as session:
+        stmt = sa.select(Planeta).where(Planeta.diám_km < 50000)
+        for planeta in session.execute(stmt).scalars():
+            for luna in planeta.lunas:
+                print(f'{luna.nombre} orbita a {planeta.nombre} '
+                    f'en posición {luna.pos}')
+
+    Luna orbita a Tierra en posición I
+    Fobos orbita a Marte en posición I
+    Deimos orbita a Marte en posición II
+    Náyade orbita a Neptuno en posición III
+    Thalassa orbita a Neptuno en posición IV
+    Despina orbita a Neptuno en posición V
+    Galatea orbita a Neptuno en posición VI
+    Larisa orbita a Neptuno en posición VII
+    Proteo orbita a Neptuno en posición VIII
+    Tritón orbita a Neptuno en posición I
+    Nereida orbita a Neptuno en posición II
+    Caronte orbita a Plutón en posición I
+
+::: {.notes}
+
+You can work with instances through an ORM pretty much like they were 
+any other Python objects.  Instead of having to think about the joins 
+between related tables, you can navigate between related objects 
+as attributes of the instances.
+
+:::
+
+## Boilerplate 
+
+    from typing import List
+    from typing import Optional
+    from sqlalchemy import ForeignKey, create_engine
+    from sqlalchemy import String, Float, Integer, String
+    from sqlalchemy.orm import DeclarativeBase
+    from sqlalchemy.orm import Mapped
+    from sqlalchemy.orm import mapped_column
+    from sqlalchemy.orm import relationship
+
+    class Base(DeclarativeBase):
+        pass
+
+    class Planeta(Base):
+        __tablename__ = "planetas"
+
+        nombre: Mapped[str] = mapped_column(primary_key=True)
+        mín_ua: Mapped[float] = mapped_column(Float)
+        máx_ua: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+        mín_ua: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+        incl_orb_g: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+        diám_km: Mapped[int] = mapped_column(Integer)
+        obl: Mapped[float] = mapped_column(Float)
+        masas_t: Mapped[float] = mapped_column(Float)
+        incl_g: Mapped[int] = mapped_column(Integer)
+        año_d: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+        día_h: Mapped[float] = mapped_column(Float)
+        
+        lunas: Mapped[List["Luna"]] = relationship(
+            back_populates="planeta"
+        )
+
+        def __str__(self):
+            return self.nombre
+            
+    class Luna(Base):
+        __tablename__ = "lunas"
+
+        nombre: Mapped[str] = mapped_column(primary_key=True)
+        pos: Mapped[str] = mapped_column(String)
+        rev_d: Mapped[float] = mapped_column(Float)
+        diám_km: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+        dist_km: Mapped[float] = mapped_column(Float)
+
+        planeta_nombre: Mapped[str] = mapped_column(ForeignKey("planetas.nombre"))
+        planeta: Mapped["Planeta"] = relationship(back_populates="lunas",)
+
+::: {.notes}
+
+One drawback is that you generally need to create a lot of code 
+defining your tables in ORM terms before you can use an ORM.
+
+Another is that all this syntax is ORM-dependent.  If you end up 
+using another ORM in a different project, you'll have to learn a 
+new syntax.
+
+:::
+
+## Define tables once 
+
+- ORM first, then `Base.metadata.create_all(engine)`
+- DDL first, then `metadata.reflect(bind=engine)` 
+
+::: {.notes}
+
+If you are strategic, and if the ORM you choose 
+supports it, you can probably avoid defining the 
+tables twice, once on the Python side and once on 
+the SQL side.
+
+:::
+
+## Query builders 
+
+    planetas, lunas = pk.Tables('planetas', 'lunas')
+    q = (pk.Query 
+        .select(lunas.star, planetas.diám_km)
+        .from_(planetas) 
+        .join(lunas) 
+        .on(planetas.nombre == lunas.planeta_nombre)
+        .where(planetas.diám_km < 60000)
+        .where(lunas.diám_km > 100)
+        )
+    print(q)
+
+    SELECT "lunas".*,"planetas"."diám_km" FROM "planetas" JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
+
+::: {.notes}
+
+At the border between writing raw SQL and an ORM, consider a 
+query builder.
+
+SQL-based syntax (so, yes, another syntax to learn) - all the 
+same concepts and keywords
+
+Why, though?  Unless you just really hate SQL syntax?
+
+:::
+
+## Composable 
+
+    q = (pk.Query 
+        .from_(planetas) 
+        .where(planetas.diám_km < 60000)     
+        .join(lunas) 
+        .on(planetas.nombre == lunas.planeta_nombre)
+        .select(lunas.star, planetas.diám_km, )
+        .where(lunas.diám_km > 100)
+        )
+    print(q)
+    SELECT "lunas".*,"planetas"."diám_km" FROM "planetas" JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
+
+---
+
+
+## Graph 
+
+```{dot}
+digraph P {
+    "Mercurio" -> "Sol" [label = "orbita"]
+    "Venus" -> "Sol" [label = "orbita"]
+    "Tierra" -> "Sol" [label = "orbita"]
+    "Luna" -> "Tierra" [label = "orbita"]
+    "Marte" -> "Sol" [label = "orbita"]
+    "Deimos" -> "Marte" [label = "orbita"]
+    "Fobos" -> "Marte" [label = "orbita"]
+}
+```
+
+::: {.notes}
+
+Like a document, this can easily represent an arbitrary structure
+
+Actually stored as node -> edge -> node
+
+:::
+
+## Graph 
+
+```{dot}
+digraph P {
+    "Mercurio" -> "Sol" 
+    "Venus" -> "Sol" 
+    "Tierra" -> "Sol" 
+    "Luna" -> "Tierra" 
+    "Marte" -> "Sol" 
+    "Deimos" -> "Marte" 
+    "Fobos" -> "Marte" 
+}
+```
+---
+
+```{dot}
+digraph P {
+    layout=dot
+    "Mercurio" -> "Sol" [label = "orbita"]
+    "Venus" -> "Sol" [label = "orbita"]
+    "Tierra" -> "Sol" [label = "orbita"]
+    "Luna" -> "Tierra" [label = "orbita"]
+    "Marte" -> "Sol" [label = "orbita"]
+    "Deimos" -> "Marte" [label = "orbita"]
+    "Fobos" -> "Marte" [label = "orbita"]
+    "Venus" -> "CO2" [label = "tiene"]
+    "Venus" -> "N2" [label = "tiene"]
+    "Tierra" -> "CO2" [label = "tiene"]
+    "Tierra" -> "N2" [label = "tiene"]
+    "Tierra" -> "O2" [label = "tiene"]
+    "Marte" -> "CO2" [label = "tiene"]
+    "CO2" -> "O" [label = "contiene", lblstyle="above, sloped"]
+    "CO2" -> "C" [label = "contiene", lblstyle="above, sloped"]
+    "O2" -> "O" [label = "contiene", lblstyle="above, sloped"]
+    "N2" -> "N" [label = "contiene", lblstyle="above, sloped"]
+    "N2" -> "Taumeba" [label = "tóxica para"]
+}
+```
+
+::: {.notes}
+
+This looks out of hand, but you wouldn't necessarily 
+view the whole graph at once.  That's what queries are for.
+
+## More 
+
+- Time series 
+- Geospatial 
+
+:::
+
+# Storage 
+
+
+|              |one machine|distributed|
+|--------------|-----------|-----------|
+|in memory     |           |redis      |
+|single file   |SQLite     |           |
+|server-managed|PostgreSQL |           |
+
+
+
+# Breaking boundaries 
+
+- Data paradigm / shape 
+- Query 
+- Storage 
+
+
+::: {.notes}
+
+There's a common assumption that you have to choose all 
+of these together - for instance, if you choose a relational 
+database, which people often call a "SQL database", that 
+makes your decisions about how you're going to access or 
+query the data, and how the data is going to be stored.  
+
+You are not necessarily locked in to just one choice for 
+data shape, and that in turn doesn't necessarily lock in 
+your choice of querying method 
+
+:::
+
+---
+
+![hstore: PostgreSQL key-value](img/hstore-big.pnd)
+
+---
+
+## PostgreSQL JSON type
+
+    select nombre, 
+           doc->'diám_km' AS diám_km, 
+           doc->'año_d' AS año_d
+    from planetas_docs
+    where (doc->>'diám_km')::int > 20000;
+
+    CREATE INDEX ON planetas_docs(((doc->>'diám_km')::int));
+
+[also in SQLite](https://dgl.cx/2020/06/sqlite-json-support)
+
+::: {.notes}
+
+In principle you can make a JSON string and store it anywhere, 
+but being able to drill into the documents to select, filter, 
+and index make it a useful data store.
+
+You may be thinking "OK, but it's not as efficient as a dedicated 
+document database, right?", but benchmarks show it sometimes 
+beating MongoDB!
+
+:::
+
+## Cross-paradigm hosting 
+
+---
+
+![FerretDB](img/ferretdb.png)
+
+::: {.notes}
+
+Supports MongoDB, but uses PostgreSQL for its storage engine
+
+I lied in my earlier slide showing MongoDB; I was actually 
+showing FerretDB.
+
+:::
+
+--- 
+
+![Apache AGE](img/apache_age.png)
+
+## Graphs without a graph database
+
+[Using PostgreSQL as a graph database](https://tech.ingrid.com/sql-as-graph-database/)
+
+    WITH RECURSIVE traverse(node_id, entity_type, entity_id) AS (
+        SELECT
+        ...
+    )
+    SELECT
+        traverse.entity_id as order_id
+    FROM traverse
+    ...
+
+::: {.notes}
+
+RECURSIVE CTE 
+
+is the special sauce that makes graph logic doable in ordinary 
+PostgreSQL
+
+:::
+
+# And more Popatterns 
+
+- Geospatial: [PostGIS](http://postgis.net/)
+- [Time-series](https://www.c-sharpcorner.com/article/introduction-to-postgresql-as-a-time-series-database-for-iot/)
+- Search-focused: [PostgreSQL full-text search]
+
+::: {.notes}
+
+Less radical variations on relational or "rectangle-shaped" data, 
+sometimes stored in dedicated database types, but that can also 
+be hosted relationally.
+
+Hang on a minute.  Is this whole talk just a bunch of 
+"you can do anything with PostgreSQL" propaganda?
+
+::: 
+
+---
+
+![Chelnik the PostgreSQL elephant](img/chelnik.jpg)
+
+::: {.notes}
+
+Chelnik!
+
+What did you do to my talk?
+
+:::
+
+# SQLite 
+
+![Chelnik the PostgreSQL elephant, with blindfold](img/chelnik-blindfolded.png)
+
+::: {.notes}
+
+Okay, don't look, Chelnik.  We love PostgreSQL, but it's not the only game in town.
+
+:::
+
+## Simplicity 
+
+|              |one machine|distributed  |
+|--------------|-----------|-------------|
+|in memory     |SQLite     |Apache Ignite|
+|single file   |SQLite     |rqlite       |
+|server-managed|PostgreSQL |CockroachDB  |
+
+- No server
+- Python Standard Library support 
+
+::: {.notes}
+
+People like using SQLite for quickie projects and demos, because it's 
+so easy to use.  It's essentially just a file format, and libraries 
+that can access that file format.
+
+:::
+
+## File format
+
+[SQLite As An Application File Format](https://www.sqlite.org/appfileformat.html)
+
+![Document: SQLite As An Application File Format](img/sqlite-app-file.png)
+
+::: {.notes}
+
+In fact, it's so simple that you can use it when
+you weren't even thinking about using a database at all - you were just looking for 
+a data storage file format.  Because it's an efficient and versatile format. 
+There's a good discussion of that in the SQLite docs.
+
+:::
+
+
+## Simple != Weak 
+
+```{dot}
+digraph P {
+    layout=dot
+    "Data source" -> "SQLite"
+    "SQLite" -> "reader 1"
+    "SQLite" -> "reader 2"
+    "SQLite" -> "reader 3"
+    "SQLite" -> "reader 4"
+    "SQLite" -> "reader 5"
+}
+```
+
+::: {.notes}
+
+Does this sound familiar?  Does anybody remember when Python was 
+regarded as not a language for serious programming, only for 
+casual scripts?
+
+But they often assume that implies that it's only suitable for small 
+amounts of data, but it does handle large amounts.
+
+They also assume it's only for single-user or single-process access.
+
+Only one process can *write to* a SQLite file at a time.  But many, 
+many processes can *read from* it efficiently.
+
+So if you're only writing data from a single source, and then serving 
+it to lots of people, SQLite works well.  Simon Willison has a great 
+article about this.  
+
+:::
+
+## Baked data 
+
+Simon Willison: [The Baked Data architectural pattern](https://simonwillison.net/2021/Jul/28/baked-data/)
+
+![Blog post: Baked Data architectural pattern](img/baked-data.png)
+
+::: {.notes}
+
+Simon Willison wrote this great article on cheaply and easily hosting an 
+application if it relies on infrequently-updated data.  Just put that data 
+in a single-file database like SQLite, and a cheap and basic real or virtual 
+server can handle the dynamic part.
+
+::: 
+
+## Datasette 
+
+![Datasette with map](img/datasette-map.img)
+
+::: {.notes}
+
+Mentioning Simon Willison is my excuse to plug his amazing project Datasette, 
+a versatile expandable tool for exploring and visualizing SQLite databases.  
+
+As you might expect for SQLite, the server is really easy to install and run.  
+It can even point to a SQLite file that's publicly hosted rather than on your 
+own machine.  In fact...
+
+:::
+
+## Datasette-lite 
+
+https://lite.datasette.io/?url=https://github.com/catherinedevlin/talks/blob/master/pycon_colombia_2023/data/planetas.sqlite
+
+
+::: {.notes}
+
+And speaking of breaking boundaries... how about that PyIodide, huh?
+Breaking boundaries between Python and web browser means a user's browser 
+can act as a self-contained server!
+
+Simon Willison did this with Datasette!
+
+Look carefully at this URL, because this URL is the *only code* that was 
+written to browse this database.  And the only server being used to run this 
+
+In other words, I did nothing at all except upload the SQLite file and then 
+compose this URL!  The datasette server was loaded from lite.datasette.io.
+The server runs in the browser, and loads the data from where it's statically 
+hosted on GitHub.  
+
+I have never been this lazy in my life, and I love it!
+
+:::
+
+## Hosted on SQLite
+
+- [SQLite as a document database](https://dgl.cx/2020/06/sqlite-json-support)
+- [simple-graph](https://github.com/dpapathanasiou/simple-graph)
+- [FTS5](https://www.sqlite.org/fts5.html): full-text for search
+
+## Multi-model databases 
+
+- ArangoDB
+
+::: {.notes}
+
+There's a 
+
+:::
+
+## Federation 
+
+::: {.notes}
+
+Leave data in place... query it anyway 
+
+:::
+
+## PostgreSQL Foreign Data Wrappers
+
+![Screenshot of using mongo_fdw](img/mongo_fdw.png)
+
+[source: CrunchyData blog](https://www.crunchydata.com/blog/easy-mongo-from-your-postgres)
+
+::: {.notes}
+
+At that point, you can run queries against your foreign tables 
+and pretty much forget that they are foreign tables!
+
+:::
+
+## Cloud storage / big data 
+
+![Parquet S3 Foreign Data Wrapper](img/s3_parquet_fdw.png)
+
+::: {.notes}
+
+Or let's say your volume and your analytics suggest using 
+
+## Many many wrappers...
+
+[listing](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
+
+
+::: {.notes}
+
+It's not frictionless, though.  Ease and quality of these are uneven.  
+Installation instructions are sometimes too terse; individual FDWs 
+have varying limitations (some read-only, some don't support all data 
+types, performance impact, etc.)  You may need to invest some effort 
+into researching a specific connection's function and installation.
+
+:::
+
+# SQL Gets In Everything 
+
+::: {.notes}
+
+Let's talk a little more about 
+
+::: 
+
+## Boo SQL 
+
+- [annoying syntax](https://github.com/catherinedevlin/rogue-sql)
+- [](https://www.scattered-thoughts.net/writing/against-sql)
+- not composeable 
+
+::: {.notes}
+
+I've been using SQL for about 24 years, constantly seeing people say that 
+its era is ending, it's an annoying language, we can do better. 
+And you can understand why - it really does have real weaknesses.
+
+:::
+
+## Hooray SQL 
+
+- Super-mature
+- Expressive
+- Readable 
+- Universal(ish)
+
+## SQL to Pandas 
+
+    qry = """SELECT p.nombre, p.diám_km, 
+            l.nombre AS luna,
+            l.diám_km AS luna_diám_km
+    FROM   planetas p 
+    JOIN   lunas l ON (l.planeta_nombre = p.nombre)"""
+    df = pd.read_sql(qry, 'sqlite:///planetas.db')
+
+- SQL support in Pandas 
+
+## [JupySQL](https://jupysql.ploomber.io/en/latest/quick-start.html)
+
+![JupySQL query](img/jupysql)
+
+## JupySQL to Pandas
+
+    %%sql result << 
+    SELECT p.nombre, p.diám_km, 
+            l.nombre AS luna,
+            l.diám_km AS luna_diám_km
+    FROM   planetas p 
+    JOIN   lunas l ON (l.planeta_nombre = p.nombre)
+
+    result.DataFrame()
+
+## Big Data support 
+
+- File formats like Parquet, Avro, ORC
+- Engines for access: Apache Spark, Presto, DuckDB, Apache Drill...
+
+::: {.notes}
+
+"Big Data" and "NoSQL" are often used as near-synonyms, yet most of the 
+"Big Data" query engines support SQL.  They may also support a variety 
+of APIs for Python-style access, but of course, those APIs are different
+for each one.
+
+Big data is a little like SQLite in that way, with no server managing 
+the file storage
+
+:::
+
+## dbt: SQL for ETL 
+
+![dbt](img/dbt.png)
+
+::: {.notes}
+
+And so SQL is enduring, and in fact still spreading.
+
+One example is dbt, a tool for the transformation portion of 
+ETL work.  dbt is just a framework for transformation 
+queries, written in SQL.  It helps you to organize, parallelize, 
+and visualize them in a really clean and manageable way.  
+
+If you have complex data transformations to manage, try it! 
+
+:::
+
+# Order vs. Freedom 
+
+---
+
+![CSV of planet info](img/csv.png)
+
+
+::: {.notes}
+
+Generally, in these rectangle-based formats, it's very 
+clear which fields are and are not present.
+
+:::
+
+--- 
+
+    ALTER TABLE planetas 
+    ADD COLUMN (anillos BOOL 
+                        NOT NULL 
+                        DEFAULT FALSE);
+
+
+::: {.notes}
+
+In fact, you may need to run code to add a field 
+that wasn't previously present.
+
+:::
+
+---
+
+    planetas['Saturno']['anillos'] = True
+
+::: {.notes}
+
+Whereas, in documents or graphs, by default you can 
+just toss in whatever values and relationships you 
+wish.  
+
+This can be very freeing and fun.
+
+:::
+
+---
+
+    planetas['Júpiter']['anillos'] = True
+    planetas['Tierra']['anllos'] = False
+
+::: {.notes}
+
+On the other hand, it makes silly mistakes like typos 
+possible.
+
+More substantively, it becomes harder to find out 
+what information about what the data should look like.
+Glancing at one object won't necessarily tell you 
+what the other objects look like.
+
+This can matter when a human views the data, or 
+when tools inspect the data.
+
+:::
+
+--- 
+
+![Python docs page on type hints](img/type-hints.png)
+
+::: {.notes}
+
+Does this tradeoff remind you of anything?
+
+::: 
+
+--- 
+
+# [JSON Schema](https://json-schema.org/)
+
+    {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/product.schema.json",
+    "title": "Product",
+    "description": "A product from Acme's catalog",
+    "type": "object",
+    "properties": {
+        "productId": {
+        "description": "The unique identifier for a product",
+        "type": "integer"
+        }
+    },
+    "required": [ "productId" ]
+    }
+
+- [JSON Schema](https://json-schema.org/)
+
+::: {.notes}
+
+Much like optional type hints are now available in 
+Python if you want it for a particular project... 
+
+The freeform, or schemaless, paradigms like document 
+and graph databases offer optional methods for defining 
+and enforcing a schema definition.
+
+:::
+
+## Dataclasses / attrs
+
+    from dataclasses import dataclass 
+
+    @dataclass 
+    class Planeta:
+
+        nombre: str 
+        diám_km: int
+        año_d: float
+
+    Planeta(nombre='Júpiter', diám_km=142800, año_d=4331.865)
+
+--- 
+
+    @dataclass 
+    class Planeta_Dataclass:
+
+        nombre: str 
+        diám_km: int
+        año_d: float
+
+
+    class Planeta_Model(Base):
+        __tablename__ = "planetas"
+
+        nombre: Mapped[str] = mapped_column(primary_key=True)
+        diám_km: Mapped[int] = mapped_column(Integer)
+        año_d: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+
+    Planeta(nombre='Mercurio', mín_ua=0.31, máx_ua=0.47, incl_orb_g=7.0, diám_km=4878, obl=0.0, masas_t=0.06, incl_g=7, año_d=87.97, día_h=1407.6, lunas=[])
+
+::: {.notes}
+
+
+These are so close together, and even serve a similar function of 
+defining data structure, 
+
+:::
+
+---
+
+## SQLAlchemy - dataclass integration
+
+from sqlalchemy.orm import MappedAsDataclass
+
+    class Planeta(MappedAsDataclass, Base):
+        __tablename__ = "planetas"
+
+        nombre: Mapped[str] = mapped_column(primary_key=True)
+        ...
+
+    Planeta(nombre='Mercurio', mín_ua=0.31, máx_ua=0.47, incl_orb_g=7.0, diám_km=4878, obl=0.0, masas_t=0.06, incl_g=7, año_d=87.97, día_h=1407.6, lunas=[])
+
+attrs, Pydantic also available
+
+
+## datamodel-codegen
+
+    !datamodel-codegen --input planetas.csv --input-file-type csv --output-model-type dataclasses.dataclass
+
+    # generated by datamodel-codegen:
+    #   filename:  planetas.csv
+    #   timestamp: 2023-06-05T01:41:29+00:00
+
+    from __future__ import annotations
+
+    from dataclasses import dataclass
+
+    @dataclass
+    class Model:
+        nombre: str
+        mín_ua: str
+        máx_ua: str
+        incl_orb_g: str
+        diám_km: str
+        obl: str
+        masas_t: str
+        incl_g: str
+        año_d: str
+        día_h: str
+
+::: {.notes}
+
+Here's a problem: I've shown you lots of technologies, but I'm lazy.  Thinking about all these possible technologies 
+makes me tired.  I don't want to have to write code 
+to *use* them.
+
+Fortunately, if you websearch around, you might 
+be able to find automated generators and 
+converters, like datamodel-codegen, which can generate
+dataclasses, Pydantic models, or attr models from raw
+data.
+
+:::
+
+
+## Automated converters
+
+```{dot}
+digraph {
+    subgraph python { 
+        style=filled;
+        color=lightblue;
+        dataclass 
+        attrs
+        pydantic
+    }
+    dataclass -> DDL [label="simple-ddl-generator"]
+    pydantic -> DDL [label="simple-ddl-generator"]
+    attrs
+    DDL -> DDL [label="simple-ddl-generator"]
+    JSON -> JSONSchema [label=genson]
+    JSONSchema -> dataclass [label=statham, dir=both]
+    ORM -> DDL [label="simple-ddl-generator"]
+    ORM -> dataclass [label=SQLAlchemy, dir=both URL="https://docs.sqlalchemy.org/en/20/orm/dataclasses.html"]
+    DDL -> dataclass [label=omymodels]
+    DDL -> ORM [label=omymodels]
+    attrs -> ORM [lable=SQLAlchemy dir=both]
+    JSONSchema -> dataclass [label="datamodel-code-generator"]
+    dict -> dataclass [label="datamodel-code-generator"]
+    JSON -> dataclass [label="datamodel-code-generator"]
+    pydantic -> JSONSchema [label=".schema_json"]
+    JSONSchema -> webform [label="react-jsonschema-webform" URL="https://rjsf-team.github.io/react-jsonschema-form/docs/"]
+    JSONSchema -> webform [label="JSONForms.io" URL="https://jsonforms.io/"]
+    JSONSchema -> DDL [label="jsonschema2db" URL="https://github.com/better/jsonschema2db"]
+    JSONSchema -> DDL [label="jsonschema2sql" URL="https://github.com/hashhar/jsonschema2sql"]
+}
+```
+
+::: {.notes}
+
+In fact, if you keep websearching, you can find a 
+whole web of automated converters.  You might be 
+able to assemble a whole data project from raw data 
+plus a series of transformations like this.  This 
+map isn't even complete, it's just a start.
+
+I think we're on the verge of having a `pandat` tool, 
+like `pandoc` for data schemas, that would integrate 
+all these converters and take your data from and to 
+all sorts of forms.
+
+:::
+
+## Clarity please 
+
+- Units are never implied!
+  - Suffixes on field names 
+- SQL table / column comments 
+
+    COMMENT ON COLUMN planetas.día_h IS 'período de rotación, en horas'
+
+---
+
+![Table description with column comment](img/with_comment.png)
+
+# Quipu redux 
+
+![Quipu](https://essentials.neh.gov/sites/default/files/quipu_v1.jpg)
+
+::: {.notes}
+
+Back to our quipu.  I mentioned that we know how 
+to interpret the numbers encoded in the knots of 
+a quipu.  
+
+But that's not all the information.  Quipu were 
+usually made with a variety of colored yarns - 
+colors that almost certainly contained additional 
+meaning.  The style of knots used to attach the 
+pendant strings to the main string also varied.
+
+It is believed that's the metadata; information 
+about what the numbers on the pendant strings mean.
+
+Unfortunately, the knowledge of how to read the 
+metadata has been lost.
+
+You may not be able to protect your own data and 
+metadata against catastrophic alien invasion, but 
+it's still a reminder to 
+
+:::
+
+# Open Khipu
+
+![Open Khipu repo](img/open-khipu.png)
+
+https://lite.datasette.io/?url=https://github.com/khipulab/open-khipu-repository/blob/master/khipu.db
