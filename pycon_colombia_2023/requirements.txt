@@ -1,0 +1,9 @@
+jupyterlab
+sqlalchemy
+pandas
+duckdb
+datasette
+psycopg2
+requests
+pgcli 
+litecli 
