@@ -1,36 +1,39 @@
 ---
 title: "Data: Clarity and Blur" 
+subtitle: "PyCon Colombia 2023"
+date: "2023-06-09"
 author: "Catherine Devlin"
-format: revealjs
-footer: "https://github.com/catherinedevlin/talks/tree/master/pycon_colombia_2023"
+format: 
+  revealjs:
+    code-line-numbers: false
+footer: "https://github.com/catherinedevlin/talks/"
 logo: img/pycon-colombia.svg
-fig-align: center
 ---
 
 ![](img/pycon-colombia.svg)
+
+https://github.com/catherinedevlin/talks/
+
+::: {.notes}
+
+Perdona que hable solo un poco de español. Si, quiere hablar conmigo en español después, por favor hable despacio y use gestos amplios.
+
+:::
 
 ---
 
 @catherinedevlin@tech.lgbt
 
-Chelnik the PostgreSQL elephant
+Chelnik, the PostgreSQL elephant
 
 ![](img/chelnik.jpg){fig-alt="Small crocheted blue elephant" fig-align="center"}
 
 ::: {.notes}
 
-DBA 1999, Python 2004 
-
-Combination of big, broad thoughts, and tasty little morsels 
-
-Clarity: understanding the different techniques and classes of 
-technology 
-
-Blur: Techniques that sit at the boundary between other 
-technologies, and let you get at least some advantages 
-of both.
+No relation to Travis Oliphant 
 
 :::
+
 
 # [Quipu](https://essentials.neh.gov/projects/quipus-inca-language-knots) 
 
@@ -38,19 +41,7 @@ of both.
 
 ::: {.notes}
 
-You will sometimes hear that the Inca had no 
-"writing system", because they had no way to 
-write down text.
-
-But they *did* have quipu, sometimes called 
-"Incan string writing", a system for recording 
-numerical information.
-
-Quipu are actually a decimal numbering system - 
-the number and type of knots in a cluster represent
-a digit, and the placement of that cluster on 
-the string indicate whether it's ones, tens, 
-hundreds...
+Decimal system 
 
 :::
 
@@ -62,16 +53,9 @@ hundreds...
 
 ::: {.notes}
 
-Elsewhere, in places like Mesopotamia that 
-developed writing systems for prose, they 
-didn't start out for writing prose.  They 
-started out for recording data.  Records of 
-production, taxation, debt, and so on.
+Writing down stories, laws, prose... optional 
 
-If you want to build an advanced civilization, 
-you can write down prose... if you feel like 
-it.  But recording *data* is not optional - 
-it's a must.
+Recording data: mandatory 
 
 ::: 
 
@@ -81,12 +65,9 @@ it's a must.
 
 ::: {.notes}
 
-Or, maybe, not such an advanced society.  This 
-piece of bone is from a Neanderthal camp in 
-France from 60,000 years ago.  It is believed 
-that these notches were made... 
+Or not so advanced 
 
-... you guessed it, to record data.
+60,000 years ago, Neanderthal 
 
 :::
 
@@ -95,19 +76,7 @@ that these notches were made...
 
 ![](img/beginners-guide.png){fig-alt="Python Beginners' Guide" fig-align="center"}
 
-
 ::: {.notes}
-
-Go through some Python tutorials.
-
-Go through some sample code.
-
-Even formal programming classes tend to postpone 
-data as long as possible.
-
-Why, if it's so central?  It's like a 
-horseback riding club that avoids talking 
-about horses.
 
 :::
 
@@ -117,17 +86,26 @@ about horses.
 
 ::: {.notes}
 
-In the process of learning programming,
-by the time you're finally learning about how to 
-store and access data, you and your instructor are pretty tired. 
-Nobody is up to a big-picture analysis.  They probably 
-show you a single approach because a through look at the 
-possible decisions to be made. 
+There are lots of ways.  And frankly none of them is obvious.
 
-Sometimes there isn't much guidance for the first 
-set of decisions - the material you find assumes 
-that those decisions have been made, and just 
-helps you with implementation
+On-your-own learning 
+
+You may study, or stumble into, one technique 
+
+:::
+
+# Clarity and blur 
+
+Clarity: about categories 
+
+Blur: between categories
+
+::: {.notes}
+
+Clarity: what makes tecniques and approaches and technologies 
+different 
+
+Blur: Boundaries 
 
 :::
 
@@ -147,12 +125,12 @@ Data from [Royal Museums Greenwich](https://www.rmg.co.uk/stories/topics/solar-s
 
 ::: {.notes}
 
-If you're a normal human, you'll call these rows 
-"rows", and you'll call this table a "table".
+"Table" with "Rows"
 
-But if you want to show off what a data hipster 
-you are, you'll call the rows "tuples", and the try it! 
-table a "relation".  Why?
+"Relation" with "tuples"
+
+Why?
+
 :::
 
 ## Not data
@@ -161,23 +139,13 @@ Venus
 
 224.7 días
 
-::: {.notes}
-
-This name and this quantity are not data.
-
-Even though it has units!  
-:::
-
 ## Now it's data 
 
 Venus **orbita alrededor del sol en** 224,7 días.
 
 ::: {.notes}
 
-I have described the relationship between "Venus" and
-"224.7 days", and now it's data.
-
-It's the connection that makes it mean something - anything!
+Meaning comes from relationship 
 
 :::
 
@@ -203,13 +171,17 @@ the relationships make them into data.
 
 # Shapes of relationships
 
-... and how we access the data
+::: {.notes}
 
-(usually)
+Is a rectangular table right?
+
+No single answer
+
+::: 
 
 ## Key:Value 
 
-![phone book listings](img/phonebook.jpg)
+![](img/phonebook.jpg){fig-alt="phone book listings"}
 
 ::: {.notes}
 
@@ -221,10 +193,14 @@ Value: simple or complex
 
 ## Key-value access
 
-    import dbm
-    with dbm.open('período_sideral_d.dbm', 'c') as db:
-        db['Marte'] = str(686.98)
-        print(db['Marte'])
+```python
+import dbm
+with dbm.open('período_sideral_d.dbm', 'c') as db:
+    db['Marte'] = str(686.98)
+
+with dbm.open('período_sideral_d.dbm') as db:
+    print(db['Marte'])
+```
 
     b'686.98'
 
@@ -235,58 +211,35 @@ Implementations fast and simple
 Correspondence to dicts is great: "querying" is simply 
 referring to a key
 
+Stores byte strings - you could use JSON to serialize 
+complex data into it, but you'd have to serialize and 
+deserialize 
 :::
 
-## Shelf 
+## Shelve 
 
-    import shelve
-    with shelve.open('planetas_shelf') as db:
-        db['Marte'] = {'diám_km': 6794, 'año_d': 686.98}
-        print(db['Marte']['diám_km'])
+```python
+import shelve
+with shelve.open('planetas_shelf') as db:
+    db['Marte'] = {'diám_km': 6794, 'año_d': 686.98}
+    print(db['Marte']['diám_km'])
+```
 
     6794
 
 ::: {.notes}
 
-Still a key-value store, but the values can:
+Shelve does that for you 
 
-Store actual Python objects, including data structures 
-like dicts,  instead of just byte sequences 
+Values store python objects, incl composites 
 
-Still need to know each object's key, though; the only 
-"query" would be to fetch each object into memory and 
-examine each value.
+Simplest document database - 
 
+"document": 
+case refers to the kind of structure that is 
+represented 
 
-:::
-
-## Document databasess 
-
-    {
-        "Venus": {
-            "masas_de_tierra": 0.82
-        },
-        "Tierra": {
-            "masas_de_tierra": 1.0,
-            "lunas": [
-            "Luna"
-            ]
-        },
-        "Marte": {
-            "masas_de_tierra": 0.11,
-            "lunas": [
-            "Deimos",
-            "Fobos"
-            ]
-        }
-    }
-
-
-::: {.notes}
-
-Related to key:value, each document is basically an elaborate 
-value.  May literally be a piece of JSON text, with all that
-flexibility, or at least can be visualized that way.
+Still query by key
 
 :::
 
@@ -294,38 +247,29 @@ flexibility, or at least can be visualized that way.
 
 [planetas.json](data/planetas.json)
 
-    resultado = {}
-    for nombre_del_planeta, planeta in sistema_solar.items():
-        for nombre_de_luna, luna in planeta.get('lunas', {}).items():
-            if luna['diámetro_media_km'] > 2000:
-                resultado[nombre_de_luna] = luna['diámetro_media_km']
-    resultado
+```python
+with shelve.open('planetas.shelve.db') as db:
+    for planeta, planeta_info in db.items():
+        for luna in planeta_info['lunas']:
+            if (luna['diám_km'] or 0) > 2000:
+                print (planeta, luna['nombre'], luna['diám_km'])
+```
 
-    {'Luna': 3476.0,
-    'Io': 3652.0,
-    'Europa': 3138.0,
-    'Ganímedes': 5262.0,
-    'Calisto': 4800.0,
-    'Titán': 5150.0,
-    'Tritón': 3500.0}
+    [('Saturno', 'Titán', 5150.0),
+    ('Tierra', 'Luna', 3476.0),
+    ('Júpiter', 'Io', 3652.0),
+    ('Júpiter', 'Europa', 3138.0),
+    ('Júpiter', 'Ganímedes', 5262.0),
+    ('Júpiter', 'Calisto', 4800.0),
+    ('Neptuno', 'Tritón', 3500.0)]
 
 ::: {.notes}
 
-Here, we have a JSON file - a sort of basic document database.
-The top level is a dict, so essentially it is a document store 
-indexed by a string key.
+Pull everything into memory, apply Python 
 
-We can "query" it by bringing the whole thing into memory, then 
-writing Python to navigate through each document, picking out 
-the ones that meet our criteria, and the portion of each document 
-that we want to report on.
+You don't have to learn anything 
 
-This is the essence of what querying is, and this method has some 
-advantages.  It uses only plain Python - you didn't have to learn 
-anything new here.
-
-Of course, it takes hand-writing a lot of code, and will be slow 
-if you have a lot of records.
+bulky, slow 
 
 :::
 
@@ -337,12 +281,6 @@ if you have a lot of records.
 
 ::: {.notes}
 
-A standard JSON file must be read entirely into memory - 
-if your whole database is an enormous JSON file, that's very bad
-
-JSONL is just a slight variation on the format that writes one 
-item per line, so that it can be read or written lazily 
-
 No standard library support, but libraries like `jsonlines` and 
 Pandas support it
 
@@ -352,35 +290,34 @@ Pandas support it
 
 MongoDB query-by-example
 
-    db.planetas.find({'diám_km': {'$gt': 10000},
-                      'año_d': {'$lt': 500}}
+```python
+db.planetas.find({'diám_km': {'$gt': 10000},
+                    'año_d': {'$lt': 500}}
+```                      
+
+![](img/elastic-query.png){fig-alt="Sample Elastic query"}
 
 ## jq 
 
-    jq.compile('.[] | {nombre: .nombre, mes: [.lunas[]?.rev_d]}'
-            ).input(sistema_solar).all()
+```python
+jq.compile('.[] | {nombre: .nombre, mes: [.lunas[]?.rev_d]}'
+        ).input(sistema_solar).all()
+```                      
 
     [{'nombre': 'Mercurio', 'mes': []},
     {'nombre': 'Venus', 'mes': []},
     {'nombre': 'Tierra', 'mes': [27.322]},
     {'nombre': 'Marte', 'mes': [0.319, 1.262]},
     {'nombre': 'Júpiter',
-    'mes': [0.295,
-    0.298,
-    0.498,
-    0.675,
+    'mes': [0.295, 0.298, 0.498, 0.675, ...
 
 ::: {.notes}
 
-DSL for selecting elements - not Python-specific
+Independent DSL for navigating structures
 
-Different database creators implement query languages differently
+like a JSON file, or a document 
 
-Both filtering and navigating within the document
-
-Useful for Python objects, JSON docs, document databases
-
-Python libraries implementing it 
+Py libaries
 
 ::: 
 
@@ -405,7 +342,37 @@ Spreadsheets
 Clipboard with a sign-up form
 
 :::
+## Dataframes
 
+```python
+planetas.loc['Marte', 'año_d']
+```
+
+    686.98
+
+```python
+planetas[planetas.año_d > 1000] \
+    [['máx_ua', 'diám_km', 'año_d']]
+```
+
+|         |   máx_ua |   diám_km |    año_d |
+|:--------|---------:|----------:|---------:|
+| Júpiter |     5.45 |    142800 |  4331.86 |
+| Saturno |    10.07 |    120000 | 10760.3  |
+| Urano   |    20.09 |     52400 | 30684.7  |
+| Neptuno |    30.32 |     48400 | 60189.5  |
+
+Pandas, Polars, agate, Dask, Ray, Modin, [more](https://github.com/jcmkk3/awesome-dataframes)
+
+::: {.notes}
+
+DataFrame object that supports LOTS of methods
+
+Also repurposes square-bracket syntax for location and filtering
+
+Familiar to Python folks
+
+::: 
 
 ## Joins: why
 
@@ -417,6 +384,13 @@ Clipboard with a sign-up form
 |  Tierra  |  1.0   | Luna |
 +----------+--------+------+
 
+
+::: {.notes}
+
+The problem with rectangular storage is that 
+data often doesn't really fit that shape.
+
+::: 
 
 ## uh-oh
 
@@ -443,15 +417,13 @@ Clipboard with a sign-up form
 
 ::: {.notes}
 
-In principle, this works.
+Use repetition to cover over mismatch 
+between rectangles and shape 
 
-There are some very wide, very repetitive Spreadsheets
+Bulk 
+Inconsistency danger 
 
-Mass of Mars stored in two places:
-Duplication / bulk 
-Danger of inconsistency 
-
-Not so bad here, but... 
+Is it so bad?
 
 :::
 
@@ -506,40 +478,19 @@ Not so bad here, but...
 
 ::: {.notes}
 
-A far more elegant solution, but it introduces some of its 
-own kinds of pain.
-::: 
+More elegant, but joining can be hard, too.
 
-## Rectangles as dataframes
+You've lost the business users.
 
-    planetas.loc['Marte', 'año_d']
+:::
 
-686.98
-
-    planetas[planetas.año_d > 1000] \
-        [['máx_ua', 'diám_km', 'año_d']]
-
-|         |   máx_ua |   diám_km |    año_d |
-|:--------|---------:|----------:|---------:|
-| Júpiter |     5.45 |    142800 |  4331.86 |
-| Saturno |    10.07 |    120000 | 10760.3  |
-| Urano   |    20.09 |     52400 | 30684.7  |
-| Neptuno |    30.32 |     48400 | 60189.5  |
-
-Pandas, Polars, agate, Dask, Ray, Modin, [more](https://github.com/jcmkk3/awesome-dataframes)
-
-::: {.notes}
-
-DataFrame object that supports LOTS of methods
-
-Also repurposes square-bracket syntax for location and filtering
-
-::: 
 
 ## Joining DataFrames
 
-    lunas.join(planetas, 'planeta', lsuffix='_l', rsuffix='_p'
-              )[['planeta', 'masas_t']]
+```python
+lunas.join(planetas, 'planeta', lsuffix='_l', rsuffix='_p'
+            )[['planeta', 'masas_t']]
+```
 
 |           | planeta   |   masas_t |
 |:----------|:----------|----------:|
@@ -550,6 +501,13 @@ Also repurposes square-bracket syntax for location and filtering
 | Adrastea  | Júpiter   |   317.89  |
 | Amaltea   | Júpiter   |   317.89  |
 | Thebe     | Júpiter   |   317.89  |
+
+::: {.notes}
+
+We still have repetition... it's just generated 
+on-the-fly 
+
+::: 
 
 ## SQL 
 
@@ -580,18 +538,31 @@ SQL handles those joins mentioned before
 
 ::: 
 
-## SQL from Python 
+## Documents too
+
+```python
+planetas['Tierra']['atmosfero'] = [{'molecule': 'N2', 'mw_amu': 28}, 
+                                   {'molecule': 'O2', 'mw_amu': 32}, 
+                                   {'molecule': 'CO2', 'mw_amu': 44}]
+planetas['Marte']['atmosfero'] = [ 
+                                   {'molecule': 'CO2', 'mw_amu': 44}]
+```
+::: {.notes}
+
+Freeform - represent arbitrary data shape 
+
+But tradeoff b/t repetition and joining remains 
+
+Not such consensus of how to express joins in a document structure
+
+::: 
+
+## Raw SQL from Python 
 
 - [DB-API2](https://cewing.github.io/training.codefellows/lectures/day21/intro_to_dbapi2.html)
 - [Records](https://github.com/kennethreitz/records) by Kenneth Reitz
 
-Hold that thought...
-
-::: {.notes}
-
-Much more to say about SQL later!
-
-::: 
+![](img/records.png){fig-alt="Records repo"}
 
 ## ORMs
 
@@ -714,18 +685,27 @@ the SQL side.
 
 :::
 
+## More concise ORMs
+
+[Hitchhiker's Guide](https://docs.python-guide.org/scenarios/db/)
+
+![](img/guide-databases.png){fig-alt="Hitchhikers' Guide to Python Databases page")
+
+
 ## Query builders 
 
-    planetas, lunas = pk.Tables('planetas', 'lunas')
-    q = (pk.Query 
-        .select(lunas.star, planetas.diám_km)
-        .from_(planetas) 
-        .join(lunas) 
-        .on(planetas.nombre == lunas.planeta_nombre)
-        .where(planetas.diám_km < 60000)
-        .where(lunas.diám_km > 100)
-        )
-    print(q)
+```python
+planetas, lunas = pk.Tables('planetas', 'lunas')
+q = (pk.Query 
+    .select(lunas.star, planetas.diám_km)
+    .from_(planetas) 
+    .join(lunas) 
+    .on(planetas.nombre == lunas.planeta_nombre)
+    .where(planetas.diám_km < 60000)
+    .where(lunas.diám_km > 100)
+    )
+print(q)
+```
 
     SELECT "lunas".*,"planetas"."diám_km" FROM "planetas" JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
 
@@ -743,6 +723,7 @@ Why, though?  Unless you just really hate SQL syntax?
 
 ## Composable 
 
+```python
     q = (pk.Query 
         .from_(planetas) 
         .where(planetas.diám_km < 60000)     
@@ -752,6 +733,8 @@ Why, though?  Unless you just really hate SQL syntax?
         .where(lunas.diám_km > 100)
         )
     print(q)
+```
+
     SELECT "lunas".*,"planetas"."diám_km" FROM "planetas" JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
 
 ---
@@ -823,6 +806,10 @@ digraph P {
 This looks out of hand, but you wouldn't necessarily 
 view the whole graph at once.  That's what queries are for.
 
+- Graph databases have query languages 
+- Often inspired by SQL 
+- Competing DSLs
+
 :::
 
 # Breaking boundaries 
@@ -831,18 +818,11 @@ view the whole graph at once.  That's what queries are for.
 - Query 
 - Storage 
 
-
 ::: {.notes}
 
-There's a common assumption that you have to choose all 
-of these together - for instance, if you choose a relational 
-database, which people often call a "SQL database", that 
-makes your decisions about how you're going to access or 
-query the data, and how the data is going to be stored.  
+Three separate decisions 
 
-You are not necessarily locked in to just one choice for 
-data shape, and that in turn doesn't necessarily lock in 
-your choice of querying method 
+"A SQL database"
 
 :::
 
@@ -854,25 +834,26 @@ your choice of querying method
 
 ## PostgreSQL JSON type
 
-    
+```sql
+CREATE TABLE planetas (
+    nombre TEXT PRIMARY KEY, info JSON);
 
-    select nombre, 
-           doc->'diám_km' AS diám_km, 
-           doc->'año_d' AS año_d
-    from planetas_docs
-    where (doc->>'diám_km')::int > 20000;
+select nombre, 
+        doc->'diám_km' AS diám_km, 
+        doc->'año_d' AS año_d
+from planetas_docs
+where (doc->>'diám_km')::int > 20000;
 
-    CREATE INDEX ON planetas_docs(((doc->>'diám_km')::int));
+CREATE INDEX ON planetas_docs(((doc->>'diám_km')::int));
+```
 
 ::: {.notes}
 
-In principle you can make a JSON string and store it anywhere, 
-but being able to drill into the documents to select, filter, 
-and index make it a useful data store.
+Like a doc database, JSON not just string
 
-You may be thinking "OK, but it's not as efficient as a dedicated 
-document database, right?", but benchmarks show it sometimes 
-beating MongoDB!
+drill in to select 
+
+index
 
 :::
 
@@ -899,25 +880,22 @@ showing FerretDB.
 
 [Using PostgreSQL as a graph database](https://tech.ingrid.com/sql-as-graph-database/)
 
-    WITH RECURSIVE traverse(node_id, entity_type, entity_id) AS (
-        SELECT
-        ...
-    )
+```sql
+WITH RECURSIVE traverse(node_id, entity_type, entity_id) AS (
     SELECT
-        traverse.entity_id as order_id
-    FROM traverse
     ...
+)
+SELECT
+    traverse.entity_id as order_id
+FROM traverse
+...
+```
 
 ::: {.notes}
 
-RECURSIVE CTE 
+RECURSIVE CTE: special sauce
 
-is the special sauce that makes graph logic doable in ordinary 
-PostgreSQL
-
-
-Hang on a minute.  Is this whole talk just a bunch of 
-"you can do anything with PostgreSQL" propaganda?
+PostgreSQL propaganda?
 
 ::: 
 
@@ -929,7 +907,7 @@ Hang on a minute.  Is this whole talk just a bunch of
 
 Chelnik!
 
-What did you do to my talk?
+What did you do to our talk?
 
 :::
 
@@ -938,8 +916,6 @@ What did you do to my talk?
 ![](img/chelnik-blindfolded.png){fig-alt="small crocheted blue elephant, wearing blindfold" fig-align="center"}
 
 ::: {.notes}
-
-Okay, don't look, Chelnik.  We love PostgreSQL, but it's not the only game in town.
 
 :::
 
@@ -956,9 +932,9 @@ Okay, don't look, Chelnik.  We love PostgreSQL, but it's not the only game in to
 
 ::: {.notes}
 
-People like using SQLite for quickie projects and demos, because it's 
-so easy to use.  It's essentially just a file format, and libraries 
-that can access that file format.
+beloved for quick projects, demos, single-user apps
+
+serverless: file format + libraries to access 
 
 :::
 
@@ -992,21 +968,15 @@ digraph P {
 
 ::: {.notes}
 
-Does this sound familiar?  Does anybody remember when Python was 
-regarded as not a language for serious programming, only for 
-casual scripts?
+Python "scripting" language?
 
-But they often assume that implies that it's only suitable for small 
-amounts of data, but it does handle large amounts.
+large amounts OK 
 
-They also assume it's only for single-user or single-process access.
+lots of users / processes OK
 
-Only one process can *write to* a SQLite file at a time.  But many, 
-many processes can *read from* it efficiently.
+Publish data, updated occasionally
 
-So if you're only writing data from a single source, and then serving 
-it to lots of people, SQLite works well.  Simon Willison has a great 
-article about this.  
+lots of writers: not OK 
 
 :::
 
@@ -1049,19 +1019,13 @@ own machine.  In fact...
 
 ::: {.notes}
 
-And speaking of breaking boundaries... how about that PyIodide, huh?
-Breaking boundaries between Python and web browser means a user's browser can act as a self-contained server!
+blurring boundaries: PyIodide
 
 Simon Willison did this with Datasette!
 
 Why would I put this long ugly URL on my slide?
 
-Because this URL is the *only code* that was 
-written to browse this database.  And the only server being used to run this Datasette browser is in the browser itself.
-
-In other words, I did nothing at all except upload the SQLite file 
-to Github, which kindly serves as a free static host, and then 
-compose this URL!  The datasette server was loaded from lite.datasette.io.
+Only code!
 
 I have never been this lazy in my life, and I love it!
 
@@ -1076,6 +1040,10 @@ I have never been this lazy in my life, and I love it!
 ## Federation 
 
 ::: {.notes}
+
+Open your eyes now, chelnik 
+
+Blur boundaries:
 
 Leave data in place... query it anyway 
 
@@ -1110,21 +1078,11 @@ format like Parquet.
 
 ::: {.notes}
 
-It's not frictionless, though.  Ease and quality of these are uneven.  
-Installation instructions are sometimes too terse; individual FDWs 
-have varying limitations (some read-only, some don't support all data 
-types, performance impact, etc.)  You may need to invest some effort 
-into researching a specific connection's function and installation.
+Ease, quality, documentation
+
+performance, read-only 
 
 :::
-
-# SQL Gets In Everything 
-
-::: {.notes}
-
-Let's talk a little more about 
-
-::: 
 
 ## Boo SQL 
 
@@ -1134,9 +1092,7 @@ Let's talk a little more about
 
 ::: {.notes}
 
-I've been using SQL for about 24 years, constantly seeing people say that 
-its era is ending, it's an annoying language, we can do better. 
-And you can understand why - it really does have real weaknesses.
+Why is SQL so popular?  24 years of seeing its end predicted
 
 :::
 
@@ -1160,17 +1116,28 @@ and (uses of) SQLite are *still growing!  For example...
 
 ## SQL to Pandas 
 
-    qry = """SELECT p.nombre, p.diám_km, 
-            l.nombre AS luna,
-            l.diám_km AS luna_diám_km
-    FROM   planetas p 
-    JOIN   lunas l ON (l.planeta_nombre = p.nombre)"""
-    df = pd.read_sql(qry, 'sqlite:///planetas.db')
-
+```python
+qry = """SELECT p.nombre, p.diám_km, 
+        l.nombre AS luna,
+        l.diám_km AS luna_diám_km
+FROM   planetas p 
+JOIN   lunas l ON (l.planeta_nombre = p.nombre)"""
+df = pd.read_sql(qry, 'sqlite:///planetas.db')
+...
+df.write_sql("new_tbl", connection)
+```
 
 ## [JupySQL](https://jupysql.ploomber.io/en/latest/quick-start.html)
 
 ![](img/jupysql){fig-alt="JupySQL webpage" fig-align="center"}
+
+::: {.notes}
+
+I love JupySQL because it's the second time somebody picked up 
+one of my personal projects and made it into something far 
+better than I could.
+
+::: 
 
 ## JupySQL to Pandas
 
@@ -1183,9 +1150,23 @@ and (uses of) SQLite are *still growing!  For example...
 
     result.DataFrame()
 
-## dbcli 
+::: {.notes}
 
-## Big Data support 
+## [dbcli](https://www.dbcli.com/)
+
+![](img/dbcli.png){fig-alt="DBCLI homepage"}
+
+::: {.notes}
+
+Relational command-line query tool 
+
+Python-based, powerful user-driven
+
+Ancient past as one of my personal projects 
+
+::: 
+
+## SQL for Big Data 
 
 - File formats like Parquet, Avro, ORC
 - Engines for access: Apache Spark, Presto, DuckDB, Apache Drill...
@@ -1197,9 +1178,6 @@ and (uses of) SQLite are *still growing!  For example...
 of APIs for Python-style access, but of course, those APIs are different
 for each one.
 
-Big data is a little like SQLite in that way, with no server managing 
-the file storage
-
 :::
 
 ## dbt: SQL for ETL 
@@ -1208,14 +1186,13 @@ the file storage
 
 ::: {.notes}
 
-And so SQL is enduring, and in fact still spreading.
+Data transformation 
 
-One example is dbt, a tool for the transformation portion of 
-ETL work.  dbt is just a framework for transformation 
-queries, written in SQL.  It helps you to organize, parallelize, 
-and visualize them in a really clean and manageable way.  
+Very old-fashioned SQL
 
-If you have complex data transformations to manage, try it! 
+-ize words: Organize, parallelize, visualize
+
+Clean and manageable
 
 :::
 
@@ -1229,8 +1206,7 @@ PostgreSQL -> CockroachDB, Crunchy, Yugabyte, Supabase...
 
 Plus the proprietary hosted variants.  
 
-Either way, you get to leverage your own expertise and 
-community expertise.
+Leveraging personal & community experience 
 
 ::: 
 
@@ -1250,10 +1226,12 @@ clear which fields are and are not present.
 
 --- 
 
-    ALTER TABLE planetas 
-    ADD COLUMN (anillos BOOL 
-                        NOT NULL 
-                        DEFAULT FALSE);
+```sql
+ALTER TABLE planetas 
+ADD COLUMN (anillos BOOL 
+                    NOT NULL 
+                    DEFAULT FALSE);
+ ```
 
 
 ::: {.notes}
@@ -1265,7 +1243,9 @@ that wasn't previously present.
 
 ---
 
-    planetas['Saturno']['anillos'] = True
+```python
+planetas['Saturno']['anillos'] = True
+```
 
 ::: {.notes}
 
@@ -1284,16 +1264,10 @@ This can be very freeing and fun.
 
 ::: {.notes}
 
-On the other hand, it makes silly mistakes like typos 
-possible.
+Mistakes 
 
-More substantively, it becomes harder to find out 
-what information about what the data should look like.
-Glancing at one object won't necessarily tell you 
-what the other objects look like.
-
-This can matter when a human views the data, or 
-when tools inspect the data.
+Not self-documented - 
+your eyes or other tools 
 
 :::
 
@@ -1307,97 +1281,108 @@ Does this tradeoff remind you of anything?
 
 ::: 
 
+## Dataclasses / attrs
+
+```python
+from dataclasses import dataclass 
+
+@dataclass 
+class Planeta:
+
+    nombre: str 
+    diám_km: int
+    año_d: float
+
+Planeta(nombre='Júpiter', diám_km=142800, año_d=4331.865)
+```
+
+::: {.notes}
+
+As Lukasz mentioned this morning, type hints make possible 
+great tools like dataclasses or attrs, or Pydantic for 
+validation
+
+:::
+
+--- 
+```python
+@dataclass 
+class Planeta_Dataclass:
+    nombre: str 
+    diám_km: int
+    año_d: float
+
+class Planeta_Model(Base):
+    __tablename__ = "planetas"
+
+    nombre: Mapped[str] = mapped_column(primary_key=True)
+    diám_km: Mapped[int] = mapped_column(Integer)
+    año_d: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+```
+
+::: {.notes}
+
+So close together!  Do we really need to define them
+separately!
+
+:::
+
+## SQLAlchemy - dataclass (attrs, Pydantic)
+
+```python
+from sqlalchemy.orm import MappedAsDataclass
+
+class Planeta(MappedAsDataclass, Base):
+    __tablename__ = "planetas"
+
+    nombre: Mapped[str] = mapped_column(primary_key=True)
+    ...
+
+```
+
+::: {.notes}
+
+Latest SQLAlchemy release blurs that boundary 
+with a mixin
+
+Also integrations with attrs and Pydantic
+
+::: 
 
 # [JSON Schema](https://json-schema.org/)
 
-    {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://example.com/product.schema.json",
-    "title": "Product",
-    "description": "A product from Acme's catalog",
-    "type": "object",
-    "properties": {
-        "productId": {
-        "description": "The unique identifier for a product",
-        "type": "integer"
-        }
-    },
-    "required": [ "productId" ]
+```json
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/product.schema.json",
+"title": "Product",
+"description": "A product from Acme's catalog",
+"type": "object",
+"properties": {
+    "productId": {
+    "description": "The unique identifier for a product",
+    "type": "integer"
     }
+},
+"required": [ "productId" ]
+}
+```
 
 ::: {.notes}
 
-You can think of JSON Schema as simply existing 
-Much like optional type hints are now available in 
-Python if you want it for a particular project... 
+JSON Schema is like optional type hints, but for 
+a document structure that doesn't normally enforce 
+a schema
 
-The freeform, or schemaless, paradigms like document 
-and graph databases offer optional methods for defining 
-and enforcing a schema definition.
+Generate random data, Swagger docs 
 
 :::
-
-## Dataclasses / attrs
-
-    from dataclasses import dataclass 
-
-    @dataclass 
-    class Planeta:
-
-        nombre: str 
-        diám_km: int
-        año_d: float
-
-    Planeta(nombre='Júpiter', diám_km=142800, año_d=4331.865)
-
---- 
-
-    @dataclass 
-    class Planeta_Dataclass:
-
-        nombre: str 
-        diám_km: int
-        año_d: float
-
-
-    class Planeta_Model(Base):
-        __tablename__ = "planetas"
-
-        nombre: Mapped[str] = mapped_column(primary_key=True)
-        diám_km: Mapped[int] = mapped_column(Integer)
-        año_d: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-
-    Planeta(nombre='Mercurio', mín_ua=0.31, máx_ua=0.47, incl_orb_g=7.0, diám_km=4878, obl=0.0, masas_t=0.06, incl_g=7, año_d=87.97, día_h=1407.6, lunas=[])
-
-::: {.notes}
-
-
-These are so close together, and even serve a similar function of 
-defining data structure, 
-
-:::
-
----
-
-## SQLAlchemy - dataclass integration
-
-from sqlalchemy.orm import MappedAsDataclass
-
-    class Planeta(MappedAsDataclass, Base):
-        __tablename__ = "planetas"
-
-        nombre: Mapped[str] = mapped_column(primary_key=True)
-        ...
-
-    Planeta(nombre='Mercurio', mín_ua=0.31, máx_ua=0.47, incl_orb_g=7.0, diám_km=4878, obl=0.0, masas_t=0.06, incl_g=7, año_d=87.97, día_h=1407.6, lunas=[])
-
-- attrs
-- Pydantic also available
-
 
 ## datamodel-codegen
 
-    !datamodel-codegen --input planetas.csv --input-file-type csv --output-model-type dataclasses.dataclass
+```bash
+datamodel-codegen --input planetas.csv --input-file-type csv --output-model-type dataclasses.dataclass
+```
 
     # generated by datamodel-codegen:
     #   filename:  planetas.csv
@@ -1422,18 +1407,13 @@ from sqlalchemy.orm import MappedAsDataclass
 
 ::: {.notes}
 
-Here's a problem: I've shown you lots of technologies, but I'm lazy.  Thinking about all these possible technologies 
-makes me tired.  I don't want to have to write code 
-to *use* them.
+Laziness!
 
-Fortunately, if you websearch around, you might 
-be able to find automated generators and 
-converters, like datamodel-codegen, which can generate
-dataclasses, Pydantic models, or attr models from raw
-data.
+Lots of ways to describe data.
+
+Automated converters!  Search for them!
 
 :::
-
 
 ## Automated converters
 
@@ -1470,16 +1450,9 @@ digraph {
 
 ::: {.notes}
 
-In fact, if you keep websearching, you can find a 
-whole web of automated converters.  You might be 
-able to assemble a whole data project from raw data 
-plus a series of transformations like this.  This 
-map isn't even complete, it's just a start.
+Partial map - my own research 
 
-I think we're on the verge of having a `pandat` tool, 
-like `pandoc` for data schemas, that would integrate 
-all these converters and take your data from and to 
-all sorts of forms.
+pandat?
 
 :::
 
@@ -1495,10 +1468,6 @@ all sorts of forms.
 
 Suffixes in field names 
 
-I dearly wish there was a good way to store Pint units in 
-a database.  If you have ideas for that, let's talk 
-afterward!
-
 :::
 
 ## SQL comments 
@@ -1513,26 +1482,11 @@ afterward!
 
 ::: {.notes}
 
-Back to our quipu.  I mentioned that we know how 
-to interpret the numbers encoded in the knots of 
-a quipu.  
+Can interpret numbers 
 
-But that's not all the information.  Quipu were 
-usually made with a variety of colored yarns - 
-colors that almost certainly contained additional 
-meaning.  The style of knots used to attach the 
-pendant strings to the main string also varied.
+Cannot interpret anchor knots colors - metadata 
 
-It is believed that's the metadata; information 
-about what the numbers on the pendant strings mean.
-
-Unfortunately, the knowledge of how to read the 
-metadata has been lost.
-
-You may not be able to protect your own data and 
-metadata against catastrophic alien invasion, but 
-it's still a reminder to protect and preserve your 
-metadata as best you can.
+Alien invasion - protect and preserve 
 
 :::
 
@@ -1549,7 +1503,7 @@ that have survived.
 ::: 
 
 
---- 
+## Datasett-Lite for quipu 
 
 https://lite.datasette.io/?url=https://github.com/khipulab/open-khipu-repository/blob/master/khipu.db
 
@@ -1559,5 +1513,11 @@ https://lite.datasette.io/?url=https://github.com/khipulab/open-khipu-repository
 And, because it's a SQLite database posted to the web, 
 you guessed it, we can use Datasette-Lite to browse it, 
 right where it is, writing no code.
+
+Published in SQLite, browsable with datasette
+
+Modern data technology - to ancient one 
+
+Maybe even help researchers restore lost metadata 
 
 :::

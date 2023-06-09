@@ -11,6 +11,7 @@
   <meta name="generator" content="quarto-1.3.340">
 
   <meta name="author" content="Catherine Devlin">
+  <meta name="dcterms.date" content="2023-06-09">
   <title>Data: Clarity and Blur</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -29,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="data-clarity-and-blur_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="data-clarity-and-blur_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -326,6 +392,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Data: Clarity and Blur</h1>
+  <p class="subtitle">PyCon Colombia 2023</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -335,21 +402,33 @@ Catherine Devlin
 </div>
 </div>
 
+  <p class="date">2023-06-09</p>
 </section>
 <section class="slide level2">
 
 
-<img data-src="img/pycon-colombia.svg" class="r-stretch"></section>
+<img data-src="img/pycon-colombia.svg" class="r-stretch"><p>https://github.com/catherinedevlin/talks/</p>
+<aside class="notes">
+<p>Perdona que hable solo un poco de español. Si, quiere hablar conmigo en español después, por favor hable despacio y use gestos amplios.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section class="slide level2">
 
 <p><span class="citation" data-cites="catherinedevlin">@catherinedevlin</span><span class="citation" data-cites="tech.lgbt">@tech.lgbt</span></p>
-<p>Chelnik the PostgreSQL elephant</p>
+<p>Chelnik, the PostgreSQL elephant</p>
 
 <img data-src="img/chelnik.jpg" alt="Small crocheted blue elephant" class="r-stretch quarto-figure-center"><aside class="notes">
-<p>DBA 1999, Python 2004</p>
-<p>Combination of big, broad thoughts, and tasty little morsels</p>
-<p>Clarity: understanding the different techniques and classes of technology</p>
-<p>Blur: Techniques that sit at the boundary between other technologies, and let you get at least some advantages of both.</p>
+<p>No relation to Travis Oliphant</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -367,9 +446,7 @@ Catherine Devlin
 <h1><a href="https://essentials.neh.gov/projects/quipus-inca-language-knots">Quipu</a></h1>
 
 <img data-src="https://essentials.neh.gov/sites/default/files/quipu_v1.jpg" alt="quipu" class="r-stretch quarto-figure-center"><aside class="notes">
-<p>You will sometimes hear that the Inca had no “writing system”, because they had no way to write down text.</p>
-<p>But they <em>did</em> have quipu, sometimes called “Incan string writing”, a system for recording numerical information.</p>
-<p>Quipu are actually a decimal numbering system - the number and type of knots in a cluster represent a digit, and the placement of that cluster on the string indicate whether it’s ones, tens, hundreds…</p>
+<p>Decimal system</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -386,8 +463,8 @@ Catherine Devlin
 <h2><a href="https://www.bbc.com/news/business-39870485">Data comes first</a></h2>
 
 <img data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/D5AA/production/_96089645_hi039302263.jpg.webp" alt="cuneiform tablet" class="r-stretch quarto-figure-center"><aside class="notes">
-<p>Elsewhere, in places like Mesopotamia that developed writing systems for prose, they didn’t start out for writing prose. They started out for recording data. Records of production, taxation, debt, and so on.</p>
-<p>If you want to build an advanced civilization, you can write down prose… if you feel like it. But recording <em>data</em> is not optional - it’s a must.</p>
+<p>Writing down stories, laws, prose… optional</p>
+<p>Recording data: mandatory</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -403,9 +480,9 @@ Catherine Devlin
 <section id="type-int" class="slide level2">
 <h2><a href="https://www.nature.com/articles/d41586-021-01429-6">type: int</a></h2>
 
-<img data-src="img/bone.png" alt="notched piece of bone" class="r-stretch"><aside class="notes">
-<p>Or, maybe, not such an advanced society. This piece of bone is from a Neanderthal camp in France from 60,000 years ago. It is believed that these notches were made…</p>
-<p>… you guessed it, to record data.</p>
+<img data-src="img/bone.png" alt="notched piece of bone" class="r-stretch quarto-figure-center"><aside class="notes">
+<p>Or not so advanced</p>
+<p>60,000 years ago, Neanderthal</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -421,11 +498,8 @@ Catherine Devlin
 <section id="so-where-is-it" class="slide level2">
 <h2>So where is it?</h2>
 
-<img data-src="img/beginners-guide.png" alt="Python Beginners' Guide" class="r-stretch"><aside class="notes">
-<p>Go through some Python tutorials.</p>
-<p>Go through some sample code.</p>
-<p>Even formal programming classes tend to postpone data as long as possible.</p>
-<p>Why, if it’s so central? It’s like a horseback riding club that avoids talking about horses.</p>
+<img data-src="img/beginners-guide.png" alt="Python Beginners' Guide" class="r-stretch quarto-figure-center"><aside class="notes">
+
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -444,8 +518,9 @@ Catherine Devlin
 <p>There should be one– and preferably only one –obvious way to do it.</p>
 </blockquote>
 <aside class="notes">
-<p>In the process of learning programming, by the time you’re finally learning about how to store and access data, you and your instructor are pretty tired. Nobody is up to a big-picture analysis. They probably show you a single approach because a through look at the possible decisions to be made.</p>
-<p>Sometimes there isn’t much guidance for the first set of decisions - the material you find assumes that those decisions have been made, and just helps you with implementation</p>
+<p>There are lots of ways. And frankly none of them is obvious.</p>
+<p>On-your-own learning</p>
+<p>You may study, or stumble into, one technique</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -458,6 +533,26 @@ Catherine Devlin
           display:block!important;
       }</style></aside>
 </section></section>
+<section id="clarity-and-blur" class="title-slide slide level1 center">
+<h1>Clarity and blur</h1>
+<p>Clarity: about categories</p>
+<p>Blur: between categories</p>
+<aside class="notes">
+<p>Clarity: what makes tecniques and approaches and technologies different</p>
+<p>Blur: Boundaries</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
 <section>
 <section id="relationships" class="title-slide slide level1 center">
 <h1>Relationships</h1>
@@ -482,8 +577,9 @@ Catherine Devlin
 </table>
 <p>Data from <a href="https://www.rmg.co.uk/stories/topics/solar-system-data">Royal Museums Greenwich</a></p>
 <aside class="notes">
-<p>If you’re a normal human, you’ll call these rows “rows”, and you’ll call this table a “table”.</p>
-<p>But if you want to show off what a data hipster you are, you’ll call the rows “tuples”, and the try it! table a “relation”. Why?</p>
+<p>“Table” with “Rows”</p>
+<p>“Relation” with “tuples”</p>
+<p>Why?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -500,27 +596,12 @@ Catherine Devlin
 <h2>Not data</h2>
 <p>Venus</p>
 <p>224.7 días</p>
-<aside class="notes">
-<p>This name and this quantity are not data.</p>
-<p>Even though it has units!</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="now-its-data" class="slide level2">
 <h2>Now it’s data</h2>
 <p>Venus <strong>orbita alrededor del sol en</strong> 224,7 días.</p>
 <aside class="notes">
-<p>I have described the relationship between “Venus” and “224.7 days”, and now it’s data.</p>
-<p>It’s the connection that makes it mean something - anything!</p>
+<p>Meaning comes from relationship</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -571,8 +652,20 @@ Catherine Devlin
 <section>
 <section id="shapes-of-relationships" class="title-slide slide level1 center">
 <h1>Shapes of relationships</h1>
-<p>… and how we access the data</p>
-<p>(usually)</p>
+<aside class="notes">
+<p>Is a rectangular table right?</p>
+<p>No single answer</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="keyvalue" class="slide level2">
 <h2>Key:Value</h2>
@@ -594,15 +687,17 @@ Catherine Devlin
 </section>
 <section id="key-value-access" class="slide level2">
 <h2>Key-value access</h2>
-<pre><code>import dbm
-with dbm.open('período_sideral_d.dbm', 'c') as db:
-    db['Marte'] = str(686.98)
-    print(db['Marte'])
-
-b'686.98'</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dbm</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dbm.<span class="bu">open</span>(<span class="st">'período_sideral_d.dbm'</span>, <span class="st">'c'</span>) <span class="im">as</span> db:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    db[<span class="st">'Marte'</span>] <span class="op">=</span> <span class="bu">str</span>(<span class="fl">686.98</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dbm.<span class="bu">open</span>(<span class="st">'período_sideral_d.dbm'</span>) <span class="im">as</span> db:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(db[<span class="st">'Marte'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>b'686.98'</code></pre>
 <aside class="notes">
 <p>Implementations fast and simple</p>
 <p>Correspondence to dicts is great: “querying” is simply referring to a key</p>
+<p>Stores byte strings - you could use JSON to serialize complex data into it, but you’d have to serialize and deserialize</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -615,52 +710,19 @@ b'686.98'</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="shelf" class="slide level2">
-<h2>Shelf</h2>
-<pre><code>import shelve
-with shelve.open('planetas_shelf') as db:
-    db['Marte'] = {'diám_km': 6794, 'año_d': 686.98}
-    print(db['Marte']['diám_km'])
-
-6794</code></pre>
+<section id="shelve" class="slide level2">
+<h2>Shelve</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shelve</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> shelve.<span class="bu">open</span>(<span class="st">'planetas_shelf'</span>) <span class="im">as</span> db:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    db[<span class="st">'Marte'</span>] <span class="op">=</span> {<span class="st">'diám_km'</span>: <span class="dv">6794</span>, <span class="st">'año_d'</span>: <span class="fl">686.98</span>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(db[<span class="st">'Marte'</span>][<span class="st">'diám_km'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>6794</code></pre>
 <aside class="notes">
-<p>Still a key-value store, but the values can:</p>
-<p>Store actual Python objects, including data structures like dicts, instead of just byte sequences</p>
-<p>Still need to know each object’s key, though; the only “query” would be to fetch each object into memory and examine each value.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="document-databasess" class="slide level2">
-<h2>Document databasess</h2>
-<pre><code>{
-    "Venus": {
-        "masas_de_tierra": 0.82
-    },
-    "Tierra": {
-        "masas_de_tierra": 1.0,
-        "lunas": [
-        "Luna"
-        ]
-    },
-    "Marte": {
-        "masas_de_tierra": 0.11,
-        "lunas": [
-        "Deimos",
-        "Fobos"
-        ]
-    }
-}</code></pre>
-<aside class="notes">
-<p>Related to key:value, each document is basically an elaborate value. May literally be a piece of JSON text, with all that flexibility, or at least can be visualized that way.</p>
+<p>Shelve does that for you</p>
+<p>Values store python objects, incl composites</p>
+<p>Simplest document database -</p>
+<p>“document”: case refers to the kind of structure that is represented</p>
+<p>Still query by key</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -676,25 +738,22 @@ with shelve.open('planetas_shelf') as db:
 <section id="procedural-query" class="slide level2">
 <h2>Procedural “query”</h2>
 <p><a href="data/planetas.json">planetas.json</a></p>
-<pre><code>resultado = {}
-for nombre_del_planeta, planeta in sistema_solar.items():
-    for nombre_de_luna, luna in planeta.get('lunas', {}).items():
-        if luna['diámetro_media_km'] &gt; 2000:
-            resultado[nombre_de_luna] = luna['diámetro_media_km']
-resultado
-
-{'Luna': 3476.0,
-'Io': 3652.0,
-'Europa': 3138.0,
-'Ganímedes': 5262.0,
-'Calisto': 4800.0,
-'Titán': 5150.0,
-'Tritón': 3500.0}</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> shelve.<span class="bu">open</span>(<span class="st">'planetas.shelve.db'</span>) <span class="im">as</span> db:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> planeta, planeta_info <span class="kw">in</span> db.items():</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> luna <span class="kw">in</span> planeta_info[<span class="st">'lunas'</span>]:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (luna[<span class="st">'diám_km'</span>] <span class="kw">or</span> <span class="dv">0</span>) <span class="op">&gt;</span> <span class="dv">2000</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span> (planeta, luna[<span class="st">'nombre'</span>], luna[<span class="st">'diám_km'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[('Saturno', 'Titán', 5150.0),
+('Tierra', 'Luna', 3476.0),
+('Júpiter', 'Io', 3652.0),
+('Júpiter', 'Europa', 3138.0),
+('Júpiter', 'Ganímedes', 5262.0),
+('Júpiter', 'Calisto', 4800.0),
+('Neptuno', 'Tritón', 3500.0)]</code></pre>
 <aside class="notes">
-<p>Here, we have a JSON file - a sort of basic document database. The top level is a dict, so essentially it is a document store indexed by a string key.</p>
-<p>We can “query” it by bringing the whole thing into memory, then writing Python to navigate through each document, picking out the ones that meet our criteria, and the portion of each document that we want to report on.</p>
-<p>This is the essence of what querying is, and this method has some advantages. It uses only plain Python - you didn’t have to learn anything new here.</p>
-<p>Of course, it takes hand-writing a lot of code, and will be slow if you have a lot of records.</p>
+<p>Pull everything into memory, apply Python</p>
+<p>You don’t have to learn anything</p>
+<p>bulky, slow</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -713,8 +772,6 @@ resultado
 {"nombre": "Tierra", "masas_de_tierra": 1.0, "lunas": ["Luna"]}
 {"nombre": "Marte", "y": 0.11, "lunas": ["Deimos", "Fobos"]}</code></pre>
 <aside class="notes">
-<p>A standard JSON file must be read entirely into memory - if your whole database is an enormous JSON file, that’s very bad</p>
-<p>JSONL is just a slight variation on the format that writes one item per line, so that it can be read or written lazily</p>
 <p>No standard library support, but libraries like <code>jsonlines</code> and Pandas support it</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -731,9 +788,10 @@ resultado
 <section id="document-query-dsls" class="slide level2">
 <h2>Document query DSLs</h2>
 <p>MongoDB query-by-example</p>
-<pre><code>db.planetas.find({'diám_km': {'$gt': 10000},
-                  'año_d': {'$lt': 500}}</code></pre>
-</section>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>db.planetas.find({<span class="st">'diám_km'</span>: {<span class="st">'$gt'</span>: <span class="dv">10000</span>},</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'año_d'</span>: {<span class="st">'$lt'</span>: <span class="dv">500</span>}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="img/elastic-query.png" alt="Sample Elastic query" class="r-stretch"></section>
 <section id="jq" class="slide level2">
 <h2>jq</h2>
 <pre><code>jq.compile('.[] | {nombre: .nombre, mes: [.lunas[]?.rev_d]}'
@@ -749,11 +807,9 @@ resultado
 0.498,
 0.675,</code></pre>
 <aside class="notes">
-<p>DSL for selecting elements - not Python-specific</p>
-<p>Different database creators implement query languages differently</p>
-<p>Both filtering and navigating within the document</p>
-<p>Useful for Python objects, JSON docs, document databases</p>
-<p>Python libraries implementing it</p>
+<p>Independent DSL for navigating structures</p>
+<p>like a JSON file, or a document</p>
+<p>Py libaries</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -872,10 +928,9 @@ resultado
 </tbody>
 </table>
 <aside class="notes">
-<p>In principle, this works.</p>
-<p>There are some very wide, very repetitive Spreadsheets</p>
-<p>Mass of Mars stored in two places: Duplication / bulk Danger of inconsistency</p>
-<p>Not so bad here, but…</p>
+<p>Use repetition to cover over mismatch between rectangles and shape</p>
+<p>Bulk Inconsistency danger</p>
+<p>Is it so bad?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -945,7 +1000,8 @@ resultado
 </tbody>
 </table>
 <aside class="notes">
-<p>A far more elegant solution, but it introduces some of its own kinds of pain.</p>
+<p>More elegant, but joining can be hard, too.</p>
+<p>You’ve lost the business users.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -958,12 +1014,35 @@ resultado
           display:block!important;
       }</style></aside>
 </section>
-<section id="rectangles-as-dataframes" class="slide level2">
-<h2>Rectangles as dataframes</h2>
-<pre><code>planetas.loc['Marte', 'año_d']</code></pre>
-<p>686.98</p>
-<pre><code>planetas[planetas.año_d &gt; 1000] \
-    [['máx_ua', 'diám_km', 'año_d']]</code></pre>
+<section id="documents-too" class="slide level2">
+<h2>Documents too</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>planetas[<span class="st">'Tierra'</span>][<span class="st">'atmosfero'</span>] <span class="op">=</span> [{<span class="st">'molecule'</span>: <span class="st">'N2'</span>, <span class="st">'mw_amu'</span>: <span class="dv">28</span>}, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                                   {<span class="st">'molecule'</span>: <span class="st">'O2'</span>, <span class="st">'mw_amu'</span>: <span class="dv">32</span>}, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                   {<span class="st">'molecule'</span>: <span class="st">'CO2'</span>, <span class="st">'mw_amu'</span>: <span class="dv">44</span>}]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>planetas[<span class="st">'Marte'</span>][<span class="st">'atmosfero'</span>] <span class="op">=</span> [ </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                   {<span class="st">'molecule'</span>: <span class="st">'CO2'</span>, <span class="st">'mw_amu'</span>: <span class="dv">44</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Freeform - represent arbitrary data shape</p>
+<p>But tradeoff b/t repetition and joining remains</p>
+<p>Not such consensus of how to express joins in a document structure</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dataframes" class="slide level2">
+<h2>Dataframes</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>    planetas.loc[<span class="st">'Marte'</span>, <span class="st">'año_d'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>686.98</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>    planetas[planetas.año_d <span class="op">&gt;</span> <span class="dv">1000</span>] <span class="op">\</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>        [[<span class="st">'máx_ua'</span>, <span class="st">'diám_km'</span>, <span class="st">'año_d'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1004,6 +1083,7 @@ resultado
 <aside class="notes">
 <p>DataFrame object that supports LOTS of methods</p>
 <p>Also repurposes square-bracket syntax for location and filtering</p>
+<p>Familiar to Python folks</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1018,8 +1098,8 @@ resultado
 </section>
 <section id="joining-dataframes" class="slide level2">
 <h2>Joining DataFrames</h2>
-<pre><code>lunas.join(planetas, 'planeta', lsuffix='_l', rsuffix='_p'
-          )[['planeta', 'masas_t']]</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lunas.join(planetas, <span class="st">'planeta'</span>, lsuffix<span class="op">=</span><span class="st">'_l'</span>, rsuffix<span class="op">=</span><span class="st">'_p'</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>            )[[<span class="st">'planeta'</span>, <span class="st">'masas_t'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1112,8 +1192,8 @@ WHERE  l.diámetro_media_km &gt; 2000</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="sql-from-python" class="slide level2">
-<h2>SQL from Python</h2>
+<section id="raw-sql-from-python" class="slide level2">
+<h2>Raw SQL from Python</h2>
 <ul>
 <li><a href="https://cewing.github.io/training.codefellows/lectures/day21/intro_to_dbapi2.html">DB-API2</a></li>
 <li><a href="https://github.com/kennethreitz/records">Records</a> by Kenneth Reitz</li>
@@ -1672,10 +1752,14 @@ O2-&gt;O
 <section class="slide level2">
 
 
-<img data-src="img/hstore.png" alt="hstore docs" class="r-stretch"></section>
+<img data-src="img/hstore.png" alt="hstore docs" class="r-stretch quarto-figure-center"></section>
 <section id="postgresql-json-type" class="slide level2">
 <h2>PostgreSQL JSON type</h2>
-<pre><code>select nombre, 
+<pre><code>CREATE TABLE planetas (
+    nombre TEXT PRIMARY KEY, info JSON
+)
+
+select nombre, 
        doc-&gt;'diám_km' AS diám_km, 
        doc-&gt;'año_d' AS año_d
 from planetas_docs
@@ -1683,8 +1767,9 @@ where (doc-&gt;&gt;'diám_km')::int &gt; 20000;
 
 CREATE INDEX ON planetas_docs(((doc-&gt;&gt;'diám_km')::int));</code></pre>
 <aside class="notes">
-<p>In principle you can make a JSON string and store it anywhere, but being able to drill into the documents to select, filter, and index make it a useful data store.</p>
-<p>You may be thinking “OK, but it’s not as efficient as a dedicated document database, right?”, but benchmarks show it sometimes beating MongoDB!</p>
+<p>More than just storing a JSON string -</p>
+<p>drill in to select</p>
+<p>index</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1703,7 +1788,7 @@ CREATE INDEX ON planetas_docs(((doc-&gt;&gt;'diám_km')::int));</code></pre>
 <section class="slide level2">
 
 
-<img data-src="img/ferretdb.png" alt="FerretDB webpage" class="r-stretch"><aside class="notes">
+<img data-src="img/ferretdb.png" alt="FerretDB webpage" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Supports MongoDB, but uses PostgreSQL for its storage engine</p>
 <p>I lied in my earlier slide showing MongoDB; I was actually showing FerretDB.</p>
 <style type="text/css">
@@ -1721,7 +1806,7 @@ CREATE INDEX ON planetas_docs(((doc-&gt;&gt;'diám_km')::int));</code></pre>
 <section class="slide level2">
 
 
-<img data-src="img/apache_age.png" alt="Apache AGE webpage" class="r-stretch"></section>
+<img data-src="img/apache_age.png" alt="Apache AGE webpage" class="r-stretch quarto-figure-center"></section>
 <section id="graphs-without-a-graph-database" class="slide level2">
 <h2>Graphs without a graph database</h2>
 <p><a href="https://tech.ingrid.com/sql-as-graph-database/">Using PostgreSQL as a graph database</a></p>
@@ -1752,7 +1837,7 @@ FROM traverse
 <section class="slide level2">
 
 
-<img data-src="img/chelnik.jpg" alt="small crocheted blue elephant" class="r-stretch"><aside class="notes">
+<img data-src="img/chelnik.jpg" alt="small crocheted blue elephant" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Chelnik!</p>
 <p>What did you do to my talk?</p>
 <style type="text/css">
@@ -1771,7 +1856,7 @@ FROM traverse
 <section id="sqlite" class="title-slide slide level1 center">
 <h1>SQLite</h1>
 
-<img data-src="img/chelnik-blindfolded.png" alt="small crocheted blue elephant, wearing blindfold" class="r-stretch"><aside class="notes">
+<img data-src="img/chelnik-blindfolded.png" alt="small crocheted blue elephant, wearing blindfold" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Okay, don’t look, Chelnik. We love PostgreSQL, but it’s not the only game in town.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1939,7 +2024,7 @@ SQLite-&gt;reader 5
 <h2>Baked data</h2>
 <p>Simon Willison: <a href="https://simonwillison.net/2021/Jul/28/baked-data/">The Baked Data architectural pattern</a></p>
 
-<img data-src="img/baked-data.png" alt="Baked Data article" class="r-stretch"><aside class="notes">
+<img data-src="img/baked-data.png" alt="Baked Data article" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Simon Willison wrote this great article on cheaply and easily hosting an application if it relies on infrequently-updated data. Just put that data in a single-file database like SQLite, and a cheap and basic real or virtual server can handle the dynamic part.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1956,7 +2041,7 @@ SQLite-&gt;reader 5
 <section id="datasette" class="slide level2">
 <h2>Datasette</h2>
 
-<img data-src="img/datasette-map.png" alt="Datasette page with map" class="r-stretch"><aside class="notes">
+<img data-src="img/datasette-map.png" alt="Datasette page with map" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Mentioning Simon Willison is my excuse to plug his amazing project Datasette, a versatile expandable tool for exploring and visualizing SQLite databases.</p>
 <p>As you might expect for SQLite, the server is really easy to install and run.<br>
 It can even point to a SQLite file that’s publicly hosted rather than on your own machine. In fact…</p>
@@ -2021,7 +2106,7 @@ It can even point to a SQLite file that’s publicly hosted rather than on your 
 <section id="postgresql-foreign-data-wrappers" class="slide level2">
 <h2>PostgreSQL Foreign Data Wrappers</h2>
 
-<img data-src="img/mongo_fdw.png" alt="Screenshot of using mongo_fdw" class="r-stretch"><p><a href="https://www.crunchydata.com/blog/easy-mongo-from-your-postgres">source: CrunchyData blog</a></p>
+<img data-src="img/mongo_fdw.png" alt="Screenshot of using mongo_fdw" class="r-stretch quarto-figure-center"><p><a href="https://www.crunchydata.com/blog/easy-mongo-from-your-postgres">source: CrunchyData blog</a></p>
 <aside class="notes">
 <p>At that point, you can run queries against your foreign tables and pretty much forget that they are foreign tables!</p>
 <style type="text/css">
@@ -2039,7 +2124,7 @@ It can even point to a SQLite file that’s publicly hosted rather than on your 
 <section id="cloud-storage-big-data" class="slide level2">
 <h2>Cloud storage / big data</h2>
 
-<img data-src="img/parquet_fdw.png" alt="Parquet Foreign Data Wrapper repo page" class="r-stretch"><aside class="notes">
+<img data-src="img/parquet_fdw.png" alt="Parquet Foreign Data Wrapper repo page" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Often, gangs of bullies accost innocent programmers and tell them that they have to use a big data file format like Parquet.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2144,7 +2229,7 @@ df = pd.read_sql(qry, 'sqlite:///planetas.db')</code></pre>
 <section id="jupysql" class="slide level2">
 <h2><a href="https://jupysql.ploomber.io/en/latest/quick-start.html">JupySQL</a></h2>
 
-<img data-src="img/jupysql.png" alt="JupySQL webpage" class="r-stretch"></section>
+<img data-src="img/jupysql.png" alt="JupySQL webpage" class="r-stretch quarto-figure-center"></section>
 <section id="jupysql-to-pandas" class="slide level2">
 <h2>JupySQL to Pandas</h2>
 <pre><code>%%sql result &lt;&lt; 
@@ -2183,7 +2268,7 @@ result.DataFrame()</code></pre>
 <section id="dbt-sql-for-etl" class="slide level2">
 <h2>dbt: SQL for ETL</h2>
 
-<img data-src="img/dbt.png" alt="dbt webpage" class="r-stretch"><aside class="notes">
+<img data-src="img/dbt.png" alt="dbt webpage" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>And so SQL is enduring, and in fact still spreading.</p>
 <p>One example is dbt, a tool for the transformation portion of ETL work. dbt is just a framework for transformation queries, written in SQL. It helps you to organize, parallelize, and visualize them in a really clean and manageable way.</p>
 <p>If you have complex data transformations to manage, try it!</p>
@@ -2226,7 +2311,7 @@ result.DataFrame()</code></pre>
 <section class="slide level2">
 
 
-<img data-src="img/csv.png" alt="CSV of planet info" class="r-stretch"><aside class="notes">
+<img data-src="img/csv.png" alt="CSV of planet info" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Generally, in these rectangle-based formats, it’s very clear which fields are and are not present.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2301,40 +2386,8 @@ planetas['Tierra']['anllos'] = False</code></pre>
 <section class="slide level2">
 
 
-<img data-src="img/type-hints.png" alt="Python docs page on type hints" class="r-stretch"><aside class="notes">
+<img data-src="img/type-hints.png" alt="Python docs page on type hints" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Does this tradeoff remind you of anything?</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="json-schema" class="title-slide slide level1 center">
-<h1><a href="https://json-schema.org/">JSON Schema</a></h1>
-<pre><code>{
-"$schema": "https://json-schema.org/draft/2020-12/schema",
-"$id": "https://example.com/product.schema.json",
-"title": "Product",
-"description": "A product from Acme's catalog",
-"type": "object",
-"properties": {
-    "productId": {
-    "description": "The unique identifier for a product",
-    "type": "integer"
-    }
-},
-"required": [ "productId" ]
-}</code></pre>
-<aside class="notes">
-<p>You can think of JSON Schema as simply existing Much like optional type hints are now available in Python if you want it for a particular project…</p>
-<p>The freeform, or schemaless, paradigms like document and graph databases offer optional methods for defining and enforcing a schema definition.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2406,6 +2459,38 @@ Planeta(nombre='Mercurio', mín_ua=0.31, máx_ua=0.47, incl_orb_g=7.0, diám_km=
 <li>attrs</li>
 <li>Pydantic also available</li>
 </ul>
+</section></section>
+<section>
+<section id="json-schema" class="title-slide slide level1 center">
+<h1><a href="https://json-schema.org/">JSON Schema</a></h1>
+<pre><code>{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/product.schema.json",
+"title": "Product",
+"description": "A product from Acme's catalog",
+"type": "object",
+"properties": {
+    "productId": {
+    "description": "The unique identifier for a product",
+    "type": "integer"
+    }
+},
+"required": [ "productId" ]
+}</code></pre>
+<aside class="notes">
+<p>You can think of JSON Schema as simply existing Much like optional type hints are now available in Python if you want it for a particular project…</p>
+<p>The freeform, or schemaless, paradigms like document and graph databases offer optional methods for defining and enforcing a schema definition.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="datamodel-codegen" class="slide level2">
 <h2>datamodel-codegen</h2>
@@ -2590,7 +2675,7 @@ dict-&gt;dataclass
 <section id="units" class="slide level2">
 <h2>Units</h2>
 
-<img data-src="img/mars-probe-collision.png" alt="News story on loss of Mars probe" class="r-stretch"><p><a href="https://pint.readthedocs.io/en/stable/">Pint</a></p>
+<img data-src="img/mars-probe-collision.png" alt="News story on loss of Mars probe" class="r-stretch quarto-figure-center"><p><a href="https://pint.readthedocs.io/en/stable/">Pint</a></p>
 <aside class="notes">
 <p>Suffixes in field names</p>
 <p>I dearly wish there was a good way to store Pint units in a database. If you have ideas for that, let’s talk afterward!</p>
@@ -2610,11 +2695,11 @@ dict-&gt;dataclass
 <h2>SQL comments</h2>
 <pre><code>COMMENT ON COLUMN planetas.día_h IS 'período de rotación, en horas'</code></pre>
 
-<img data-src="img/with_comment.png" alt="Table description with column comment" class="r-stretch"></section></section>
+<img data-src="img/with_comment.png" alt="Table description with column comment" class="r-stretch quarto-figure-center"></section></section>
 <section id="quipu-redux" class="title-slide slide level1 center">
 <h1>Quipu redux</h1>
 
-<img data-src="https://essentials.neh.gov/sites/default/files/quipu_v1.jpg" alt="quipu" class="r-stretch"><aside class="notes">
+<img data-src="https://essentials.neh.gov/sites/default/files/quipu_v1.jpg" alt="quipu" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Back to our quipu. I mentioned that we know how to interpret the numbers encoded in the knots of a quipu.</p>
 <p>But that’s not all the information. Quipu were usually made with a variety of colored yarns - colors that almost certainly contained additional meaning. The style of knots used to attach the pendant strings to the main string also varied.</p>
 <p>It is believed that’s the metadata; information about what the numbers on the pendant strings mean.</p>
@@ -2637,7 +2722,7 @@ dict-&gt;dataclass
 <section id="open-khipu" class="title-slide slide level1 center">
 <h1>Open Khipu</h1>
 
-<img data-src="img/open-khipu.png" alt="Open Khipu repo" class="r-stretch"><aside class="notes">
+<img data-src="img/open-khipu.png" alt="Open Khipu repo" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>But let’s end on a happy note! There’s a large open-data database of data meticulously describing thousands of quipu that have survived.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2669,7 +2754,7 @@ dict-&gt;dataclass
       }</style></aside>
 
 <img src="img/pycon-colombia.svg" class="slide-logo r-stretch"><div class="footer footer-default">
-<p>https://github.com/catherinedevlin/talks/tree/master/pycon_colombia_2023</p>
+<p>https://github.com/catherinedevlin/talks/</p>
 </div>
 </section></section>
     </div>
