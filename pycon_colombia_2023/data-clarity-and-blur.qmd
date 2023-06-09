@@ -294,7 +294,7 @@ MongoDB query-by-example
 db.planetas.find({'diám_km': {'$gt': 10000},
                     'año_d': {'$lt': 500}}
 ```                      
-
+Elastic query
 ![](img/elastic-query.png){fig-alt="Sample Elastic query"}
 
 ## jq 
@@ -568,15 +568,9 @@ Not such consensus of how to express joins in a document structure
 
 Object-Relational Mappers
 
-[Python Guide's Databases page](https://docs.python-guide.org/scenarios/db/)
-
 ::: {.notes}
 
-The most famous way of blurring the border between Python objects 
-and SQL is with Object-Relational Mappers.  In fact, a lot of people 
-simply *assume* that you will use an ORM.
-
-The Hitchhiker's Guide to Python describes the best-known of them.  
+Famous... often assumed
 
 :::
 
@@ -691,7 +685,6 @@ the SQL side.
 
 ![](img/guide-databases.png){fig-alt="Hitchhikers' Guide to Python Databases page")
 
-
 ## Query builders 
 
 ```python
@@ -738,6 +731,19 @@ Why, though?  Unless you just really hate SQL syntax?
     SELECT "lunas".*,"planetas"."diám_km" FROM "planetas" JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
 
 ---
+
+## PugSQL
+
+![](img/pugsql.png){fig-alt="PugSQL webpage"}
+
+::: {.notes}
+
+Another ORM option
+
+Define queries with SQL, each in its own .sql file, 
+inport, invoke cleansly
+
+:::
 
 
 ## Graph 
