@@ -1,0 +1,22 @@
+digraph P {
+    layout=dot
+    dataclass -> DDL [label="simple-ddl-generator"]
+    pydantic -> DDL [label="simple-ddl-generator"]
+    attrs
+    DDL -> DDL [label="simple-ddl-generator"]
+    JSON -> JSONSchema [label=genson]
+    JSONSchema -> dataclass [label=statham, dir=both]
+    ORM -> DDL [label="simple-ddl-generator"]
+    ORM -> dataclass [label=SQLAlchemy, dir=both URL="https://docs.sqlalchemy.org/en/20/orm/dataclasses.html"]
+    DDL -> dataclass [label=omymodels]
+    DDL -> ORM [label=omymodels]
+    attrs -> ORM [lable=SQLAlchemy dir=both]
+    JSONSchema -> dataclass [label="datamodel-code-generator"]
+    dict -> dataclass [label="datamodel-code-generator"]
+    JSON -> dataclass [label="datamodel-code-generator"]
+    pydantic -> JSONSchema [label=".schema_json"]
+    JSONSchema -> webform [label="react-jsonschema-webform" URL="https://rjsf-team.github.io/react-jsonschema-form/docs/"]
+    JSONSchema -> webform [label="JSONForms.io" URL="https://jsonforms.io/"]
+    JSONSchema -> DDL [label="jsonschema2db" URL="https://github.com/better/jsonschema2db"]
+    JSONSchema -> DDL [label="jsonschema2sql" URL="https://github.com/hashhar/jsonschema2sql"]
+}

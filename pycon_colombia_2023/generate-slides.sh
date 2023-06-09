@@ -1,2 +1,3 @@
 quarto render data-clarity-and-blur.qmd
-open data-clarity-and-blur.html
+# dot -o converters.svg -Tsvg converters.dot
+# open data-clarity-and-blur.html

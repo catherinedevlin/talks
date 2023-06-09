@@ -16,7 +16,7 @@ https://github.com/catherinedevlin/talks/
 
 ::: {.notes}
 
-Perdona que hable solo un poco de español. Si, quiere hablar conmigo en español después, por favor hable despacio y use gestos amplios.
+Me disculpo porque solo sé un poco de español. Si desea hablar conmigo en español, maravilloso. Por favor, hable muy despacio y utilice grandes gestos.
 
 :::
 
@@ -164,8 +164,8 @@ Meaning comes from relationship
 
 ::: {.notes}
 
-... between names of objects, quantities, etc.; 
-the relationships make them into data.
+That's what a table is *for* - it tells us how 
+the elements of the data relate 
 
 :::
 
@@ -273,19 +273,6 @@ bulky, slow
 
 :::
 
-## JSONL: line-delimited JSON 
-
-    {"nombre": "Venus", "masas_de_tierra": 0.82}
-    {"nombre": "Tierra", "masas_de_tierra": 1.0, "lunas": ["Luna"]}
-    {"nombre": "Marte", "y": 0.11, "lunas": ["Deimos", "Fobos"]}
-
-::: {.notes}
-
-No standard library support, but libraries like `jsonlines` and 
-Pandas support it
-
-:::
-
 ## Document query DSLs 
 
 MongoDB query-by-example
@@ -345,6 +332,8 @@ Clipboard with a sign-up form
 ## Dataframes
 
 ```python
+import pandas as pd 
+planetas = pd.read_csv('planetas.csv')
 planetas.loc['Marte', 'año_d']
 ```
 
@@ -608,60 +597,48 @@ as attributes of the instances.
 
 ## Boilerplate 
 
-    from typing import List
-    from typing import Optional
-    from sqlalchemy import ForeignKey, create_engine
-    from sqlalchemy import String, Float, Integer, String
-    from sqlalchemy.orm import DeclarativeBase
-    from sqlalchemy.orm import Mapped
-    from sqlalchemy.orm import mapped_column
-    from sqlalchemy.orm import relationship
+```python
+class Base(DeclarativeBase):
+    pass
 
-    class Base(DeclarativeBase):
-        pass
+class Planeta(Base):
+    __tablename__ = "planetas"
 
-    class Planeta(Base):
-        __tablename__ = "planetas"
+    nombre: Mapped[str] = mapped_column(primary_key=True)
+    mín_ua: Mapped[float] = mapped_column(Float)
+    máx_ua: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    mín_ua: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    incl_orb_g: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    diám_km: Mapped[int] = mapped_column(Integer)
+    obl: Mapped[float] = mapped_column(Float)
+    masas_t: Mapped[float] = mapped_column(Float)
+    incl_g: Mapped[int] = mapped_column(Integer)
+    año_d: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    día_h: Mapped[float] = mapped_column(Float)
+    
+    lunas: Mapped[List["Luna"]] = relationship(
+        back_populates="planeta"
+    )
 
-        nombre: Mapped[str] = mapped_column(primary_key=True)
-        mín_ua: Mapped[float] = mapped_column(Float)
-        máx_ua: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-        mín_ua: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-        incl_orb_g: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-        diám_km: Mapped[int] = mapped_column(Integer)
-        obl: Mapped[float] = mapped_column(Float)
-        masas_t: Mapped[float] = mapped_column(Float)
-        incl_g: Mapped[int] = mapped_column(Integer)
-        año_d: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-        día_h: Mapped[float] = mapped_column(Float)
+    def __str__(self):
+        return self.nombre
         
-        lunas: Mapped[List["Luna"]] = relationship(
-            back_populates="planeta"
-        )
+class Luna(Base):
+    __tablename__ = "lunas"
 
-        def __str__(self):
-            return self.nombre
-            
-    class Luna(Base):
-        __tablename__ = "lunas"
+    nombre: Mapped[str] = mapped_column(primary_key=True)
+    pos: Mapped[str] = mapped_column(String)
+    rev_d: Mapped[float] = mapped_column(Float)
+    diám_km: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    dist_km: Mapped[float] = mapped_column(Float)
 
-        nombre: Mapped[str] = mapped_column(primary_key=True)
-        pos: Mapped[str] = mapped_column(String)
-        rev_d: Mapped[float] = mapped_column(Float)
-        diám_km: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-        dist_km: Mapped[float] = mapped_column(Float)
-
-        planeta_nombre: Mapped[str] = mapped_column(ForeignKey("planetas.nombre"))
-        planeta: Mapped["Planeta"] = relationship(back_populates="lunas",)
+    planeta_nombre: Mapped[str] = mapped_column(ForeignKey("planetas.nombre"))
+    planeta: Mapped["Planeta"] = relationship(back_populates="lunas",)
+```
 
 ::: {.notes}
 
-One drawback is that you generally need to create a lot of code 
-defining your tables in ORM terms before you can use an ORM.
-
-Another is that all this syntax is ORM-dependent.  If you end up 
-using another ORM in a different project, you'll have to learn a 
-new syntax.
+Syntax varies from ORM to ORM 
 
 :::
 
@@ -688,6 +665,7 @@ the SQL side.
 ## Query builders 
 
 ```python
+import pypika as pk
 planetas, lunas = pk.Tables('planetas', 'lunas')
 q = (pk.Query 
     .select(lunas.star, planetas.diám_km)
@@ -700,7 +678,10 @@ q = (pk.Query
 print(q)
 ```
 
-    SELECT "lunas".*,"planetas"."diám_km" FROM "planetas" JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
+    SELECT "lunas".*,"planetas"."diám_km" 
+    FROM "planetas" 
+    JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" 
+    WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
 
 ::: {.notes}
 
@@ -728,7 +709,11 @@ Why, though?  Unless you just really hate SQL syntax?
     print(q)
 ```
 
-    SELECT "lunas".*,"planetas"."diám_km" FROM "planetas" JOIN "lunas" ON "planetas"."nombre"="lunas"."planeta_nombre" WHERE "planetas"."diám_km"<60000 AND "lunas"."diám_km">100
+    SELECT "lunas".*,"planetas"."diám_km" 
+    FROM "planetas" JOIN "lunas" 
+    ON "planetas"."nombre"="lunas"."planeta_nombre" 
+    WHERE "planetas"."diám_km"<60000 
+    AND "lunas"."diám_km">100
 
 ---
 
@@ -768,19 +753,6 @@ Actually stored as node -> edge -> node
 
 :::
 
-## Graph 
-
-```{dot}
-digraph P {
-    "Mercurio" -> "Sol" 
-    "Venus" -> "Sol" 
-    "Tierra" -> "Sol" 
-    "Luna" -> "Tierra" 
-    "Marte" -> "Sol" 
-    "Deimos" -> "Marte" 
-    "Fobos" -> "Marte" 
-}
-```
 ---
 
 ```{dot}
@@ -864,6 +836,8 @@ index
 :::
 
 ## Cross-paradigm hosting 
+
+Database of one class acts as another 
 
 ---
 
@@ -1003,16 +977,17 @@ server can handle the dynamic part.
 
 ## Datasette 
 
+[datasette data/planetas.sqlite](http://localhost:8001/)
+
 ![](img/datasette-map.png){fig-alt="Datasette page with map" fig-align="center"}
 
 ::: {.notes}
 
-Mentioning Simon Willison is my excuse to plug his amazing project Datasette, 
-a versatile expandable tool for exploring and visualizing SQLite databases.  
+Explore, visualize tool 
 
-As you might expect for SQLite, the server is really easy to install and run.  
-It can even point to a SQLite file that's publicly hosted rather than on your 
-own machine.  In fact...
+Plugins for leaflet, dashboards, 
+
+Simple as SQLite itself
 
 :::
 
@@ -1043,7 +1018,9 @@ I have never been this lazy in my life, and I love it!
 - [simple-graph](https://github.com/dpapathanasiou/simple-graph)
 - [FTS5](https://www.sqlite.org/fts5.html): full-text for search
 
-## Federation 
+## Data Federation 
+
+Stop thinking about where data is hosted
 
 ::: {.notes}
 
@@ -1090,35 +1067,7 @@ performance, read-only
 
 :::
 
-## Boo SQL 
-
-- [annoying syntax](https://github.com/catherinedevlin/rogue-sql)
-- [mathematically poor](https://www.scattered-thoughts.net/writing/against-sql)
-- not composeable 
-
-::: {.notes}
-
-Why is SQL so popular?  24 years of seeing its end predicted
-
-:::
-
-## Hooray SQL 
-
-- Super-mature
-- Expressive
-- Readable 
-- Universal(ish)
-
-SQL ecosystem growing
-
-::: {.notes}
-
-New technologies are at least as likely to support SQL 
-as old ones are 
-
-and (uses of) SQLite are *still growing!  For example...
-
-:::
+## SQL (itself) gets everywhere 
 
 ## SQL to Pandas 
 
@@ -1155,22 +1104,6 @@ better than I could.
     JOIN   lunas l ON (l.planeta_nombre = p.nombre)
 
     result.DataFrame()
-
-::: {.notes}
-
-## [dbcli](https://www.dbcli.com/)
-
-![](img/dbcli.png){fig-alt="DBCLI homepage"}
-
-::: {.notes}
-
-Relational command-line query tool 
-
-Python-based, powerful user-driven
-
-Ancient past as one of my personal projects 
-
-::: 
 
 ## SQL for Big Data 
 
@@ -1265,8 +1198,11 @@ This can be very freeing and fun.
 
 ---
 
-    planetas['Júpiter']['anillos'] = True
-    planetas['Tierra']['anllos'] = False
+```python
+planetas['Saturno']['anillos'] = True
+planetas['Júpiter']['anillos'] = True
+planetas['Tierra'] ['anllos'] = False
+```
 
 ::: {.notes}
 
@@ -1276,6 +1212,32 @@ Not self-documented -
 your eyes or other tools 
 
 :::
+
+# [JSON Schema](https://json-schema.org/)
+
+```json
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/product.schema.json",
+"title": "Product",
+"description": "A product from Acme's catalog",
+"type": "object",
+"properties": {
+    "productId": {
+    "description": "The unique identifier for a product",
+    "type": "integer"
+    }
+},
+"required": [ "productId" ]
+}
+```
+
+::: {.notes}
+
+Validate like Pydantic 
+
+:::
+
 
 --- 
 
@@ -1304,9 +1266,9 @@ Planeta(nombre='Júpiter', diám_km=142800, año_d=4331.865)
 
 ::: {.notes}
 
-As Lukasz mentioned this morning, type hints make possible 
-great tools like dataclasses or attrs, or Pydantic for 
-validation
+Lukasz: defined organization enables technologies 
+
+Defined schema enables documentation tools, editors 
 
 :::
 
@@ -1333,7 +1295,9 @@ separately!
 
 :::
 
-## SQLAlchemy - dataclass (attrs, Pydantic)
+## SQLAlchemy 2.0 - dataclass 
+
+and (attrs, Pydantic)
 
 ```python
 from sqlalchemy.orm import MappedAsDataclass
@@ -1342,6 +1306,8 @@ class Planeta(MappedAsDataclass, Base):
     __tablename__ = "planetas"
 
     nombre: Mapped[str] = mapped_column(primary_key=True)
+    diám_km: Mapped[int] = mapped_column(Integer)
+    año_d: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     ...
 
 ```
@@ -1355,34 +1321,23 @@ Also integrations with attrs and Pydantic
 
 ::: 
 
-# [JSON Schema](https://json-schema.org/)
+## Laziness
 
-```json
-{
-"$schema": "https://json-schema.org/draft/2020-12/schema",
-"$id": "https://example.com/product.schema.json",
-"title": "Product",
-"description": "A product from Acme's catalog",
-"type": "object",
-"properties": {
-    "productId": {
-    "description": "The unique identifier for a product",
-    "type": "integer"
-    }
-},
-"required": [ "productId" ]
-}
-```
+### Mock data
+
+  From Pydantic / dataclasses: [Polyfactory](https://polyfactory.litestar.dev/)
+
+  From JSON Schema: [jsf](https://github.com/ghandic/jsf)
 
 ::: {.notes}
 
-JSON Schema is like optional type hints, but for 
-a document structure that doesn't normally enforce 
-a schema
+Not talking about data loading.  I mean that
+I am lazy. I love that mixin.
 
-Generate random data, Swagger docs 
+Oh, but now I have to define my dataclass.
 
 :::
+
 
 ## datamodel-codegen
 
@@ -1413,9 +1368,6 @@ datamodel-codegen --input planetas.csv --input-file-type csv --output-model-type
 
 ::: {.notes}
 
-Laziness!
-
-Lots of ways to describe data.
 
 Automated converters!  Search for them!
 
@@ -1423,48 +1375,19 @@ Automated converters!  Search for them!
 
 ## Automated converters
 
-```{dot}
-digraph {
-    subgraph python { 
-        style=filled;
-        color=lightblue;
-        dataclass 
-        attrs
-        pydantic
-    }
-    dataclass -> DDL [label="simple-ddl-generator"]
-    pydantic -> DDL [label="simple-ddl-generator"]
-    attrs
-    DDL -> DDL [label="simple-ddl-generator"]
-    JSON -> JSONSchema [label=genson]
-    JSONSchema -> dataclass [label=statham, dir=both]
-    ORM -> DDL [label="simple-ddl-generator"]
-    ORM -> dataclass [label=SQLAlchemy, dir=both URL="https://docs.sqlalchemy.org/en/20/orm/dataclasses.html"]
-    DDL -> dataclass [label=omymodels]
-    DDL -> ORM [label=omymodels]
-    attrs -> ORM [lable=SQLAlchemy dir=both]
-    JSONSchema -> dataclass [label="datamodel-code-generator"]
-    dict -> dataclass [label="datamodel-code-generator"]
-    JSON -> dataclass [label="datamodel-code-generator"]
-    pydantic -> JSONSchema [label=".schema_json"]
-    JSONSchema -> webform [label="react-jsonschema-webform" URL="https://rjsf-team.github.io/react-jsonschema-form/docs/"]
-    JSONSchema -> webform [label="JSONForms.io" URL="https://jsonforms.io/"]
-    JSONSchema -> DDL [label="jsonschema2db" URL="https://github.com/better/jsonschema2db"]
-    JSONSchema -> DDL [label="jsonschema2sql" URL="https://github.com/hashhar/jsonschema2sql"]
-}
-```
+![](converters.svg){fig-alt="diagram of converters between data specs"}
 
 ::: {.notes}
 
 Partial map - my own research 
 
-pandat?
+glue together into pandat?
 
 :::
 
 # Clarity please 
 
-## Units 
+## Units: put them in field names!
 
 ![](img/mars-probe-collision.png){fig-alt="News story on loss of Mars probe" fig-align="center"}
 
@@ -1509,9 +1432,9 @@ that have survived.
 ::: 
 
 
-## Datasett-Lite for quipu 
+## Datasette-Lite for quipu 
 
-https://lite.datasette.io/?url=https://github.com/khipulab/open-khipu-repository/blob/master/khipu.db
+[https://lite.datasette.io/?url=https://github.com/khipulab/open-khipu-repository/blob/master/khipu.db](https://lite.datasette.io/?url=https://github.com/khipulab/open-khipu-repository/blob/master/khipu.db)
 
 
 ::: {.notes}
