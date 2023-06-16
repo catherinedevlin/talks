@@ -1069,6 +1069,12 @@ performance, read-only
 
 ## SQL (itself) gets everywhere 
 
+::: {.notes}
+
+Does not respect boundaries 
+
+:::
+
 ## SQL to Pandas 
 
 ```python
@@ -1213,7 +1219,7 @@ your eyes or other tools
 
 :::
 
-# [JSON Schema](https://json-schema.org/)
+## [JSON Schema](https://json-schema.org/)
 
 ```json
 {
@@ -1323,7 +1329,14 @@ Also integrations with attrs and Pydantic
 
 ## Laziness
 
-### Mock data
+::: {.notes}
+
+Not talking about data loading.  I mean that
+I am lazy. I love that mixin.
+
+:::
+
+## Fake testing data
 
   From Pydantic / dataclasses: [Polyfactory](https://polyfactory.litestar.dev/)
 
@@ -1331,10 +1344,7 @@ Also integrations with attrs and Pydantic
 
 ::: {.notes}
 
-Not talking about data loading.  I mean that
-I am lazy. I love that mixin.
-
-Oh, but now I have to define my dataclass.
+Love
 
 :::
 
@@ -1368,6 +1378,7 @@ datamodel-codegen --input planetas.csv --input-file-type csv --output-model-type
 
 ::: {.notes}
 
+Hand me my dataclass
 
 Automated converters!  Search for them!
 
@@ -1405,7 +1416,7 @@ Suffixes in field names
 
 ![](img/with_comment.png){fig-alt="Table description with column comment" fig-align="center"}
 
-# Quipu redux 
+# Quipu 
 
 ![](https://essentials.neh.gov/sites/default/files/quipu_v1.jpg){fig-alt="quipu" fig-align="center"}
 

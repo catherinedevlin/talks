@@ -1,0 +1,597 @@
+{
+  "Mercurio": {
+    "m\u00edn_ua": 0.31,
+    "m\u00e1x_ua": 0.47,
+    "incl_orb_g": 7.0,
+    "di\u00e1m_km": 4878,
+    "obl": 0.0,
+    "masas_t": 0.06,
+    "incl_g": 7,
+    "a\u00f1o_d": 87.97,
+    "d\u00eda_h": 1407.6,
+    "lunas": []
+  },
+  "Venus": {
+    "m\u00edn_ua": 0.72,
+    "m\u00e1x_ua": 0.73,
+    "incl_orb_g": 3.4,
+    "di\u00e1m_km": 12100,
+    "obl": 0.0,
+    "masas_t": 0.82,
+    "incl_g": 177,
+    "a\u00f1o_d": 224.7,
+    "d\u00eda_h": 5832.0,
+    "lunas": []
+  },
+  "Tierra": {
+    "m\u00edn_ua": 0.98,
+    "m\u00e1x_ua": 1.02,
+    "incl_orb_g": 0.0,
+    "di\u00e1m_km": 12756,
+    "obl": 0.0034,
+    "masas_t": 1.0,
+    "incl_g": 23,
+    "a\u00f1o_d": 365.26,
+    "d\u00eda_h": 23.933999999999997,
+    "lunas": [
+      {
+        "nombre": "Luna",
+        "planeta": "Tierra",
+        "pos": "I",
+        "rev_d": 27.322,
+        "di\u00e1m_km": 3476.0,
+        "dist_km": 384000.0
+      }
+    ]
+  },
+  "Marte": {
+    "m\u00edn_ua": 1.38,
+    "m\u00e1x_ua": 1.67,
+    "incl_orb_g": 1.8,
+    "di\u00e1m_km": 6794,
+    "obl": 0.005,
+    "masas_t": 0.11,
+    "incl_g": 25,
+    "a\u00f1o_d": 686.98,
+    "d\u00eda_h": 24.622999999999998,
+    "lunas": [
+      {
+        "nombre": "Fobos",
+        "planeta": "Marte",
+        "pos": "I",
+        "rev_d": 0.319,
+        "di\u00e1m_km": 22.666666666666668,
+        "dist_km": 9380.0
+      },
+      {
+        "nombre": "Deimos",
+        "planeta": "Marte",
+        "pos": "II",
+        "rev_d": 1.262,
+        "di\u00e1m_km": 12.666666666666666,
+        "dist_km": 23460.0
+      }
+    ]
+  },
+  "J\u00fapiter": {
+    "m\u00edn_ua": 4.95,
+    "m\u00e1x_ua": 5.45,
+    "incl_orb_g": 1.3,
+    "di\u00e1m_km": 142800,
+    "obl": 0.065,
+    "masas_t": 317.89,
+    "incl_g": 3,
+    "a\u00f1o_d": 4331.865,
+    "d\u00eda_h": 9.842,
+    "lunas": [
+      {
+        "nombre": "Metis",
+        "planeta": "J\u00fapiter",
+        "pos": "XVI",
+        "rev_d": 0.295,
+        "di\u00e1m_km": 40.0,
+        "dist_km": 127960.0
+      },
+      {
+        "nombre": "Adrastea",
+        "planeta": "J\u00fapiter",
+        "pos": "XV",
+        "rev_d": 0.298,
+        "di\u00e1m_km": 20.0,
+        "dist_km": 128979.99999999999
+      },
+      {
+        "nombre": "Amaltea",
+        "planeta": "J\u00fapiter",
+        "pos": "V",
+        "rev_d": 0.498,
+        "di\u00e1m_km": 196.66666666666666,
+        "dist_km": 181300.0
+      },
+      {
+        "nombre": "Thebe",
+        "planeta": "J\u00fapiter",
+        "pos": "XIV",
+        "rev_d": 0.675,
+        "di\u00e1m_km": 100.0,
+        "dist_km": 221900.0
+      },
+      {
+        "nombre": "Io",
+        "planeta": "J\u00fapiter",
+        "pos": "I",
+        "rev_d": 1.769,
+        "di\u00e1m_km": 3652.0,
+        "dist_km": 421600.0
+      },
+      {
+        "nombre": "Europa",
+        "planeta": "J\u00fapiter",
+        "pos": "II",
+        "rev_d": 3.551,
+        "di\u00e1m_km": 3138.0,
+        "dist_km": 670900.0
+      },
+      {
+        "nombre": "Gan\u00edmedes",
+        "planeta": "J\u00fapiter",
+        "pos": "III",
+        "rev_d": 7.155,
+        "di\u00e1m_km": 5262.0,
+        "dist_km": 1070000.0
+      },
+      {
+        "nombre": "Calisto",
+        "planeta": "J\u00fapiter",
+        "pos": "IV",
+        "rev_d": 16.689,
+        "di\u00e1m_km": 4800.0,
+        "dist_km": 1880000.0
+      },
+      {
+        "nombre": "Leda",
+        "planeta": "J\u00fapiter",
+        "pos": "XIII",
+        "rev_d": 238.7,
+        "di\u00e1m_km": 10.0,
+        "dist_km": 11094000.0
+      },
+      {
+        "nombre": "Himalaya",
+        "planeta": "J\u00fapiter",
+        "pos": "VI",
+        "rev_d": 250.6,
+        "di\u00e1m_km": 180.0,
+        "dist_km": 11480000.0
+      },
+      {
+        "nombre": "Lisitia",
+        "planeta": "J\u00fapiter",
+        "pos": "X",
+        "rev_d": 259.2,
+        "di\u00e1m_km": 20.0,
+        "dist_km": 11720000.0
+      },
+      {
+        "nombre": "Elara",
+        "planeta": "J\u00fapiter",
+        "pos": "VII",
+        "rev_d": 259.7,
+        "di\u00e1m_km": 80.0,
+        "dist_km": 11737000.0
+      },
+      {
+        "nombre": "Anank\u00e9",
+        "planeta": "J\u00fapiter",
+        "pos": "XII",
+        "rev_d": 631.0,
+        "di\u00e1m_km": 20.0,
+        "dist_km": 21200000.0
+      },
+      {
+        "nombre": "Carmen",
+        "planeta": "J\u00fapiter",
+        "pos": "XI",
+        "rev_d": 692.0,
+        "di\u00e1m_km": 30.0,
+        "dist_km": 22600000.0
+      },
+      {
+        "nombre": "Pasifae",
+        "planeta": "J\u00fapiter",
+        "pos": "VIII",
+        "rev_d": 735.0,
+        "di\u00e1m_km": 40.0,
+        "dist_km": 23500000.0
+      },
+      {
+        "nombre": "Sinope",
+        "planeta": "J\u00fapiter",
+        "pos": "IX",
+        "rev_d": 758.0,
+        "di\u00e1m_km": 30.0,
+        "dist_km": 23700000.0
+      }
+    ]
+  },
+  "Saturno": {
+    "m\u00edn_ua": 9.01,
+    "m\u00e1x_ua": 10.07,
+    "incl_orb_g": 2.5,
+    "di\u00e1m_km": 120000,
+    "obl": 0.108,
+    "masas_t": 95.17,
+    "incl_g": 27,
+    "a\u00f1o_d": 10760.265,
+    "d\u00eda_h": 10.233,
+    "lunas": [
+      {
+        "nombre": "Atlas",
+        "planeta": "Saturno",
+        "pos": "XV",
+        "rev_d": 0.602,
+        "di\u00e1m_km": 32.0,
+        "dist_km": 137670.0
+      },
+      {
+        "nombre": "Prometeo",
+        "planeta": "Saturno",
+        "pos": "XVI",
+        "rev_d": 0.613,
+        "di\u00e1m_km": 104.66666666666667,
+        "dist_km": 139350.0
+      },
+      {
+        "nombre": "Pandora",
+        "planeta": "Saturno",
+        "pos": "XVII",
+        "rev_d": 0.629,
+        "di\u00e1m_km": 86.66666666666667,
+        "dist_km": 141700.0
+      },
+      {
+        "nombre": "Jano",
+        "planeta": "Saturno",
+        "pos": "X",
+        "rev_d": 0.695,
+        "di\u00e1m_km": 190.0,
+        "dist_km": 151470.0
+      },
+      {
+        "nombre": "Epimeteo",
+        "planeta": "Saturno",
+        "pos": "XI",
+        "rev_d": 0.694,
+        "di\u00e1m_km": 118.0,
+        "dist_km": 151420.0
+      },
+      {
+        "nombre": "Mimus",
+        "planeta": "Saturno",
+        "pos": "I",
+        "rev_d": 0.942,
+        "di\u00e1m_km": 392.0,
+        "dist_km": 185540.0
+      },
+      {
+        "nombre": "Encelado",
+        "planeta": "Saturno",
+        "pos": "II",
+        "rev_d": 1.37,
+        "di\u00e1m_km": 500.0,
+        "dist_km": 238040.0
+      },
+      {
+        "nombre": "Tetis",
+        "planeta": "Saturno",
+        "pos": "III",
+        "rev_d": 1.888,
+        "di\u00e1m_km": 1060.0,
+        "dist_km": 294670.0
+      },
+      {
+        "nombre": "Telesto",
+        "planeta": "Saturno",
+        "pos": "XIII",
+        "rev_d": 1.888,
+        "di\u00e1m_km": 23.0,
+        "dist_km": 294670.0
+      },
+      {
+        "nombre": "Calipso",
+        "planeta": "Saturno",
+        "pos": "XIV",
+        "rev_d": 1.888,
+        "di\u00e1m_km": 23.333333333333332,
+        "dist_km": 294670.0
+      },
+      {
+        "nombre": "Dione",
+        "planeta": "Saturno",
+        "pos": "IV",
+        "rev_d": 2.737,
+        "di\u00e1m_km": 1120.0,
+        "dist_km": 377420.0
+      },
+      {
+        "nombre": "Helena",
+        "planeta": "Saturno",
+        "pos": "XII",
+        "rev_d": 2.737,
+        "di\u00e1m_km": 36.0,
+        "dist_km": 377420.0
+      },
+      {
+        "nombre": "Rhea",
+        "planeta": "Saturno",
+        "pos": "V",
+        "rev_d": 4.518,
+        "di\u00e1m_km": 1530.0,
+        "dist_km": 527040.0
+      },
+      {
+        "nombre": "Tit\u00e1n",
+        "planeta": "Saturno",
+        "pos": "VI",
+        "rev_d": 15.495,
+        "di\u00e1m_km": 5150.0,
+        "dist_km": 1221860.0
+      },
+      {
+        "nombre": "Hiperi\u00f3n",
+        "planeta": "Saturno",
+        "pos": "VII",
+        "rev_d": 21.277,
+        "di\u00e1m_km": 261.3333333333333,
+        "dist_km": 1481100.0
+      },
+      {
+        "nombre": "Japeto",
+        "planeta": "Saturno",
+        "pos": "VIII",
+        "rev_d": 79.331,
+        "di\u00e1m_km": 1460.0,
+        "dist_km": 3561300.0
+      },
+      {
+        "nombre": "Feobe",
+        "planeta": "Saturno",
+        "pos": "IX",
+        "rev_d": 550.4,
+        "di\u00e1m_km": 220.0,
+        "dist_km": 12954000.0
+      }
+    ]
+  },
+  "Urano": {
+    "m\u00edn_ua": 18.28,
+    "m\u00e1x_ua": 20.09,
+    "incl_orb_g": 0.8,
+    "di\u00e1m_km": 52400,
+    "obl": 0.03,
+    "masas_t": 14.56,
+    "incl_g": 98,
+    "a\u00f1o_d": 30684.6525,
+    "d\u00eda_h": 17.0,
+    "lunas": [
+      {
+        "nombre": "Cordelia",
+        "planeta": "Urano",
+        "pos": "VI",
+        "rev_d": 0.335,
+        "di\u00e1m_km": 15.0,
+        "dist_km": 49800.0
+      },
+      {
+        "nombre": "Ofelia",
+        "planeta": "Urano",
+        "pos": "VII",
+        "rev_d": 0.376,
+        "di\u00e1m_km": 20.0,
+        "dist_km": 53800.0
+      },
+      {
+        "nombre": "Blanca",
+        "planeta": "Urano",
+        "pos": "VIII",
+        "rev_d": 0.433,
+        "di\u00e1m_km": 50.0,
+        "dist_km": 59100.0
+      },
+      {
+        "nombre": "Cr\u00e9sida",
+        "planeta": "Urano",
+        "pos": "IX",
+        "rev_d": 0.463,
+        "di\u00e1m_km": 70.0,
+        "dist_km": 61750.0
+      },
+      {
+        "nombre": "Desd\u00e9mona",
+        "planeta": "Urano",
+        "pos": "X",
+        "rev_d": 0.475,
+        "di\u00e1m_km": 50.0,
+        "dist_km": 62700.0
+      },
+      {
+        "nombre": "Julieta",
+        "planeta": "Urano",
+        "pos": "XI",
+        "rev_d": 0.493,
+        "di\u00e1m_km": 70.0,
+        "dist_km": 64349.99999999999
+      },
+      {
+        "nombre": "Porcia",
+        "planeta": "Urano",
+        "pos": "XII",
+        "rev_d": 0.513,
+        "di\u00e1m_km": 90.0,
+        "dist_km": 66090.0
+      },
+      {
+        "nombre": "Rosalinda",
+        "planeta": "Urano",
+        "pos": "XIII",
+        "rev_d": 0.558,
+        "di\u00e1m_km": 50.0,
+        "dist_km": 69920.0
+      },
+      {
+        "nombre": "Belinda",
+        "planeta": "Urano",
+        "pos": "XIV",
+        "rev_d": 0.622,
+        "di\u00e1m_km": 50.0,
+        "dist_km": 75300.0
+      },
+      {
+        "nombre": "Disco",
+        "planeta": "Urano",
+        "pos": "XV",
+        "rev_d": 0.762,
+        "di\u00e1m_km": 170.0,
+        "dist_km": 86010.0
+      },
+      {
+        "nombre": "Miranda",
+        "planeta": "Urano",
+        "pos": "V",
+        "rev_d": 1.414,
+        "di\u00e1m_km": 480.0,
+        "dist_km": 129400.0
+      },
+      {
+        "nombre": "Ariel",
+        "planeta": "Urano",
+        "pos": "I",
+        "rev_d": 2.52,
+        "di\u00e1m_km": 1170.0,
+        "dist_km": 191000.0
+      },
+      {
+        "nombre": "Umbriel",
+        "planeta": "Urano",
+        "pos": "II",
+        "rev_d": 4.144,
+        "di\u00e1m_km": 1190.0,
+        "dist_km": 266300.0
+      },
+      {
+        "nombre": "Titania",
+        "planeta": "Urano",
+        "pos": "III",
+        "rev_d": 8.706,
+        "di\u00e1m_km": 1560.0,
+        "dist_km": 435900.0
+      },
+      {
+        "nombre": "Ober\u00f3n",
+        "planeta": "Urano",
+        "pos": "IV",
+        "rev_d": 13.463,
+        "di\u00e1m_km": 1550.0,
+        "dist_km": 583500.0
+      }
+    ]
+  },
+  "Neptuno": {
+    "m\u00edn_ua": 29.8,
+    "m\u00e1x_ua": 30.32,
+    "incl_orb_g": 1.8,
+    "di\u00e1m_km": 48400,
+    "obl": 0.02,
+    "masas_t": 17.24,
+    "incl_g": 30,
+    "a\u00f1o_d": 60189.5475,
+    "d\u00eda_h": 16.0,
+    "lunas": [
+      {
+        "nombre": "N\u00e1yade",
+        "planeta": "Neptuno",
+        "pos": "III",
+        "rev_d": 0.3,
+        "di\u00e1m_km": 50.0,
+        "dist_km": 48200.0
+      },
+      {
+        "nombre": "Thalassa",
+        "planeta": "Neptuno",
+        "pos": "IV",
+        "rev_d": 0.31,
+        "di\u00e1m_km": 90.0,
+        "dist_km": 50000.0
+      },
+      {
+        "nombre": "Despina",
+        "planeta": "Neptuno",
+        "pos": "V",
+        "rev_d": 0.33,
+        "di\u00e1m_km": 140.0,
+        "dist_km": 52500.0
+      },
+      {
+        "nombre": "Galatea",
+        "planeta": "Neptuno",
+        "pos": "VI",
+        "rev_d": 0.43,
+        "di\u00e1m_km": 160.0,
+        "dist_km": 62000.0
+      },
+      {
+        "nombre": "Larisa",
+        "planeta": "Neptuno",
+        "pos": "VII",
+        "rev_d": 0.55,
+        "di\u00e1m_km": 200.0,
+        "dist_km": 73600.0
+      },
+      {
+        "nombre": "Proteo",
+        "planeta": "Neptuno",
+        "pos": "VIII",
+        "rev_d": 1.12,
+        "di\u00e1m_km": 420.0,
+        "dist_km": 117600.0
+      },
+      {
+        "nombre": "Trit\u00f3n",
+        "planeta": "Neptuno",
+        "pos": "I",
+        "rev_d": 5.877,
+        "di\u00e1m_km": 3500.0,
+        "dist_km": 354800.0
+      },
+      {
+        "nombre": "Nereida",
+        "planeta": "Neptuno",
+        "pos": "II",
+        "rev_d": 360.21,
+        "di\u00e1m_km": 400.0,
+        "dist_km": 5510000.0
+      }
+    ]
+  },
+  "Plut\u00f3n": {
+    "m\u00edn_ua": null,
+    "m\u00e1x_ua": null,
+    "incl_orb_g": null,
+    "di\u00e1m_km": 2445,
+    "obl": 0.0,
+    "masas_t": 0.002,
+    "incl_g": 118,
+    "a\u00f1o_d": null,
+    "d\u00eda_h": 153.35999999999999,
+    "lunas": [
+      {
+        "nombre": "Caronte",
+        "planeta": "Plut\u00f3n",
+        "pos": "I",
+        "rev_d": 6.387,
+        "di\u00e1m_km": null,
+        "dist_km": 19700.0
+      }
+    ]
+  }
+}

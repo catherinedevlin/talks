@@ -2097,6 +2097,19 @@ SQLite-&gt;reader 5
 </section>
 <section id="sql-itself-gets-everywhere" class="slide level2">
 <h2>SQL (itself) gets everywhere</h2>
+<aside class="notes">
+<p>Does not respect boundaries</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sql-to-pandas" class="slide level2">
 <h2>SQL to Pandas</h2>
@@ -2275,10 +2288,9 @@ result.DataFrame()</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
-<section id="json-schema" class="title-slide slide level1 center">
-<h1><a href="https://json-schema.org/">JSON Schema</a></h1>
+</section>
+<section id="json-schema" class="slide level2">
+<h2><a href="https://json-schema.org/">JSON Schema</a></h2>
 <div class="sourceCode" id="cb29"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="dt">"$schema"</span><span class="fu">:</span> <span class="st">"https://json-schema.org/draft/2020-12/schema"</span><span class="fu">,</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="dt">"$id"</span><span class="fu">:</span> <span class="st">"https://example.com/product.schema.json"</span><span class="fu">,</span></span>
@@ -2408,12 +2420,26 @@ result.DataFrame()</code></pre>
 </section>
 <section id="laziness" class="slide level2">
 <h2>Laziness</h2>
-<h3 id="mock-data">Mock data</h3>
+<aside class="notes">
+<p>Not talking about data loading. I mean that I am lazy. I love that mixin.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fake-testing-data" class="slide level2">
+<h2>Fake testing data</h2>
 <p>From Pydantic / dataclasses: <a href="https://polyfactory.litestar.dev/">Polyfactory</a></p>
 <p>From JSON Schema: <a href="https://github.com/ghandic/jsf">jsf</a></p>
 <aside class="notes">
-<p>Not talking about data loading. I mean that I am lazy. I love that mixin.</p>
-<p>Oh, but now I have to define my dataclass.</p>
+<p>Love</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2450,6 +2476,7 @@ class Model:
     año_d: str
     día_h: str</code></pre>
 <aside class="notes">
+<p>Hand me my dataclass</p>
 <p>Automated converters! Search for them!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2509,8 +2536,8 @@ class Model:
 <pre><code>COMMENT ON COLUMN planetas.día_h IS 'período de rotación, en horas'</code></pre>
 
 <img data-src="img/with_comment.png" alt="Table description with column comment" class="r-stretch quarto-figure-center"></section></section>
-<section id="quipu-redux" class="title-slide slide level1 center">
-<h1>Quipu redux</h1>
+<section id="quipu-1" class="title-slide slide level1 center">
+<h1>Quipu</h1>
 
 <img data-src="https://essentials.neh.gov/sites/default/files/quipu_v1.jpg" alt="quipu" class="r-stretch quarto-figure-center"><aside class="notes">
 <p>Can interpret numbers</p>
