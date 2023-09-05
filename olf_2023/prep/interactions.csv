@@ -1,0 +1,36 @@
+issue,Hero_1,Hero_2,nature
+1,Captain Columbus,Henry Fnord,clash
+2,Captain Columbus,The Trilobite,clash
+3,Cardinal Virtue,Putin Bae,clash
+3,Captain Columbus,Putin Bae,clash
+3,Captain Columbus,Cardinal Virtue,ally
+4,Cardinal Virtue,Orville Wrong,clash
+4,Cardinal Virtue,Wilbur Wrong,clash
+4,Cardinal Virtue,Airship Alice,clash
+4,Orville Wrong,Airship Alice,ally
+4,Wilber Wrong,Airship Alice,ally
+4,Orville Wrong,Wilbur Wrong,ally
+5,Ohio Gosaimasu,Buckeye Bullet,ally
+5,Ohio Gosaimasu,The Stealer,clash
+5,Buckeye Bullet,The Stealer,clash
+6,Captain Columbus,The Thinker,ally
+6,Captain Columbus,Defiance Dogman,clash
+6,The Thinker,Defiance Dogman,clash
+7,Annie Oakley,Cardinal Virtue,ally
+7,Annie Oakley,Henry Fnord,clash
+7,Cardinal Virtue,Henry Fnord,clash
+7,Annie Oakley,Nell Strongarm,clash
+7,Cardinal Virtue,Nell Strongarm,clash
+7,Henry Fnord,Nell Strongarm,ally
+8,Putin Bae,Defiance Dogman,ally
+8,Putin Bae,Ohio Gosaimasu,clash
+8,Defiance Dogman,Ohio Gosaimasu,clash
+8,Putin Bae,The Hawk King,clash
+8,Defiance Dogman,The Hawk King,clash
+8,The Hawk King,Ohio Gosaimasu,ally
+9,Ohio Gosaimasu,Cardinal Virtue,ally
+9,Ohio Gosaimasu,Henry Fnord,clash
+9,Cardinal Virtue,Henry Fnord,clash
+9,The Hawk King,Buckeye Bullet,ally
+9,The Hawk King,Motown Menace,clash
+9,Buckeye Bullet,Motown Menace,clash

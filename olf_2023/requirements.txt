@@ -1,0 +1,16 @@
+jupyterlab
+rise
+jupysql
+psycopg2
+cogapp
+records
+pyperclip
+pymongo
+pandas
+tabulate
+jupysql
+pugsql
+agnostic[postgres]
+agnostic[sqlite]
+datasette
+pypika

@@ -1,0 +1,1151 @@
+---
+title: "Database Superpowers"
+subtitle: "OLF 2023"
+date: "2023-09-08"
+author: "Catherine Devlin"
+fediverse: "https://github.com/catherinedevlin/talks"
+format: 
+  revealjs:
+    code-line-numbers: false
+footer: "https://github.com/catherinedevlin/talks/"
+---
+
+Tools used 
+
+- Quarto
+- cog
+- Midjourney
+- ImageMagick
+- Pinta
+
+---
+
+![](img/captain-columbus.png){fig-alt="Captain Columbus" fig-align="center"}
+
+::: {.notes}
+
+- Grant for regional crimefighting
+- Digital divide
+- FOSS 
+
+:::
+
+## Open-source databases 
+
+- PostgreSQL
+- SQLite
+- Nine hundred bazillion more 
+
+::: {.notes}
+
+Scope 
+
+I am not the one to tell you the cool things about the others
+
+These are common, but common doesn't mean uncool 
+
+:::
+
+## Introducing [Chelnik](https://twitter.com/ChelnikTravels)
+
+![](img/chelnik.jpg){fig-alt="Small crocheted blue elephant" fig-align="center"}
+
+::: {.notes}
+
+The other databases are cool, but do they have an adorable 
+blue elephant?
+
+Capt. C was still skeptical...
+
+:::
+
+---
+
+![](img/chelnik-masked.jpg){fig-alt="Chelnik the PostgreSQL elephant, in superhero mask" fig-align="center"}
+
+# Apologies
+
+![](img/chaos.png){fig-alt="Chaotic comic scene" fig-align="center"}
+
+::: {.notes}
+
+Mishmash, no thematic consistency 
+
+Whirlwind, eclectic tour: Demos and brief shout-outs
+
+:::
+
+# Outline 
+
+- Shape of data
+- Pandas / Jupyter
+- Plain SQL 
+- Advanced SQL
+- SQLite
+  - simple != weak
+  - datasette
+
+----
+
+![](img/postgresql-homepage.png){fig-alt="PostgreSQL homepage" fig-align="center"}
+
+::: {.notes}
+
+Classic database server 
+
+Complete and powerful
+
+:::
+
+-----
+
+![](img/sqlite-homepage.png){fig-alt="SQLite homepage" fig-align="center"}
+
+::: {.notes}
+
+Lightweight, basic (but efficient) database server 
+
+:::
+
+-----
+
+            PostgreSQL   SQLite
+  --------- ------------ -------------
+            server       library
+  watchword powerful     lightweight
+  SQL       compliant    incomplete
+  Readers   many         many
+  Writers   many         one
+
+
+# The Mighty Rectangle
+
+![](img/spreadsheet.png){fig-alt="spreadsheet" fig-align="center"}
+
+::: {.notes}
+
+Ubiquitious, easy, and flawed 
+
+Power 1, Power 2, ...
+
+Power 4?
+
+Which col to search?
+
+:::
+
+
+## Relationships
+
+
+
+::: { .notes }
+foreign-keys.sql
+:::
+
+```{sql}
+
+select * from powers;
+
+select * from supers;
+
+
+```
+
+
+## Join
+
+
+
+
+::: { .notes }
+join.sql
+:::
+
+```{sql}
+select s.name,
+       s.tagline,
+       p.name AS power
+from supers s
+join powers p on (p.super_id = s.id)
+order by s.id;
+```
+
+
+
+::: {.notes}
+
+Well now you've got a rectangle again.  But at least it isn't stored this way.
+
+:::
+
+## View
+
+
+
+::: { .notes }
+view.sql
+:::
+
+```{sql}
+CREATE OR REPLACE VIEW supers_w_powers AS
+select s.name,
+       s.tagline,
+       p.name AS power
+from supers s
+join powers p on (p.super_id = s.id)
+order by s.id;
+```
+
+
+--------------
+
+
+
+::: { .notes }
+use_view.sql
+:::
+
+```{sql}
+SELECT * 
+FROM   supers_w_powers
+WHERE  tagline IS NOT NULL;
+```
+
+
+
+## Materialized view
+
+
+
+::: { .notes }
+matview.sql
+:::
+
+```{sql}
+CREATE OR REPLACE MATERIALIZED VIEW supers_w_powers_mv AS
+SELECT * 
+FROM   supers_w_powers;
+
+REFRESH MATERIALIZED VIEW supers_w_powers_mv;
+
+CREATE INDEX ON supers_w_powers_mv (name);
+
+SELECT * 
+FROM   supers_w_powers_mv
+WHERE  name LIKE 'Captain%';
+```
+
+
+(not SQLite)
+
+## Many-to-many 
+
+
+
+::: { .notes }
+many-to-many-problem.sql
+:::
+
+```{sql}
+SELECT name, power 
+FROM   supers_w_powers
+WHERE  power like '%speed%'
+OR     power like '%strength%'
+OR     power like '%flight%'
+ORDER BY power, name;
+```
+
+
+::: {.notes}
+
+This might be best if not all 
+- inefficient
+- inelegant
+- potential discrepancy
+
+SELECT * FROM powers_mtm; 
+
+SELECT * FROM super_to_power;
+
+:::
+
+------
+
+
+
+::: { .notes }
+many-to-many-query.sql
+:::
+
+```{sql}
+
+SELECT s.id, s.name, s.tagline, 
+       p.name 
+FROM   supers s 
+JOIN   super_to_power sp ON (sp.super_id = s.id)
+JOIN   powers_mtm p ON (sp.power_id = p.id)
+ORDER BY s.id, p.id;
+```
+
+
+
+::: {.notes}
+
+This can also be wrapped in a view.
+
+:::
+
+# Other shapes
+
+## Documents
+
+    [{'issue': 1,
+    'venue': 'Air Force museum',
+    'sides': {'villains': {'objective': 'Steal B-52',
+        'success': False,
+        'participants': {'Orville Wrong': {'consequences': {'captured': False,
+        'injuries': ['black eye']}},
+        'Wilbur Wrong': {'consequences': {'captured': False}}}},
+    'heroes': {'participants': {'Captain Columbus': {'consequences': []},
+        'Cardinal Virtue': {'consequences': ['sprained wing',
+        'ruffled feathers']}}},
+    'property loss': ['B-52 damaged', 'SPAD VII stolen']}},
+    {'issue': 2,
+    'venue': 'Purple People Bridge',
+    'sides': {'heroes': {'objective': "learn villains' plans",
+        'success': True,
+        'participants': {'Ohio Gosaimasu': {'consequences': {'captured': True}}}},
+    'villains': {'objective': 'capture hero',
+        'success': True,
+        'participants': {'Nell Strongarm': {'consequences': []},
+        'Henry Fnord': {'consequences': []}}},
+    'property loss': ['Segway thrown into river']}}]
+
+::: {.notes}
+
+- Hard to model as related tables 
+- Tons of joins - awkward and slow
+
+:::
+
+## Store in PostgreSQL
+
+[doc-in-pg.sql](prep/doc-in-pg.sql)
+
+::: {.notes}
+
+Stuck a SQL string into a text field?
+
+:::
+
+
+## Query
+
+
+
+::: { .notes }
+json-query.sql
+:::
+
+```{sql}
+select battle->'venue' AS venue,
+       battle->'sides'->'villains'->'participants' AS villains,
+       battle->'property loss'
+from   battles
+where  battle->'sides'->'villains'->>'success' = 'false';
+
+```
+
+
+jq-like [jsonpath: SQL/JSON](https://github.com/obartunov/sqljsondoc/blob/master/jsonpath.md)
+
+## Index
+
+
+
+::: { .notes }
+json-index.sql
+:::
+
+```{sql}
+CREATE INDEX ON battles ((battle->>'venue'));
+```
+
+
+## Other document options
+
+## Document database 
+
+
+
+::: { .notes }
+mongo-connect.sh
+:::
+
+```{sql}
+mongosh mongodb://$PGUSER:$PGPASSWORD@127.0.0.1/ferretdb?authMechanism=PLAIN
+
+```
+
+
+
+
+::: { .notes }
+battles.js
+:::
+
+```{sql}
+db.battles.find({venue: 'Air Force museum'})
+```
+
+
+::: {.notes}
+
+You like the MongoDB API, Mongo query-by-example 
+
+:::
+
+------
+
+![](img/ferretdb.png){fig-alt="FerretDB: document database hosted on PostgreSQL" fig-align="center"}
+
+::: {.notes}
+
+Surprise!
+
+:::
+
+------
+
+## FerretDB: hosted on PostgreSQL
+
+    $ sudo apt-get install ferretdb
+    $ ferretdb --postgresql-url=postgres://$PGUSER:$PGPASSWORD@localhost:$PGPORT/$PGDATABASE
+
+
+[all-in-one Docker image](https://github.com/ferretdb/FerretDB/pkgs/container/all-in-one)
+
+[install mongosh client](https://www.mongodb.com/docs/mongodb-shell/install/)
+
+
+## FerretDB on SQLite 
+
+![](img/ferretdb-on-sqlite.png){fig-alt="FerretDB on SQLite" fig-align="center"}
+
+## Foreign Data Wrapper
+
+![](img/mongo_fdw_gh.png){fig-alt="mongo_fdw GitHub page" fig-align="center"}
+
+-------
+
+
+## Graphs
+
+```{dot}
+digraph P {
+    layout=dot
+    "node 0" -> "node 2" [label = "edge"]
+    "node 0" -> "node 3" [label = "edge"]
+    "node 1" -> "node 4" [label = "edge"]
+    "node 1" -> "node 5" [label = "edge"]
+    "node 0" -> "node 4" [label = "edge"]
+    "node 3" -> "node 4" [label = "edge"]
+}
+```
+
+-------
+
+![](img/innovators.png){fig-alt="Innovators of Iniquity" fig-align="center"}
+
+------
+
+
+
+
+::: { .notes }
+group_or_member.sql
+:::
+
+```{sql}
+
+SELECT * FROM group_or_member;
+
+```
+
+
+::: {.notes}
+
+Models the nesting
+
+But each row can be a super, or not - awkward 
+
+:::
+
+------
+
+
+
+::: { .notes }
+innovators-rel.sql
+:::
+
+```{sql}
+SELECT s.*
+FROM   group_or_member i
+JOIN   group_or_member i_mem
+ON     (i_mem.belongs_to = i.id)
+LEFT JOIN   group_or_member i_subgrp_mem 
+ON     (i_subgrp_mem.belongs_to = i_mem.id)
+JOIN   supers s 
+ON     (   s.id = i_mem.super_id 
+	OR s.id = i_subgrp_mem.super_id) 
+WHERE  i.name = 'Innovators of Iniquity';
+
+
+```
+
+
+
+::: {.notes}
+
+What if it were nested more deeply?
+
+What if it were arbitrarily nested?
+
+:::
+
+## Recursive CTE 
+
+[Using PostgreSQL as a graph database](https://tech.ingrid.com/sql-as-graph-database/) by Krzysztof Dryś 
+
+
+## [Recursive CTE in SQLite](https://www.sqlite.org/lang_with.html)
+
+![](img/recursive-sqlite.png){fig-alt="Recursive CTE in SQLite" fig-align="center"}
+
+
+## [Apache AGE](https://age.apache.org/)
+
+Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
+
+
+## Define graph
+
+[age-setup.sql](prep/age-setup.sql)
+
+## Query
+
+
+
+::: { .notes }
+membership-graph.sql
+:::
+
+```{sql}
+LOAD 'age';
+SET search_path = ag_catalog, "$user", public;
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Innovators of Iniquity"})
+  MATCH (g)-[i:INCLUDES*1..]->(e)
+  RETURN g, i, e
+ $$) AS (g agtype, i agtype, e agtype);
+
+```
+
+
+
+# AGE-Viewer
+
+    docker run --publish=3001:3001 joefagan/incubator-age-viewer:latest
+
+::: {.notes}
+
+LOAD THIS BEFORE 
+
+export PGPORT=5455
+database name justice 
+
+running in docker - must use ifconfig!
+
+:::
+
+## Query through viewer
+
+
+
+::: { .notes }
+membership-graph.sql
+:::
+
+```{sql}
+LOAD 'age';
+SET search_path = ag_catalog, "$user", public;
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Innovators of Iniquity"})
+  MATCH (g)-[i:INCLUDES*1..]->(e)
+  RETURN g, i, e
+ $$) AS (g agtype, i agtype, e agtype);
+
+```
+
+
+
+-----
+
+
+
+::: { .notes }
+friend-of-friend2.sql
+:::
+
+```{sql}
+LOAD 'age';
+SET search_path = ag_catalog, "$user", public;
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus"})
+  MATCH (s1)-[a:ALLIED_WITH*1..2]-(s2:Super)
+  RETURN s1, a, s2 
+ $$) AS (result1 agtype, a agtype, s2 agtype);
+
+```
+
+
+
+-----
+
+
+
+::: { .notes }
+enemy-of-enemy.sql
+:::
+
+```{sql}
+LOAD 'age';
+SET search_path = ag_catalog, "$user", public;
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus"})
+  MATCH (s1)-[f1:FOUGHT]-(v:Super)-[f2:FOUGHT]-(s2:Super)
+  RETURN s1, f1, v, f2, s2 
+ $$) AS (s1 agtype, f1 agtype, v agtype, f2 agtype, s2 agtype);
+
+
+```
+
+
+---
+
+![](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="center"}
+
+---
+
+![](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="center"}
+
+## SQLite?
+
+[simple-graph](https://github.com/dpapathanasiou/simple-graph)
+
+## neo4j_fdw 
+
+![](img/neo4j_fdw.png){fig-alt="neo4j_fdw" fig-align="center"}
+
+## So many FDWs 
+
+[So many FDWs](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
+
+# FerretDB on SQLite 
+
+![](img/ferretdb-on-sqlite.png){fig-alt="FerretDB on SQLite" fig-align="center"}
+
+## Review: non-relational PostgreSQL
+
+|                       | Document          | Graph         |
+|:----------------------|:------------------|:--------------|
+| native                | json, jsonb types | recursive CTE |
+| hosted                | FerretDB          | Apache AGE    |
+| foreign data wrappers | mongo_fdw         | neo4j_fdw     |
+
+## non-relational SQLite
+
+|                       | Document       | Graph         |
+|:----------------------|:---------------|:--------------|
+| native                | JSON functions | recursive CTE |
+| hosted                | FerretDB       | simple-graph  |
+| foreign data wrappers |                |               |
+
+## Go big 
+
+|              |one machine|distributed  |
+|--------------|-----------|-------------|
+|in memory     |SQLite     |Apache Ignite|
+|single file   |SQLite     |rqlite       |
+|server-managed|PostgreSQL |CockroachDB  |
+
+
+# Pandas / Jupyter
+
+
+
+::: {.notes}
+
+Reason the Mighty Rectangle prevails
+
+:::
+
+## Pandas and SQL 
+
+[pandas.ipynb](demo/pandas.ipynb)
+
+## Object-Relational Mappers
+
+
+
+::: { .notes }
+orm-qry.py
+:::
+
+```{sql}
+from models import Super, Power  
+import sqlalchemy as sa 
+
+engine = sa.create_engine(
+    'postgresql://captcbus:forohio@localhost:5455/justice')
+with sa.orm.Session(engine) as session:
+    stmt = sa.select(Super).where(Super.align == 'hero')
+    for super in session.execute(stmt).scalars():
+        power_list = ', '.join(p.name for p in super.powers)
+        print(f'{super.name} has {power_list}')
+```
+
+
+## ORMs: the bad news 
+
+
+
+::: { .notes }
+models.py
+:::
+
+```{sql}
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, MappedAsDataclass
+from sqlalchemy import String, ForeignKey
+from typing import Optional, List 
+
+# class Base(MappedAsDataclass, DeclarativeBase):
+class Base(DeclarativeBase):
+    pass
+
+class Super(Base):
+    __tablename__ = "supers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String)
+    align: Mapped[str] = mapped_column(String)
+    tagline: Mapped[str] = mapped_column(String)
+    based_in: Mapped[str] = mapped_column(String)
+    powers: Mapped[List["Power"]] = relationship(
+        back_populates="hero"
+    )
+
+    def __str__(self):
+        return self.nombre
+
+class Power(Base):
+    __tablename__ = "powers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String)
+    super_id: Mapped[int] = mapped_column(ForeignKey("supers.id"))
+    hero: Mapped["Super"] = relationship(back_populates="powers",)
+
+```
+
+
+## Reducing ORM labor
+
+- Generate DDL from ORM definitions
+- Reflection (`autoload_with`, `.reflect`) - Core, not ORM
+- Dataclass integration
+
+## Dataclass integration
+
+
+
+::: { .notes }
+orm-dataclass.py
+:::
+
+```{sql}
+from models import Super, Power  
+import sqlalchemy as sa 
+from pprint import pprint
+
+engine = sa.create_engine(
+    'postgresql://captcbus:forohio@localhost:5455/justice')
+with sa.orm.Session(engine) as session:
+
+    stmt = sa.select(Super).where(Super.name == 'Ohio Gosaimasu')
+    pprint(session.execute(stmt).first()[0])
+```
+
+
+## Query builders
+
+
+
+::: { .notes }
+query-builder.py
+:::
+
+```{sql}
+import pypika as pk
+
+supers, powers = pk.Tables('supers', 'powers')
+q = (pk.Query 
+    .from_(supers) 
+    .select(supers.star, powers.name)
+    .where(supers.align == 'hero')
+    .on(powers.super_id == supers.id)
+    .join(powers) 
+    .where(supers.name > 'M')
+    )
+print(q)
+
+```
+
+
+::: {.notes}
+
+At the border between writing raw SQL and an ORM, consider a 
+query builder.
+
+SQL-based syntax (so, yes, another syntax to learn) - all the 
+same concepts and keywords
+
+SQL syntax is picky - this is more freeform and composable
+
+
+:::
+
+
+# Plain SQL 
+
+Ask what it can do for you
+
+
+## HugSQL / [PugSQL](https://pugsql.org/)
+
+
+
+::: { .notes }
+use-pugsql.py
+:::
+
+```{sql}
+import pugsql
+
+queries = pugsql.module('pugsql_queries/')
+queries.connect('postgresql://captcbus:forohio@localhost:5455/justice')
+for row in queries.supers_by_power(power='%light'):
+    print(row)
+
+```
+
+
+Also: HugSQL (Clojure), HugSQLx (Rust), hugsql.js
+
+## Migrations: [Agnostic](https://agnostic.readthedocs.io)
+
+    agnostic -t postgres -u $PGUSER -p $PGPASSWORD -d $PGDATABASE -p $PGPORT migrate
+
+
+::: {.notes}
+
+Track database structure changes 
+Associate them to commit in your VC history 
+
+Not running this one live!
+
+:::
+
+## Transformations: [dbt](https://www.getdbt.com/)
+
+![](img/dbt.png){fig-alt="dbt" fig-align="center"}
+
+## Rich feature set
+
+- Arrays
+- Inheritance 
+- Window functions
+- Custom types 
+- PL/everything stored procedures 
+
+::: {.notes}
+
+PostgreSQL only
+
+:::
+
+## SQL functions
+
+
+
+::: { .notes }
+raw-locations.sql
+:::
+
+```{sql}
+SELECT * FROM raw_locations;
+
+
+```
+
+
+----------
+
+
+
+::: { .notes }
+raw-loc-to-array.sql
+:::
+
+```{sql}
+
+SELECT city, 
+       string_to_array(loc_list, ', ')
+FROM   raw_locations;
+
+```
+
+
+-------------
+
+
+
+::: { .notes }
+raw-loc-to-rows.sql
+:::
+
+```{sql}
+
+SELECT city, 
+       unnest(string_to_array(loc_list, ', '))
+FROM   raw_locations;
+
+```
+
+
+## SIMILAR TO
+
+
+
+::: { .notes }
+many-to-many-problem.sql
+:::
+
+```{sql}
+SELECT name, power 
+FROM   supers_w_powers
+WHERE  power like '%speed%'
+OR     power like '%strength%'
+OR     power like '%flight%'
+ORDER BY power, name;
+```
+
+
+
+----------------
+
+
+
+::: { .notes }
+similar-to.sql
+:::
+
+```{sql}
+
+SELECT name, power 
+FROM   supers_w_powers
+WHERE  power similar to '%(speed|strength|flight)%'
+ORDER BY power, name;
+```
+
+
+... or POSIX regular expressions 
+
+::: {.notes}
+
+LIKE OR... LIKE OR
+
+Regexes, 
+
+But you can think of them as multiple-like 
+
+## DISTINCT ON
+
+
+
+
+::: { .notes }
+distinct-on.sql
+:::
+
+```{sql}
+select distinct on (based_in) name, based_in from supers order by based_in, name;
+
+```
+
+
+:::
+
+# SQLite?
+
+Yes:
+
+- ORMs
+- Pandas, jupysql
+- PugSQL, Agnostic
+
+No:
+
+- dbt
+- advanced SQL
+
+::: {.notes}
+
+No cute animal logo
+
+But let's sing its praises anyway 
+
+:::
+
+## Simplicity 
+
+- No server
+- Python Standard Library support 
+
+::: {.notes}
+
+beloved for quick projects, demos, single-user apps
+
+serverless: file format + libraries to access 
+
+:::
+
+## Smallness 
+
+## [SQLite for Application Files](https://www.sqlite.org/appfileformat.html)
+
+![](img/sqlite-app-file.png){fig-alt="Article titled: SQL as an Application File Format" fig-align="center"}
+
+::: {.notes}
+
+In fact, it's so simple that you can use it when
+you weren't even thinking about using a database at all - you were just looking for 
+a data storage file format.  Because it's an efficient and versatile format. 
+There's a good discussion of that in the SQLite docs.
+
+:::
+
+
+## Simple != Weak 
+
+```{dot}
+digraph P {
+    layout=dot
+    "Data source" -> "SQLite"
+    "SQLite" -> "reader 1"
+    "SQLite" -> "reader 2"
+    "SQLite" -> "reader 3"
+    "SQLite" -> "reader 4"
+    "SQLite" -> "reader 5"
+}
+```
+
+::: {.notes}
+
+Python "scripting" language?
+
+large amounts OK 
+
+lots of users / processes OK
+
+Publish data, updated occasionally
+
+lots of writers: not OK 
+
+:::
+
+## Baked data 
+
+Simon Willison: [The Baked Data architectural pattern](https://simonwillison.net/2021/Jul/28/baked-data/)
+
+![](img/baked-data.png){fig-alt="Baked Data article" fig-align="center"}
+
+::: {.notes}
+
+Simon Willison wrote this great article on cheaply and easily hosting an 
+application if it relies on infrequently-updated data.  Just put that data 
+in a single-file database like SQLite, and a cheap and basic real or virtual 
+server can handle the dynamic part.
+
+::: 
+
+## Datasette 
+
+[datasette data/supers.sqlite](http://localhost:8001/)
+
+![](img/datasette-map.png){fig-alt="Datasette page with map" fig-align="center"}
+
+::: {.notes}
+
+Explore, visualize tool 
+
+Plugins for leaflet, dashboards, 
+
+Simple as SQLite itself
+
+:::
+
+## Datasette-lite 
+
+[https://lite.datasette.io/?url=https://github.com
+    /catherinedevlin/talks/blob/master
+    /olf_2003/supers.sqlite](https://lite.datasette.io/?url=https://github.com/catherinedevlin/talks/blob/master/olf_2003/supers.sqlite)
+
+
+::: {.notes}
+
+blurring boundaries: PyIodide
+
+Simon Willison did this with Datasette!
+
+Why would I put this long ugly URL on my slide?
+
+Only code!
+
+I have never been this lazy in my life, and I love it!
+
+:::
+
+---
+
+![](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="left" height=250}
+![](img/captain-columbus.png){fig-alt="Captain Columbus" fig-align="center" height=250}
+![](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="right" height=250}
+
+
+https://github.com/catherinedevlin/talks
+
+@catherinedevlin@tech.lgbt

@@ -1,0 +1,747 @@
+---
+title: "Database Superpowers"
+subtitle: "OLF 2023"
+date: "2023-09-08"
+author: "Catherine Devlin"
+fediverse: "https://github.com/catherinedevlin/talks"
+format: 
+  revealjs:
+    code-line-numbers: false
+footer: "https://github.com/catherinedevlin/talks/"
+---
+
+Tools used 
+
+- Quarto
+- cog
+- Midjourney
+- ImageMagick
+- Pinta
+
+---
+
+![](img/captain-columbus.png){fig-alt="Captain Columbus" fig-align="center"}
+
+::: {.notes}
+
+- Grant for regional crimefighting
+- Digital divide
+- FOSS 
+
+:::
+
+## Open-source databases 
+
+- PostgreSQL
+- SQLite
+- Nine hundred bazillion more 
+
+::: {.notes}
+
+Scope 
+
+I am not the one to tell you the cool things about the others
+
+These are common, but common doesn't mean uncool 
+
+:::
+
+## Introducing [Chelnik](https://twitter.com/ChelnikTravels)
+
+![](img/chelnik.jpg){fig-alt="Small crocheted blue elephant" fig-align="center"}
+
+::: {.notes}
+
+The other databases are cool, but do they have an adorable 
+blue elephant?
+
+Capt. C was still skeptical...
+
+:::
+
+---
+
+![](img/chelnik-masked.jpg){fig-alt="Chelnik the PostgreSQL elephant, in superhero mask" fig-align="center"}
+
+# Apologies
+
+![](img/chaos.png){fig-alt="Chaotic comic scene" fig-align="center"}
+
+::: {.notes}
+
+Mishmash, no thematic consistency 
+
+Whirlwind, eclectic tour: Demos and brief shout-outs
+
+:::
+
+# Outline 
+
+- Shape of data
+- Pandas / Jupyter
+- Plain SQL 
+- Advanced SQL
+- SQLite
+  - simple != weak
+  - datasette
+
+----
+
+![](img/postgresql-homepage.png){fig-alt="PostgreSQL homepage" fig-align="center"}
+
+::: {.notes}
+
+Classic database server 
+
+Complete and powerful
+
+:::
+
+-----
+
+![](img/sqlite-homepage.png){fig-alt="SQLite homepage" fig-align="center"}
+
+::: {.notes}
+
+Lightweight, basic (but efficient) database server 
+
+:::
+
+-----
+
+            PostgreSQL   SQLite
+  --------- ------------ -------------
+            server       library
+  watchword powerful     lightweight
+  SQL       compliant    incomplete
+  Readers   many         many
+  Writers   many         one
+
+
+# The Mighty Rectangle
+
+![](img/spreadsheet.png){fig-alt="spreadsheet" fig-align="center"}
+
+::: {.notes}
+
+Ubiquitious, easy, and flawed 
+
+Power 1, Power 2, ...
+
+Power 4?
+
+Which col to search?
+
+:::
+
+
+## Relationships
+
+[[[cog
+import fileinsert
+fileinsert.insert('foreign-keys.sql')
+]]]
+
+[[[end]]]
+
+## Join
+
+
+[[[cog fileinsert.insert('join.sql')]]]
+[[[end]]]
+
+
+::: {.notes}
+
+Well now you've got a rectangle again.  But at least it isn't stored this way.
+
+:::
+
+## View
+
+[[[cog fileinsert.insert('view.sql')]]]
+[[[end]]]
+
+--------------
+
+[[[cog fileinsert.insert('use_view.sql')]]]
+[[[end]]]
+
+
+## Materialized view
+
+[[[cog fileinsert.insert('matview.sql')]]]
+[[[end]]]
+
+(not SQLite)
+
+## Many-to-many 
+
+[[[cog fileinsert.insert('many-to-many-problem.sql')]]]
+[[[end]]]
+
+::: {.notes}
+
+This might be best if not all 
+- inefficient
+- inelegant
+- potential discrepancy
+
+SELECT * FROM powers_mtm; 
+
+SELECT * FROM super_to_power;
+
+:::
+
+------
+
+[[[cog fileinsert.insert('many-to-many-query.sql')]]]
+[[[end]]]
+
+
+::: {.notes}
+
+This can also be wrapped in a view.
+
+:::
+
+# Other shapes
+
+## Documents
+
+    [{'issue': 1,
+    'venue': 'Air Force museum',
+    'sides': {'villains': {'objective': 'Steal B-52',
+        'success': False,
+        'participants': {'Orville Wrong': {'consequences': {'captured': False,
+        'injuries': ['black eye']}},
+        'Wilbur Wrong': {'consequences': {'captured': False}}}},
+    'heroes': {'participants': {'Captain Columbus': {'consequences': []},
+        'Cardinal Virtue': {'consequences': ['sprained wing',
+        'ruffled feathers']}}},
+    'property loss': ['B-52 damaged', 'SPAD VII stolen']}},
+    {'issue': 2,
+    'venue': 'Purple People Bridge',
+    'sides': {'heroes': {'objective': "learn villains' plans",
+        'success': True,
+        'participants': {'Ohio Gosaimasu': {'consequences': {'captured': True}}}},
+    'villains': {'objective': 'capture hero',
+        'success': True,
+        'participants': {'Nell Strongarm': {'consequences': []},
+        'Henry Fnord': {'consequences': []}}},
+    'property loss': ['Segway thrown into river']}}]
+
+::: {.notes}
+
+- Hard to model as related tables 
+- Tons of joins - awkward and slow
+
+:::
+
+## Store in PostgreSQL
+
+[doc-in-pg.sql](prep/doc-in-pg.sql)
+
+::: {.notes}
+
+Stuck a SQL string into a text field?
+
+:::
+
+
+## Query
+
+[[[cog fileinsert.insert('json-query.sql')]]]
+[[[end]]]
+
+jq-like [jsonpath: SQL/JSON](https://github.com/obartunov/sqljsondoc/blob/master/jsonpath.md)
+
+## Index
+
+[[[cog fileinsert.insert('json-index.sql')]]]
+[[[end]]]
+
+## Other document options
+
+## Document database 
+
+[[[cog fileinsert.insert('mongo-connect.sh')]]]
+[[[end]]]
+
+[[[cog fileinsert.insert('battles.js')]]]
+[[[end]]]
+
+::: {.notes}
+
+You like the MongoDB API, Mongo query-by-example 
+
+:::
+
+------
+
+![](img/ferretdb.png){fig-alt="FerretDB: document database hosted on PostgreSQL" fig-align="center"}
+
+::: {.notes}
+
+Surprise!
+
+:::
+
+------
+
+## FerretDB: hosted on PostgreSQL
+
+    $ sudo apt-get install ferretdb
+    $ ferretdb --postgresql-url=postgres://$PGUSER:$PGPASSWORD@localhost:$PGPORT/$PGDATABASE
+
+
+[all-in-one Docker image](https://github.com/ferretdb/FerretDB/pkgs/container/all-in-one)
+
+[install mongosh client](https://www.mongodb.com/docs/mongodb-shell/install/)
+
+
+## FerretDB on SQLite 
+
+![](img/ferretdb-on-sqlite.png){fig-alt="FerretDB on SQLite" fig-align="center"}
+
+## Foreign Data Wrapper
+
+![](img/mongo_fdw_gh.png){fig-alt="mongo_fdw GitHub page" fig-align="center"}
+
+-------
+
+
+## Graphs
+
+```{dot}
+digraph P {
+    layout=dot
+    "node 0" -> "node 2" [label = "edge"]
+    "node 0" -> "node 3" [label = "edge"]
+    "node 1" -> "node 4" [label = "edge"]
+    "node 1" -> "node 5" [label = "edge"]
+    "node 0" -> "node 4" [label = "edge"]
+    "node 3" -> "node 4" [label = "edge"]
+}
+```
+
+-------
+
+![](img/innovators.png){fig-alt="Innovators of Iniquity" fig-align="center"}
+
+------
+
+
+[[[cog fileinsert.insert('group_or_member.sql')]]]
+[[[end]]]
+
+::: {.notes}
+
+Models the nesting
+
+But each row can be a super, or not - awkward 
+
+:::
+
+------
+
+[[[cog fileinsert.insert('innovators-rel.sql')]]]
+[[[end]]]
+
+
+::: {.notes}
+
+What if it were nested more deeply?
+
+What if it were arbitrarily nested?
+
+:::
+
+## Recursive CTE 
+
+[Using PostgreSQL as a graph database](https://tech.ingrid.com/sql-as-graph-database/) by Krzysztof Dryś 
+
+
+## [Recursive CTE in SQLite](https://www.sqlite.org/lang_with.html)
+
+![](img/recursive-sqlite.png){fig-alt="Recursive CTE in SQLite" fig-align="center"}
+
+
+## [Apache AGE](https://age.apache.org/)
+
+Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
+
+
+## Define graph
+
+[age-setup.sql](prep/age-setup.sql)
+
+## Query
+
+[[[cog fileinsert.insert('membership-graph.sql')]]]
+[[[end]]]
+
+
+# AGE-Viewer
+
+    docker run --publish=3001:3001 joefagan/incubator-age-viewer:latest
+
+::: {.notes}
+
+LOAD THIS BEFORE 
+
+export PGPORT=5455
+database name justice 
+
+running in docker - must use ifconfig!
+
+:::
+
+## Query through viewer
+
+[[[cog fileinsert.insert('membership-graph.sql')]]]
+[[[end]]]
+
+
+-----
+
+[[[cog fileinsert.insert('friend-of-friend2.sql')]]]
+[[[end]]]
+
+
+-----
+
+[[[cog fileinsert.insert('enemy-of-enemy.sql')]]]
+[[[end]]]
+
+---
+
+![](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="center"}
+
+---
+
+![](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="center"}
+
+## SQLite?
+
+[simple-graph](https://github.com/dpapathanasiou/simple-graph)
+
+## neo4j_fdw 
+
+![](img/neo4j_fdw.png){fig-alt="neo4j_fdw" fig-align="center"}
+
+## So many FDWs 
+
+[So many FDWs](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
+
+# FerretDB on SQLite 
+
+![](img/ferretdb-on-sqlite.png){fig-alt="FerretDB on SQLite" fig-align="center"}
+
+## Review: non-relational PostgreSQL
+
+|                       | Document          | Graph         |
+|:----------------------|:------------------|:--------------|
+| native                | json, jsonb types | recursive CTE |
+| hosted                | FerretDB          | Apache AGE    |
+| foreign data wrappers | mongo_fdw         | neo4j_fdw     |
+
+## non-relational SQLite
+
+|                       | Document       | Graph         |
+|:----------------------|:---------------|:--------------|
+| native                | JSON functions | recursive CTE |
+| hosted                | FerretDB       | simple-graph  |
+| foreign data wrappers |                |               |
+
+## Go big 
+
+|              |one machine|distributed  |
+|--------------|-----------|-------------|
+|in memory     |SQLite     |Apache Ignite|
+|single file   |SQLite     |rqlite       |
+|server-managed|PostgreSQL |CockroachDB  |
+
+
+# Pandas / Jupyter
+
+
+
+::: {.notes}
+
+Reason the Mighty Rectangle prevails
+
+:::
+
+## Pandas and SQL 
+
+[pandas.ipynb](demo/pandas.ipynb)
+
+## Object-Relational Mappers
+
+[[[cog fileinsert.insert('orm-qry.py')]]]
+[[[end]]]
+
+## ORMs: the bad news 
+
+[[[cog fileinsert.insert('models.py')]]]
+[[[end]]]
+
+## Reducing ORM labor
+
+- Generate DDL from ORM definitions
+- Reflection (`autoload_with`, `.reflect`) - Core, not ORM
+- Dataclass integration
+
+## Dataclass integration
+
+[[[cog fileinsert.insert('orm-dataclass.py')]]]
+[[[end]]]
+
+## Query builders
+
+[[[cog fileinsert.insert('query-builder.py')]]]
+[[[end]]]
+
+::: {.notes}
+
+At the border between writing raw SQL and an ORM, consider a 
+query builder.
+
+SQL-based syntax (so, yes, another syntax to learn) - all the 
+same concepts and keywords
+
+SQL syntax is picky - this is more freeform and composable
+
+
+:::
+
+
+# Plain SQL 
+
+Ask what it can do for you
+
+
+## HugSQL / [PugSQL](https://pugsql.org/)
+
+[[[cog fileinsert.insert('use-pugsql.py')]]]
+[[[end]]]
+
+Also: HugSQL (Clojure), HugSQLx (Rust), hugsql.js
+
+## Migrations: [Agnostic](https://agnostic.readthedocs.io)
+
+    agnostic -t postgres -u $PGUSER -p $PGPASSWORD -d $PGDATABASE -p $PGPORT migrate
+
+
+::: {.notes}
+
+Track database structure changes 
+Associate them to commit in your VC history 
+
+Not running this one live!
+
+:::
+
+## Transformations: [dbt](https://www.getdbt.com/)
+
+![](img/dbt.png){fig-alt="dbt" fig-align="center"}
+
+## Rich feature set
+
+- Arrays
+- Inheritance 
+- Window functions
+- Custom types 
+- PL/everything stored procedures 
+
+::: {.notes}
+
+PostgreSQL only
+
+:::
+
+## SQL functions
+
+[[[cog fileinsert.insert('raw-locations.sql')]]]
+[[[end]]]
+
+----------
+
+[[[cog fileinsert.insert('raw-loc-to-array.sql')]]]
+[[[end]]]
+
+-------------
+
+[[[cog fileinsert.insert('raw-loc-to-rows.sql')]]]
+[[[end]]]
+
+## SIMILAR TO
+
+[[[cog fileinsert.insert('many-to-many-problem.sql')]]]
+[[[end]]]
+
+
+----------------
+
+[[[cog fileinsert.insert('similar-to.sql')]]]
+[[[end]]]
+
+... or POSIX regular expressions 
+
+::: {.notes}
+
+LIKE OR... LIKE OR
+
+Regexes, 
+
+But you can think of them as multiple-like 
+
+## DISTINCT ON
+
+
+[[[cog fileinsert.insert('distinct-on.sql')]]]
+[[[end]]]
+
+:::
+
+# SQLite?
+
+Yes:
+
+- ORMs
+- Pandas, jupysql
+- PugSQL, Agnostic
+
+No:
+
+- dbt
+- advanced SQL
+
+::: {.notes}
+
+No cute animal logo
+
+But let's sing its praises anyway 
+
+:::
+
+## Simplicity 
+
+- No server
+- Python Standard Library support 
+
+::: {.notes}
+
+beloved for quick projects, demos, single-user apps
+
+serverless: file format + libraries to access 
+
+:::
+
+## Smallness 
+
+## [SQLite for Application Files](https://www.sqlite.org/appfileformat.html)
+
+![](img/sqlite-app-file.png){fig-alt="Article titled: SQL as an Application File Format" fig-align="center"}
+
+::: {.notes}
+
+In fact, it's so simple that you can use it when
+you weren't even thinking about using a database at all - you were just looking for 
+a data storage file format.  Because it's an efficient and versatile format. 
+There's a good discussion of that in the SQLite docs.
+
+:::
+
+
+## Simple != Weak 
+
+```{dot}
+digraph P {
+    layout=dot
+    "Data source" -> "SQLite"
+    "SQLite" -> "reader 1"
+    "SQLite" -> "reader 2"
+    "SQLite" -> "reader 3"
+    "SQLite" -> "reader 4"
+    "SQLite" -> "reader 5"
+}
+```
+
+::: {.notes}
+
+Python "scripting" language?
+
+large amounts OK 
+
+lots of users / processes OK
+
+Publish data, updated occasionally
+
+lots of writers: not OK 
+
+:::
+
+## Baked data 
+
+Simon Willison: [The Baked Data architectural pattern](https://simonwillison.net/2021/Jul/28/baked-data/)
+
+![](img/baked-data.png){fig-alt="Baked Data article" fig-align="center"}
+
+::: {.notes}
+
+Simon Willison wrote this great article on cheaply and easily hosting an 
+application if it relies on infrequently-updated data.  Just put that data 
+in a single-file database like SQLite, and a cheap and basic real or virtual 
+server can handle the dynamic part.
+
+::: 
+
+## Datasette 
+
+[datasette data/supers.sqlite](http://localhost:8001/)
+
+![](img/datasette-map.png){fig-alt="Datasette page with map" fig-align="center"}
+
+::: {.notes}
+
+Explore, visualize tool 
+
+Plugins for leaflet, dashboards, 
+
+Simple as SQLite itself
+
+:::
+
+## Datasette-lite 
+
+[https://lite.datasette.io/?url=https://github.com
+    /catherinedevlin/talks/blob/master
+    /olf_2003/supers.sqlite](https://lite.datasette.io/?url=https://github.com/catherinedevlin/talks/blob/master/olf_2003/supers.sqlite)
+
+
+::: {.notes}
+
+blurring boundaries: PyIodide
+
+Simon Willison did this with Datasette!
+
+Why would I put this long ugly URL on my slide?
+
+Only code!
+
+I have never been this lazy in my life, and I love it!
+
+:::
+
+---
+
+![](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="left" height=250}
+![](img/captain-columbus.png){fig-alt="Captain Columbus" fig-align="center" height=250}
+![](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="right" height=250}
+
+
+https://github.com/catherinedevlin/talks
+
+@catherinedevlin@tech.lgbt

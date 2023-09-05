@@ -1,0 +1,46 @@
+- issue: 1
+  venue: Air Force museum
+  sides:
+    villains:
+      objective: Steal B-52
+      success: false
+      participants:
+        Orville Wrong:
+          consequences:
+            captured: false
+            injuries:
+              - black eye
+        Wilbur Wrong:
+          consequences:
+            captured: false
+    heroes:
+      participants:
+        Captain Columbus:
+          consequences: []
+        Cardinal Virtue:
+          consequences:
+            - sprained wing
+            - ruffled feathers
+    property loss:
+      - B-52 damaged
+      - SPAD VII stolen
+- issue: 2
+  venue: Purple People Bridge
+  sides:
+    heroes:
+      objective: "learn villains' plans"
+      success: true
+      participants:
+        Ohio Gosaimasu:
+          consequences:
+            captured: true 
+    villains:
+      objective: capture hero 
+      success: true
+      participants:
+        Nell Strongarm:
+          consequences: []
+        Henry Fnord:
+          consequences: 
+    property loss:
+      - Segway thrown into river 
