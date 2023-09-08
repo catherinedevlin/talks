@@ -8,9 +8,7 @@ format:
   revealjs:
     code-line-numbers: false
     code-copy: true
-    theme: sandstone
-    monofontoptions: 
-      - Scale=1.5
+    theme: [solarized, bigger-code.scss] 
 footer: "https://github.com/catherinedevlin/talks/"
 ---
 
