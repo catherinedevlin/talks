@@ -8,8 +8,14 @@ format:
   revealjs:
     code-line-numbers: false
     code-copy: true
+    theme: sandstone
+    monofontoptions: 
+      - Scale=1.5
 footer: "https://github.com/catherinedevlin/talks/"
 ---
+
+[[[cog import fileinsert ]]]
+[[[end]]]
 
 Tools used 
 
@@ -118,6 +124,7 @@ Lightweight, basic (but efficient) database server
   Readers   many         many
   Writers   many         one
 
+# Seating amnesty break
 
 # The Mighty Rectangle
 
@@ -138,11 +145,7 @@ Which col to search?
 
 ## Relationships
 
-[[[cog
-import fileinsert
-fileinsert.insert('foreign-keys.sql')
-]]]
-
+[[[cog fileinsert.insert('foreign-keys.sql')]]]
 [[[end]]]
 
 ## Join
@@ -183,14 +186,35 @@ Well now you've got a rectangle again.  But at least it isn't stored this way.
 
 ::: {.notes}
 
-This might be best if not all 
-- inefficient
-- inelegant
-- potential discrepancy
+Store powers more than once
 
-SELECT * FROM powers_mtm; 
+- storage 
+- discrepancy 
+- single power - all 
 
-SELECT * FROM super_to_power;
+:::
+
+---
+
+[[[cog fileinsert.insert('display_powers_mtm.sql')]]]
+[[[end]]]
+
+[[[cog fileinsert.insert('display_super_to_power.sql')]]]
+[[[end]]]
+
+```{dot}
+digraph P {
+    layout=dot
+    "supers" -> "super_to_power_mtm"
+    "powers_mtm" -> "super_to_power_mtm"
+}
+```
+
+::: {.notes}
+
+Relationship not to each other, but to a 
+
+join table, bridging table
 
 :::
 
@@ -207,6 +231,18 @@ This can also be wrapped in a view.
 :::
 
 # Other shapes
+
+![](img/thinker.jpg){fig-alt="The Thinker, sculpture at Cleveland Museum of Art" fig-align="center"}
+
+::: {.notes}
+
+Relational *can* model anything, but maybe not always ideal 
+
+Thinker sends us data about superhero battles
+
+JSON format
+
+::: 
 
 ## Documents
 
@@ -296,11 +332,6 @@ Surprise!
     $ ferretdb --postgresql-url=postgres://$PGUSER:$PGPASSWORD@localhost:$PGPORT/$PGDATABASE
 
 
-[all-in-one Docker image](https://github.com/ferretdb/FerretDB/pkgs/container/all-in-one)
-
-[install mongosh client](https://www.mongodb.com/docs/mongodb-shell/install/)
-
-
 ## FerretDB on SQLite 
 
 ![](img/ferretdb-on-sqlite.png){fig-alt="FerretDB on SQLite" fig-align="center"}
@@ -327,6 +358,18 @@ digraph P {
 ```
 
 -------
+
+![Henry Fnord](img/fnord.png){fig-alt="Henry Fnord" fig-align="center"}
+
+--------
+
+![Wrong Brothers, the Fiends of Flight](img/wrong-brothers.png){fig-alt="Wrong Brothers" fig-align="center"}
+
+--------
+
+![Nell Strongarm, Astro-Thug from Wapakoneta](img/nell-strongarm2.png){fig-alt="Nell Strongarm" fig-align="center"}
+
+--------
 
 ![](img/innovators.png){fig-alt="Innovators of Iniquity" fig-align="center"}
 
@@ -372,10 +415,14 @@ What if it were arbitrarily nested?
 
 Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
 
+![](img/apache-age.png){fig-alt="Apacheh AGE webpage" fig-align="center"}
 
 ## Define graph
 
-[age-setup.sql](prep/age-setup.sql)
+[[[cog fileinsert.insert('age-setup.sql')]]]
+[[[end]]]
+
+
 
 ## Query
 
@@ -384,8 +431,9 @@ Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
 
 
 # AGE-Viewer
+ podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
 
-    docker run --publish=3001:3001 joefagan/incubator-age-viewer:latest
+    podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
 
 ::: {.notes}
 
@@ -406,11 +454,15 @@ running in docker - must use ifconfig!
 
 -----
 
+## Easy recursive search
+
 [[[cog fileinsert.insert('friend-of-friend2.sql')]]]
 [[[end]]]
 
 
 -----
+
+## Enemy of my enemy 
 
 [[[cog fileinsert.insert('enemy-of-enemy.sql')]]]
 [[[end]]]
@@ -431,13 +483,9 @@ running in docker - must use ifconfig!
 
 ![](img/neo4j_fdw.png){fig-alt="neo4j_fdw" fig-align="center"}
 
-## So many FDWs 
+## [So many FDWs](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
 
-[So many FDWs](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
-
-# FerretDB on SQLite 
-
-![](img/ferretdb-on-sqlite.png){fig-alt="FerretDB on SQLite" fig-align="center"}
+![](img/fdws.png){fig-alt="Foreign Data Wrappers" fig-align="center"}
 
 ## Review: non-relational PostgreSQL
 
@@ -550,7 +598,6 @@ Not running this one live!
 
 ## Rich feature set
 
-- Arrays
 - Inheritance 
 - Window functions
 - Custom types 
@@ -563,6 +610,11 @@ PostgreSQL only
 :::
 
 ## SQL functions
+
+
+![](img/trilobite.png){fig-alt="The Trilobite, the Caped Cambrian" fig-align="center"}
+
+------------
 
 [[[cog fileinsert.insert('raw-locations.sql')]]]
 [[[end]]]

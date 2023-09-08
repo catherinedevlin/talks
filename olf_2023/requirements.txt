@@ -14,3 +14,4 @@ agnostic[postgres]
 agnostic[sqlite]
 datasette
 pypika
+pgcli

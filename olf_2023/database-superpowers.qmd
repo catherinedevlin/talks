@@ -8,8 +8,12 @@ format:
   revealjs:
     code-line-numbers: false
     code-copy: true
+    theme: sandstone
+    monofontoptions: 
+      - Scale=1.5
 footer: "https://github.com/catherinedevlin/talks/"
 ---
+
 
 Tools used 
 
@@ -118,6 +122,7 @@ Lightweight, basic (but efficient) database server
   Readers   many         many
   Writers   many         one
 
+# Seating amnesty break
 
 # The Mighty Rectangle
 
@@ -140,10 +145,6 @@ Which col to search?
 
 
 
-::: { .notes }
-foreign-keys.sql
-:::
-
 ```{sql}
 
 select * from powers;
@@ -153,15 +154,16 @@ select * from supers;
 
 ```
 
+::: { .notes }
+00-foreign-keys.sql
+:::
+
+
 
 ## Join
 
 
 
-
-::: { .notes }
-join.sql
-:::
 
 ```{sql}
 select s.name,
@@ -172,9 +174,9 @@ join powers p on (p.super_id = s.id)
 order by s.id;
 ```
 
+::: { .notes }
+01-join.sql
 
-
-::: {.notes}
 
 Well now you've got a rectangle again.  But at least it isn't stored this way.
 
@@ -183,10 +185,6 @@ Well now you've got a rectangle again.  But at least it isn't stored this way.
 ## View
 
 
-
-::: { .notes }
-view.sql
-:::
 
 ```{sql}
 CREATE OR REPLACE VIEW supers_w_powers AS
@@ -198,14 +196,15 @@ join powers p on (p.super_id = s.id)
 order by s.id;
 ```
 
+::: { .notes }
+02-view.sql
+:::
+
+
 
 --------------
 
 
-
-::: { .notes }
-use_view.sql
-:::
 
 ```{sql}
 SELECT * 
@@ -213,18 +212,19 @@ FROM   supers_w_powers
 WHERE  tagline IS NOT NULL;
 ```
 
+::: { .notes }
+03-use_view.sql
+:::
+
+
 
 
 ## Materialized view
 
 
 
-::: { .notes }
-matview.sql
-:::
-
 ```{sql}
-CREATE OR REPLACE MATERIALIZED VIEW supers_w_powers_mv AS
+CREATE MATERIALIZED VIEW supers_w_powers_mv AS
 SELECT * 
 FROM   supers_w_powers;
 
@@ -237,16 +237,17 @@ FROM   supers_w_powers_mv
 WHERE  name LIKE 'Captain%';
 ```
 
+::: { .notes }
+04-matview.sql
+:::
+
+
 
 (not SQLite)
 
 ## Many-to-many 
 
 
-
-::: { .notes }
-many-to-many-problem.sql
-:::
 
 ```{sql}
 SELECT name, power 
@@ -257,27 +258,65 @@ OR     power like '%flight%'
 ORDER BY power, name;
 ```
 
+::: { .notes }
+05-many-to-many-problem.sql
+
+
+Store powers more than once
+
+- storage 
+- discrepancy 
+- single power - all 
+
+:::
+
+---
+
+
+
+```{sql}
+SELECT * FROM powers_mtm; 
+
+```
+
+::: { .notes }
+06-display_powers_mtm.sql
+:::
+
+
+
+
+
+```{sql}
+SELECT * FROM super_to_power;
+
+```
+
+::: { .notes }
+07-display_super_to_power.sql
+:::
+
+
+
+```{dot}
+digraph P {
+    layout=dot
+    "supers" -> "super_to_power_mtm"
+    "powers_mtm" -> "super_to_power_mtm"
+}
+```
 
 ::: {.notes}
 
-This might be best if not all 
-- inefficient
-- inelegant
-- potential discrepancy
+Relationship not to each other, but to a 
 
-SELECT * FROM powers_mtm; 
-
-SELECT * FROM super_to_power;
+join table, bridging table
 
 :::
 
 ------
 
 
-
-::: { .notes }
-many-to-many-query.sql
-:::
 
 ```{sql}
 
@@ -289,15 +328,27 @@ JOIN   powers_mtm p ON (sp.power_id = p.id)
 ORDER BY s.id, p.id;
 ```
 
+::: { .notes }
+08-many-to-many-query.sql
 
-
-::: {.notes}
 
 This can also be wrapped in a view.
 
 :::
 
 # Other shapes
+
+![](img/thinker.jpg){fig-alt="The Thinker, sculpture at Cleveland Museum of Art" fig-align="center"}
+
+::: {.notes}
+
+Relational *can* model anything, but maybe not always ideal 
+
+Thinker sends us data about superhero battles
+
+JSON format
+
+::: 
 
 ## Documents
 
@@ -345,10 +396,6 @@ Stuck a SQL string into a text field?
 
 
 
-::: { .notes }
-json-query.sql
-:::
-
 ```{sql}
 select battle->'venue' AS venue,
        battle->'sides'->'villains'->'participants' AS villains,
@@ -358,6 +405,11 @@ where  battle->'sides'->'villains'->>'success' = 'false';
 
 ```
 
+::: { .notes }
+09-json-query.sql
+:::
+
+
 
 jq-like [jsonpath: SQL/JSON](https://github.com/obartunov/sqljsondoc/blob/master/jsonpath.md)
 
@@ -365,13 +417,14 @@ jq-like [jsonpath: SQL/JSON](https://github.com/obartunov/sqljsondoc/blob/master
 
 
 
-::: { .notes }
-json-index.sql
-:::
-
 ```{sql}
 CREATE INDEX ON battles ((battle->>'venue'));
 ```
+
+::: { .notes }
+10-json-index.sql
+:::
+
 
 
 ## Other document options
@@ -380,28 +433,26 @@ CREATE INDEX ON battles ((battle->>'venue'));
 
 
 
-::: { .notes }
-mongo-connect.sh
-:::
-
 ```{sql}
 mongosh mongodb://$PGUSER:$PGPASSWORD@127.0.0.1/ferretdb?authMechanism=PLAIN
 
 ```
 
-
-
-
 ::: { .notes }
-battles.js
+11-mongo-connect.sh
 :::
+
+
+
+
 
 ```{sql}
 db.battles.find({venue: 'Air Force museum'})
 ```
 
+::: { .notes }
+12-battles.js
 
-::: {.notes}
 
 You like the MongoDB API, Mongo query-by-example 
 
@@ -423,11 +474,6 @@ Surprise!
 
     $ sudo apt-get install ferretdb
     $ ferretdb --postgresql-url=postgres://$PGUSER:$PGPASSWORD@localhost:$PGPORT/$PGDATABASE
-
-
-[all-in-one Docker image](https://github.com/ferretdb/FerretDB/pkgs/container/all-in-one)
-
-[install mongosh client](https://www.mongodb.com/docs/mongodb-shell/install/)
 
 
 ## FerretDB on SQLite 
@@ -457,6 +503,18 @@ digraph P {
 
 -------
 
+![Henry Fnord](img/fnord.png){fig-alt="Henry Fnord" fig-align="center"}
+
+--------
+
+![Wrong Brothers, the Fiends of Flight](img/wrong-brothers.png){fig-alt="Wrong Brothers" fig-align="center"}
+
+--------
+
+![Nell Strongarm, Astro-Thug from Wapakoneta](img/nell-strongarm2.png){fig-alt="Nell Strongarm" fig-align="center"}
+
+--------
+
 ![](img/innovators.png){fig-alt="Innovators of Iniquity" fig-align="center"}
 
 ------
@@ -464,18 +522,15 @@ digraph P {
 
 
 
-::: { .notes }
-group_or_member.sql
-:::
-
 ```{sql}
 
 SELECT * FROM group_or_member;
 
 ```
 
+::: { .notes }
+13-group_or_member.sql
 
-::: {.notes}
 
 Models the nesting
 
@@ -486,10 +541,6 @@ But each row can be a super, or not - awkward
 ------
 
 
-
-::: { .notes }
-innovators-rel.sql
-:::
 
 ```{sql}
 SELECT s.*
@@ -506,9 +557,9 @@ WHERE  i.name = 'Innovators of Iniquity';
 
 ```
 
+::: { .notes }
+14-innovators-rel.sql
 
-
-::: {.notes}
 
 What if it were nested more deeply?
 
@@ -530,18 +581,588 @@ What if it were arbitrarily nested?
 
 Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
 
+![](img/apache-age.png){fig-alt="Apacheh AGE webpage" fig-align="center"}
 
 ## Define graph
 
-[age-setup.sql](prep/age-setup.sql)
+
+
+```{sql}
+load 'age';
+
+SET search_path = ag_catalog, "$user", public;
+
+select drop_graph('knowledge', true);
+
+select create_graph('knowledge');
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "The Trilobite", align: NULL, 
+          tagline: "Caped Cambrian", based_in: "Silvania" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Putin Bae", align: "villain", 
+          tagline: "Rasslin’ Russophile", based_in: "Mansfield" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Cardinal Virtue", align: "hero", 
+          tagline: "Redbird of Righteousness", based_in: "Cincinnati" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Orville Wrong", align: "villain", 
+          tagline: "Fiend of Flight", based_in: "Dayton" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Wilbur Wrong", align: "villain", 
+          tagline: "Fiend of Flight", based_in: "Dayton" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Henry Fnord", align: "villain", 
+          tagline: "Mass-Producer of Mayhem", based_in: "Dearborn" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Nell Strongarm", align: "villain", 
+          tagline: "Astro-Thug", based_in: "Wapokoneta" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "The Thinker", align: "hero", 
+          tagline: "None", based_in: "Cleveland" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Blue Jacket", align: "hero", 
+          tagline: "None", based_in: "Chillicothe" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Captain Columbus", align: "hero", 
+          tagline: "Protector of Ohio", based_in: "Columbus" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Buckeye Bullet", align: "hero", 
+          tagline: "None", based_in: "Cleveland" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Annie Oakley", align: "hero", 
+          tagline: "Little Miss Sure Shot", based_in: "Greenville" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "The Stealer", align: "villain", 
+          tagline: "None", based_in: "Pittsburgh" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Ohio Gosaimasu", align: "hero", 
+          tagline: "Sandusky Samurai", based_in: "Sandusky" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "The Hawk King", align: "hero", 
+          tagline: "None", based_in: "Hocking Hills" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Airship Alice", align: "villain", 
+          tagline: "None", based_in: "Akron" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Motown Menace", align: "villain", 
+          tagline: "None", based_in: "Detroit" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Captain Cuyahoga", align: "villain", 
+          tagline: "Fire and Water Do Mix", based_in: "Cleveland" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Indian Jane", align: "hero", 
+          tagline: "Nazi-punching archaeologist", based_in: "Bloomington" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Defiance Dogman", align: "villain", 
+          tagline: "None", based_in: "Defiance" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Loveland Frogman", align: NULL, 
+          tagline: "None", based_in: "Loveland" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Marvelous Mudhen", align: "hero", 
+          tagline: "None", based_in: "Toledo" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (s:Super { name: "Mad Miller", align: NULL, 
+          tagline: "None", based_in: "Milan" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Orville Wrong" })
+  MATCH (s2:Super { name: "Airship Alice" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Cardinal Virtue" })
+  MATCH (s2:Super { name: "Airship Alice" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "The Hawk King" })
+  MATCH (s2:Super { name: "Buckeye Bullet" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Ohio Gosaimasu" })
+  MATCH (s2:Super { name: "Buckeye Bullet" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Ohio Gosaimasu" })
+  MATCH (s2:Super { name: "Cardinal Virtue" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus" })
+  MATCH (s2:Super { name: "Cardinal Virtue" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Annie Oakley" })
+  MATCH (s2:Super { name: "Cardinal Virtue" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "The Thinker" })
+  MATCH (s2:Super { name: "Defiance Dogman" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus" })
+  MATCH (s2:Super { name: "Defiance Dogman" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Putin Bae" })
+  MATCH (s2:Super { name: "Defiance Dogman" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Cardinal Virtue" })
+  MATCH (s2:Super { name: "Henry Fnord" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus" })
+  MATCH (s2:Super { name: "Henry Fnord" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Annie Oakley" })
+  MATCH (s2:Super { name: "Henry Fnord" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Ohio Gosaimasu" })
+  MATCH (s2:Super { name: "Henry Fnord" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Cardinal Virtue" })
+  MATCH (s2:Super { name: "Henry Fnord" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Buckeye Bullet" })
+  MATCH (s2:Super { name: "Motown Menace" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "The Hawk King" })
+  MATCH (s2:Super { name: "Motown Menace" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Cardinal Virtue" })
+  MATCH (s2:Super { name: "Nell Strongarm" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Annie Oakley" })
+  MATCH (s2:Super { name: "Nell Strongarm" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Henry Fnord" })
+  MATCH (s2:Super { name: "Nell Strongarm" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Putin Bae" })
+  MATCH (s2:Super { name: "Ohio Gosaimasu" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "The Hawk King" })
+  MATCH (s2:Super { name: "Ohio Gosaimasu" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Defiance Dogman" })
+  MATCH (s2:Super { name: "Ohio Gosaimasu" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Cardinal Virtue" })
+  MATCH (s2:Super { name: "Orville Wrong" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Cardinal Virtue" })
+  MATCH (s2:Super { name: "Putin Bae" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus" })
+  MATCH (s2:Super { name: "Putin Bae" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Defiance Dogman" })
+  MATCH (s2:Super { name: "The Hawk King" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Putin Bae" })
+  MATCH (s2:Super { name: "The Hawk King" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Ohio Gosaimasu" })
+  MATCH (s2:Super { name: "The Stealer" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Buckeye Bullet" })
+  MATCH (s2:Super { name: "The Stealer" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus" })
+  MATCH (s2:Super { name: "The Thinker" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Captain Columbus" })
+  MATCH (s2:Super { name: "The Trilobite" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Orville Wrong" })
+  MATCH (s2:Super { name: "Wilbur Wrong" })
+  CREATE (s1)-[:ALLIED_WITH]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (s1:Super { name: "Cardinal Virtue" })
+  MATCH (s2:Super { name: "Wilbur Wrong" })
+  CREATE (s1)-[:FOUGHT]->(s2)
+ $$) AS (result1 agtype);
+
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (g:Group { name: "Innovators of Iniquity"  })
+ $$) AS (result1 agtype);
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  CREATE (g:Group { name: "Wrong Brothers", 
+          tagline: "Fiends of Flight", based_in: "Dayton" } )
+ $$) AS (result1 agtype);
+
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Wrong Brothers" })
+  MATCH (s:Super { name: "Wilbur Wrong" })
+  CREATE (g)-[:INCLUDES]->(s)
+ $$) AS (result1 agtype);
+
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Wrong Brothers" })
+  MATCH (s:Super { name: "Orville Wrong" })
+  CREATE (g)-[:INCLUDES]->(s)
+ $$) AS (result1 agtype);
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Innovators of Iniquity" })
+  MATCH (s:Super { name: "Henry Fnord" })
+  CREATE (g)-[:INCLUDES]->(s)
+ $$) AS (result1 agtype);
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Innovators of Iniquity" })
+  MATCH (s:Super { name: "Nell Strongarm" })
+  CREATE (g)-[:INCLUDES]->(s)
+ $$) AS (result1 agtype);
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Innovators of Iniquity" })
+  MATCH (g2:Group { name: "Wrong Brothers" })
+  CREATE (g)-[:INCLUDES]->(g2)
+ $$) AS (result1 agtype);
+
+
+SET search_path = "$user", public;
+
+
+
+
+
+
+
+
+
+
+```
+
+::: { .notes }
+15-age-setup.sql
+:::
+
+
+
+
 
 ## Query
 
 
-
-::: { .notes }
-membership-graph.sql
-:::
 
 ```{sql}
 LOAD 'age';
@@ -557,11 +1178,17 @@ cypher('knowledge', $$
 
 ```
 
+::: { .notes }
+16-membership-graph.sql
+:::
+
+
 
 
 # AGE-Viewer
+ podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
 
-    docker run --publish=3001:3001 joefagan/incubator-age-viewer:latest
+    podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
 
 ::: {.notes}
 
@@ -578,10 +1205,6 @@ running in docker - must use ifconfig!
 
 
 
-::: { .notes }
-membership-graph.sql
-:::
-
 ```{sql}
 LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
@@ -596,15 +1219,18 @@ cypher('knowledge', $$
 
 ```
 
+::: { .notes }
+17-membership-graph.sql
+:::
+
+
 
 
 -----
 
+## Easy recursive search
 
 
-::: { .notes }
-friend-of-friend2.sql
-:::
 
 ```{sql}
 LOAD 'age';
@@ -620,15 +1246,18 @@ cypher('knowledge', $$
 
 ```
 
+::: { .notes }
+18-friend-of-friend2.sql
+:::
+
+
 
 
 -----
 
+## Enemy of my enemy 
 
 
-::: { .notes }
-enemy-of-enemy.sql
-:::
 
 ```{sql}
 LOAD 'age';
@@ -643,6 +1272,11 @@ cypher('knowledge', $$
 
 
 ```
+
+::: { .notes }
+19-enemy-of-enemy.sql
+:::
+
 
 
 ---
@@ -661,13 +1295,9 @@ cypher('knowledge', $$
 
 ![](img/neo4j_fdw.png){fig-alt="neo4j_fdw" fig-align="center"}
 
-## So many FDWs 
+## [So many FDWs](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
 
-[So many FDWs](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
-
-# FerretDB on SQLite 
-
-![](img/ferretdb-on-sqlite.png){fig-alt="FerretDB on SQLite" fig-align="center"}
+![](img/fdws.png){fig-alt="Foreign Data Wrappers" fig-align="center"}
 
 ## Review: non-relational PostgreSQL
 
@@ -712,10 +1342,6 @@ Reason the Mighty Rectangle prevails
 
 
 
-::: { .notes }
-orm-qry.py
-:::
-
 ```{sql}
 from models import Super, Power  
 import sqlalchemy as sa 
@@ -729,14 +1355,15 @@ with sa.orm.Session(engine) as session:
         print(f'{super.name} has {power_list}')
 ```
 
+::: { .notes }
+20-orm-qry.py
+:::
+
+
 
 ## ORMs: the bad news 
 
 
-
-::: { .notes }
-models.py
-:::
 
 ```{sql}
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, MappedAsDataclass
@@ -772,6 +1399,11 @@ class Power(Base):
 
 ```
 
+::: { .notes }
+21-models.py
+:::
+
+
 
 ## Reducing ORM labor
 
@@ -782,10 +1414,6 @@ class Power(Base):
 ## Dataclass integration
 
 
-
-::: { .notes }
-orm-dataclass.py
-:::
 
 ```{sql}
 from models import Super, Power  
@@ -800,14 +1428,15 @@ with sa.orm.Session(engine) as session:
     pprint(session.execute(stmt).first()[0])
 ```
 
+::: { .notes }
+22-orm-dataclass.py
+:::
+
+
 
 ## Query builders
 
 
-
-::: { .notes }
-query-builder.py
-:::
 
 ```{sql}
 import pypika as pk
@@ -825,8 +1454,9 @@ print(q)
 
 ```
 
+::: { .notes }
+23-query-builder.py
 
-::: {.notes}
 
 At the border between writing raw SQL and an ORM, consider a 
 query builder.
@@ -849,10 +1479,6 @@ Ask what it can do for you
 
 
 
-::: { .notes }
-use-pugsql.py
-:::
-
 ```{sql}
 import pugsql
 
@@ -862,6 +1488,11 @@ for row in queries.supers_by_power(power='%light'):
     print(row)
 
 ```
+
+::: { .notes }
+24-use-pugsql.py
+:::
+
 
 
 Also: HugSQL (Clojure), HugSQLx (Rust), hugsql.js
@@ -886,7 +1517,6 @@ Not running this one live!
 
 ## Rich feature set
 
-- Arrays
 - Inheritance 
 - Window functions
 - Custom types 
@@ -901,10 +1531,11 @@ PostgreSQL only
 ## SQL functions
 
 
+![](img/trilobite.png){fig-alt="The Trilobite, the Caped Cambrian" fig-align="center"}
 
-::: { .notes }
-raw-locations.sql
-:::
+------------
+
+
 
 ```{sql}
 SELECT * FROM raw_locations;
@@ -912,14 +1543,15 @@ SELECT * FROM raw_locations;
 
 ```
 
+::: { .notes }
+25-raw-locations.sql
+:::
+
+
 
 ----------
 
 
-
-::: { .notes }
-raw-loc-to-array.sql
-:::
 
 ```{sql}
 
@@ -929,14 +1561,15 @@ FROM   raw_locations;
 
 ```
 
+::: { .notes }
+26-raw-loc-to-array.sql
+:::
+
+
 
 -------------
 
 
-
-::: { .notes }
-raw-loc-to-rows.sql
-:::
 
 ```{sql}
 
@@ -946,14 +1579,15 @@ FROM   raw_locations;
 
 ```
 
+::: { .notes }
+27-raw-loc-to-rows.sql
+:::
+
+
 
 ## SIMILAR TO
 
 
-
-::: { .notes }
-many-to-many-problem.sql
-:::
 
 ```{sql}
 SELECT name, power 
@@ -964,15 +1598,16 @@ OR     power like '%flight%'
 ORDER BY power, name;
 ```
 
+::: { .notes }
+28-many-to-many-problem.sql
+:::
+
+
 
 
 ----------------
 
 
-
-::: { .notes }
-similar-to.sql
-:::
 
 ```{sql}
 
@@ -981,6 +1616,11 @@ FROM   supers_w_powers
 WHERE  power similar to '%(speed|strength|flight)%'
 ORDER BY power, name;
 ```
+
+::: { .notes }
+29-similar-to.sql
+:::
+
 
 
 ... or POSIX regular expressions 
@@ -998,14 +1638,15 @@ But you can think of them as multiple-like
 
 
 
-::: { .notes }
-distinct-on.sql
-:::
-
 ```{sql}
 select distinct on (based_in) name, based_in from supers order by based_in, name;
 
 ```
+
+::: { .notes }
+30-distinct-on.sql
+:::
+
 
 
 :::

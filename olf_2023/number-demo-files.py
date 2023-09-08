@@ -7,7 +7,6 @@ old_demos = Path('demo')
 new_demos = Path('ndemo')
 new_demos.mkdir(exist_ok=True)
 
-
 def main():
     final = []
     filecount = 0
@@ -15,13 +14,14 @@ def main():
     for line in raw.splitlines():
         if match := pattern.search(line):
             fname = match.group(1)
-            new_fname = f"{filecount:03}-{match.group(1)}"
+            new_fname = f"{filecount:02}-{match.group(1)}"
             filecount += 1
             line = line.replace(fname, new_fname)
             # line = pattern.sub(new_fname, line)
             shutil.copyfile(old_demos / fname, new_demos / new_fname)
         final.append(line)
-    raw = Path('database-superpowers.precog.1.qmd').write_text('\n'.join(final))
+    text = '\n'.join(final)
+    raw = Path('database-superpowers.precog.1.qmd').write_text(text)
 
 
     

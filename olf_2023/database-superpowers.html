@@ -547,30 +547,14 @@ Catherine Devlin
 </section>
 <section id="relationships" class="slide level2">
 <h2>Relationships</h2>
-<aside class="notes">
-<p>foreign-keys.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>
 select * from powers;
 
 select * from supers;
 
 </code></pre>
-</section>
-<section id="join" class="slide level2">
-<h2>Join</h2>
 <aside class="notes">
-<p>join.sql</p>
+<p>00-foreign-keys.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -582,6 +566,9 @@ select * from supers;
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="join" class="slide level2">
+<h2>Join</h2>
 <pre class="{sql}"><code>select s.name,
        s.tagline,
        p.name AS power
@@ -589,6 +576,7 @@ from supers s
 join powers p on (p.super_id = s.id)
 order by s.id;</code></pre>
 <aside class="notes">
+<p>01-join.sql</p>
 <p>Well now you’ve got a rectangle again. But at least it isn’t stored this way.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -604,19 +592,6 @@ order by s.id;</code></pre>
 </section>
 <section id="view" class="slide level2">
 <h2>View</h2>
-<aside class="notes">
-<p>view.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>CREATE OR REPLACE VIEW supers_w_powers AS
 select s.name,
        s.tagline,
@@ -624,30 +599,27 @@ select s.name,
 from supers s
 join powers p on (p.super_id = s.id)
 order by s.id;</code></pre>
+<aside class="notes">
+<p>02-view.sql</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
-<aside class="notes">
-<p>use_view.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>SELECT * 
 FROM   supers_w_powers
 WHERE  tagline IS NOT NULL;</code></pre>
-</section>
-<section id="materialized-view" class="slide level2">
-<h2>Materialized view</h2>
 <aside class="notes">
-<p>matview.sql</p>
+<p>03-use_view.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -659,7 +631,10 @@ WHERE  tagline IS NOT NULL;</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<pre class="{sql}"><code>CREATE OR REPLACE MATERIALIZED VIEW supers_w_powers_mv AS
+</section>
+<section id="materialized-view" class="slide level2">
+<h2>Materialized view</h2>
+<pre class="{sql}"><code>CREATE MATERIALIZED VIEW supers_w_powers_mv AS
 SELECT * 
 FROM   supers_w_powers;
 
@@ -670,12 +645,8 @@ CREATE INDEX ON supers_w_powers_mv (name);
 SELECT * 
 FROM   supers_w_powers_mv
 WHERE  name LIKE 'Captain%';</code></pre>
-<p>(not SQLite)</p>
-</section>
-<section id="many-to-many" class="slide level2">
-<h2>Many-to-many</h2>
 <aside class="notes">
-<p>many-to-many-problem.sql</p>
+<p>04-matview.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -687,6 +658,10 @@ WHERE  name LIKE 'Captain%';</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<p>(not SQLite)</p>
+</section>
+<section id="many-to-many" class="slide level2">
+<h2>Many-to-many</h2>
 <pre class="{sql}"><code>SELECT name, power 
 FROM   supers_w_powers
 WHERE  power like '%speed%'
@@ -694,9 +669,13 @@ OR     power like '%strength%'
 OR     power like '%flight%'
 ORDER BY power, name;</code></pre>
 <aside class="notes">
-<p>This might be best if not all - inefficient - inelegant - potential discrepancy</p>
-<p>SELECT * FROM powers_mtm;</p>
-<p>SELECT * FROM super_to_power;</p>
+<p>05-many-to-many-problem.sql</p>
+<p>Store powers more than once</p>
+<ul>
+<li>storage</li>
+<li>discrepancy</li>
+<li>single power - all</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -711,8 +690,10 @@ ORDER BY power, name;</code></pre>
 </section>
 <section class="slide level2">
 
+<pre class="{sql}"><code>SELECT * FROM powers_mtm; 
+</code></pre>
 <aside class="notes">
-<p>many-to-many-query.sql</p>
+<p>06-display_powers_mtm.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -724,6 +705,73 @@ ORDER BY power, name;</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<pre class="{sql}"><code>SELECT * FROM super_to_power;
+</code></pre>
+<aside class="notes">
+<p>07-display_super_to_power.sql</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 223.25 116.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>
+P
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 219.25,-112 219.25,4 -4,4"></polygon> <!-- supers --> <g id="node1" class="node">
+<title>
+supers
+</title>
+<ellipse fill="none" stroke="black" cx="38.79" cy="-90" rx="35.92" ry="18"></ellipse> <text text-anchor="middle" x="38.79" y="-85.8" font-family="Times,serif" font-size="14.00">supers</text> </g> <!-- super_to_power_mtm --> <g id="node2" class="node">
+<title>
+super_to_power_mtm
+</title>
+<ellipse fill="none" stroke="black" cx="95.79" cy="-18" rx="95.58" ry="18"></ellipse> <text text-anchor="middle" x="95.79" y="-13.8" font-family="Times,serif" font-size="14.00">super_to_power_mtm</text> </g> <!-- supers&#45;&gt;super_to_power_mtm --> <g id="edge1" class="edge">
+<title>
+supers-&gt;super_to_power_mtm
+</title>
+<path fill="none" stroke="black" d="M51.72,-73.12C58.7,-64.54 67.48,-53.77 75.36,-44.09"></path> <polygon fill="black" stroke="black" points="78.11,-46.26 81.71,-36.29 72.68,-41.84 78.11,-46.26"></polygon> </g> <!-- powers_mtm --> <g id="node3" class="node">
+<title>
+powers_mtm
+</title>
+<ellipse fill="none" stroke="black" cx="153.79" cy="-90" rx="61.42" ry="18"></ellipse> <text text-anchor="middle" x="153.79" y="-85.8" font-family="Times,serif" font-size="14.00">powers_mtm</text> </g> <!-- powers_mtm&#45;&gt;super_to_power_mtm --> <g id="edge2" class="edge">
+<title>
+powers_mtm-&gt;super_to_power_mtm
+</title>
+<path fill="none" stroke="black" d="M140.04,-72.41C133,-63.91 124.27,-53.37 116.43,-43.91"></path> <polygon fill="black" stroke="black" points="118.91,-41.42 109.84,-35.96 113.52,-45.89 118.91,-41.42"></polygon> </g> </g>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Relationship not to each other, but to a</p>
+<p>join table, bridging table</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
 <pre class="{sql}"><code>
 SELECT s.id, s.name, s.tagline, 
        p.name 
@@ -732,6 +780,7 @@ JOIN   super_to_power sp ON (sp.super_id = s.id)
 JOIN   powers_mtm p ON (sp.power_id = p.id)
 ORDER BY s.id, p.id;</code></pre>
 <aside class="notes">
+<p>08-many-to-many-query.sql</p>
 <p>This can also be wrapped in a view.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -749,6 +798,21 @@ ORDER BY s.id, p.id;</code></pre>
 <section id="other-shapes" class="title-slide slide level1 center">
 <h1>Other shapes</h1>
 
+<img data-src="img/thinker.jpg" alt="The Thinker, sculpture at Cleveland Museum of Art" class="r-stretch quarto-figure-center"><aside class="notes">
+<p>Relational <em>can</em> model anything, but maybe not always ideal</p>
+<p>Thinker sends us data about superhero battles</p>
+<p>JSON format</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="documents" class="slide level2">
 <h2>Documents</h2>
@@ -809,31 +873,14 @@ ORDER BY s.id, p.id;</code></pre>
 </section>
 <section id="query" class="slide level2">
 <h2>Query</h2>
-<aside class="notes">
-<p>json-query.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>select battle-&gt;'venue' AS venue,
        battle-&gt;'sides'-&gt;'villains'-&gt;'participants' AS villains,
        battle-&gt;'property loss'
 from   battles
 where  battle-&gt;'sides'-&gt;'villains'-&gt;&gt;'success' = 'false';
 </code></pre>
-<p>jq-like <a href="https://github.com/obartunov/sqljsondoc/blob/master/jsonpath.md">jsonpath: SQL/JSON</a></p>
-</section>
-<section id="index" class="slide level2">
-<h2>Index</h2>
 <aside class="notes">
-<p>json-index.sql</p>
+<p>09-json-query.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -845,30 +892,34 @@ where  battle-&gt;'sides'-&gt;'villains'-&gt;&gt;'success' = 'false';
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<p>jq-like <a href="https://github.com/obartunov/sqljsondoc/blob/master/jsonpath.md">jsonpath: SQL/JSON</a></p>
+</section>
+<section id="index" class="slide level2">
+<h2>Index</h2>
 <pre class="{sql}"><code>CREATE INDEX ON battles ((battle-&gt;&gt;'venue'));</code></pre>
+<aside class="notes">
+<p>10-json-index.sql</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="other-document-options" class="slide level2">
 <h2>Other document options</h2>
 </section>
 <section id="document-database" class="slide level2">
 <h2>Document database</h2>
-<aside class="notes">
-<p>mongo-connect.sh</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>mongosh mongodb://$PGUSER:$PGPASSWORD@127.0.0.1/ferretdb?authMechanism=PLAIN
 </code></pre>
 <aside class="notes">
-<p>battles.js</p>
+<p>11-mongo-connect.sh</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -882,6 +933,7 @@ where  battle-&gt;'sides'-&gt;'villains'-&gt;&gt;'success' = 'false';
       }</style></aside>
 <pre class="{sql}"><code>db.battles.find({venue: 'Air Force museum'})</code></pre>
 <aside class="notes">
+<p>12-battles.js</p>
 <p>You like the MongoDB API, Mongo query-by-example</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -996,26 +1048,26 @@ node 1-&gt;node 5
 <section class="slide level2">
 
 
+<img data-src="img/fnord.png" alt="Henry Fnord" class="r-stretch quarto-figure-center"></section>
+<section class="slide level2">
+
+
+<img data-src="img/wrong-brothers.png" alt="Wrong Brothers" class="r-stretch quarto-figure-center"></section>
+<section class="slide level2">
+
+
+<img data-src="img/nell-strongarm2.png" alt="Nell Strongarm" class="r-stretch quarto-figure-center"></section>
+<section class="slide level2">
+
+
 <img data-src="img/innovators.png" alt="Innovators of Iniquity" class="r-stretch quarto-figure-center"></section>
 <section class="slide level2">
 
-<aside class="notes">
-<p>group_or_member.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>
 SELECT * FROM group_or_member;
 </code></pre>
 <aside class="notes">
+<p>13-group_or_member.sql</p>
 <p>Models the nesting</p>
 <p>But each row can be a super, or not - awkward</p>
 <style type="text/css">
@@ -1032,19 +1084,6 @@ SELECT * FROM group_or_member;
 </section>
 <section class="slide level2">
 
-<aside class="notes">
-<p>innovators-rel.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>SELECT s.*
 FROM   group_or_member i
 JOIN   group_or_member i_mem
@@ -1058,6 +1097,7 @@ WHERE  i.name = 'Innovators of Iniquity';
 
 </code></pre>
 <aside class="notes">
+<p>14-innovators-rel.sql</p>
 <p>What if it were nested more deeply?</p>
 <p>What if it were arbitrarily nested?</p>
 <style type="text/css">
@@ -1090,19 +1130,6 @@ WHERE  i.name = 'Innovators of Iniquity';
 </section>
 <section id="query-1" class="slide level2">
 <h2>Query</h2>
-<aside class="notes">
-<p>membership-graph.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
 
@@ -1114,6 +1141,19 @@ cypher('knowledge', $$
   RETURN g, i, e
  $$) AS (g agtype, i agtype, e agtype);
 </code></pre>
+<aside class="notes">
+<p>15-membership-graph.sql</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="age-viewer" class="title-slide slide level1 center">
@@ -1137,19 +1177,6 @@ cypher('knowledge', $$
 </section>
 <section id="query-through-viewer" class="slide level2">
 <h2>Query through viewer</h2>
-<aside class="notes">
-<p>membership-graph.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
 
@@ -1161,11 +1188,8 @@ cypher('knowledge', $$
   RETURN g, i, e
  $$) AS (g agtype, i agtype, e agtype);
 </code></pre>
-</section>
-<section class="slide level2">
-
 <aside class="notes">
-<p>friend-of-friend2.sql</p>
+<p>16-membership-graph.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1177,6 +1201,9 @@ cypher('knowledge', $$
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level2">
+
 <pre class="{sql}"><code>LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
 
@@ -1188,11 +1215,8 @@ cypher('knowledge', $$
   RETURN s1, a, s2 
  $$) AS (result1 agtype, a agtype, s2 agtype);
 </code></pre>
-</section>
-<section class="slide level2">
-
 <aside class="notes">
-<p>enemy-of-enemy.sql</p>
+<p>17-friend-of-friend2.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1204,6 +1228,9 @@ cypher('knowledge', $$
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level2">
+
 <pre class="{sql}"><code>LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
 
@@ -1215,6 +1242,19 @@ cypher('knowledge', $$
  $$) AS (s1 agtype, f1 agtype, v agtype, f2 agtype, s2 agtype);
 
 </code></pre>
+<aside class="notes">
+<p>18-enemy-of-enemy.sql</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -1235,12 +1275,7 @@ cypher('knowledge', $$
 <section id="so-many-fdws" class="slide level2">
 <h2>So many FDWs</h2>
 <p><a href="https://wiki.postgresql.org/wiki/Foreign_data_wrappers">So many FDWs</a></p>
-</section></section>
-<section>
-<section id="ferretdb-on-sqlite-1" class="title-slide slide level1 center">
-<h1>FerretDB on SQLite</h1>
-
-<img data-src="img/ferretdb-on-sqlite.png" alt="FerretDB on SQLite" class="r-stretch quarto-figure-center"></section>
+</section>
 <section id="review-non-relational-postgresql" class="slide level2">
 <h2>Review: non-relational PostgreSQL</h2>
 <table>
@@ -1351,19 +1386,6 @@ cypher('knowledge', $$
 </section>
 <section id="object-relational-mappers" class="slide level2">
 <h2>Object-Relational Mappers</h2>
-<aside class="notes">
-<p>orm-qry.py</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>from models import Super, Power  
 import sqlalchemy as sa 
 
@@ -1374,11 +1396,8 @@ with sa.orm.Session(engine) as session:
     for super in session.execute(stmt).scalars():
         power_list = ', '.join(p.name for p in super.powers)
         print(f'{super.name} has {power_list}')</code></pre>
-</section>
-<section id="orms-the-bad-news" class="slide level2">
-<h2>ORMs: the bad news</h2>
 <aside class="notes">
-<p>models.py</p>
+<p>19-orm-qry.py</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1390,6 +1409,9 @@ with sa.orm.Session(engine) as session:
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="orms-the-bad-news" class="slide level2">
+<h2>ORMs: the bad news</h2>
 <pre class="{sql}"><code>from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, MappedAsDataclass
 from sqlalchemy import String, ForeignKey
 from typing import Optional, List 
@@ -1421,6 +1443,19 @@ class Power(Base):
     super_id: Mapped[int] = mapped_column(ForeignKey("supers.id"))
     hero: Mapped["Super"] = relationship(back_populates="powers",)
 </code></pre>
+<aside class="notes">
+<p>20-models.py</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="reducing-orm-labor" class="slide level2">
 <h2>Reducing ORM labor</h2>
@@ -1432,19 +1467,6 @@ class Power(Base):
 </section>
 <section id="dataclass-integration" class="slide level2">
 <h2>Dataclass integration</h2>
-<aside class="notes">
-<p>orm-dataclass.py</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <pre class="{sql}"><code>from models import Super, Power  
 import sqlalchemy as sa 
 from pprint import pprint
@@ -1455,11 +1477,8 @@ with sa.orm.Session(engine) as session:
 
     stmt = sa.select(Super).where(Super.name == 'Ohio Gosaimasu')
     pprint(session.execute(stmt).first()[0])</code></pre>
-</section>
-<section id="query-builders" class="slide level2">
-<h2>Query builders</h2>
 <aside class="notes">
-<p>query-builder.py</p>
+<p>21-orm-dataclass.py</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1471,6 +1490,9 @@ with sa.orm.Session(engine) as session:
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="query-builders" class="slide level2">
+<h2>Query builders</h2>
 <pre class="{sql}"><code>import pypika as pk
 
 supers, powers = pk.Tables('supers', 'powers')
@@ -1485,6 +1507,7 @@ q = (pk.Query
 print(q)
 </code></pre>
 <aside class="notes">
+<p>22-query-builder.py</p>
 <p>At the border between writing raw SQL and an ORM, consider a query builder.</p>
 <p>SQL-based syntax (so, yes, another syntax to learn) - all the same concepts and keywords</p>
 <p>SQL syntax is picky - this is more freeform and composable</p>
@@ -1507,8 +1530,15 @@ print(q)
 </section>
 <section id="hugsql-pugsql" class="slide level2">
 <h2>HugSQL / <a href="https://pugsql.org/">PugSQL</a></h2>
+<pre class="{sql}"><code>import pugsql
+
+queries = pugsql.module('pugsql_queries/')
+queries.connect('postgresql://captcbus:forohio@localhost:5455/justice')
+for row in queries.supers_by_power(power='%light'):
+    print(row)
+</code></pre>
 <aside class="notes">
-<p>use-pugsql.py</p>
+<p>23-use-pugsql.py</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1520,13 +1550,6 @@ print(q)
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<pre class="{sql}"><code>import pugsql
-
-queries = pugsql.module('pugsql_queries/')
-queries.connect('postgresql://captcbus:forohio@localhost:5455/justice')
-for row in queries.supers_by_power(power='%light'):
-    print(row)
-</code></pre>
 <p>Also: HugSQL (Clojure), HugSQLx (Rust), hugsql.js</p>
 </section>
 <section id="migrations-agnostic" class="slide level2">
@@ -1554,7 +1577,6 @@ for row in queries.supers_by_power(power='%light'):
 <section id="rich-feature-set" class="slide level2">
 <h2>Rich feature set</h2>
 <ul>
-<li>Arrays</li>
 <li>Inheritance</li>
 <li>Window functions</li>
 <li>Custom types</li>
@@ -1576,27 +1598,15 @@ for row in queries.supers_by_power(power='%light'):
 </section>
 <section id="sql-functions" class="slide level2">
 <h2>SQL functions</h2>
-<aside class="notes">
-<p>raw-locations.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+
+<img data-src="img/trilobite.png" alt="The Trilobite, the Caped Cambrian" class="r-stretch quarto-figure-center"></section>
+<section class="slide level2">
+
 <pre class="{sql}"><code>SELECT * FROM raw_locations;
 
 </code></pre>
-</section>
-<section class="slide level2">
-
 <aside class="notes">
-<p>raw-loc-to-array.sql</p>
+<p>24-raw-locations.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1608,16 +1618,16 @@ for row in queries.supers_by_power(power='%light'):
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level2">
+
 <pre class="{sql}"><code>
 SELECT city, 
        string_to_array(loc_list, ', ')
 FROM   raw_locations;
 </code></pre>
-</section>
-<section class="slide level2">
-
 <aside class="notes">
-<p>raw-loc-to-rows.sql</p>
+<p>25-raw-loc-to-array.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1629,16 +1639,16 @@ FROM   raw_locations;
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level2">
+
 <pre class="{sql}"><code>
 SELECT city, 
        unnest(string_to_array(loc_list, ', '))
 FROM   raw_locations;
 </code></pre>
-</section>
-<section id="similar-to" class="slide level2">
-<h2>SIMILAR TO</h2>
 <aside class="notes">
-<p>many-to-many-problem.sql</p>
+<p>26-raw-loc-to-rows.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1650,17 +1660,17 @@ FROM   raw_locations;
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="similar-to" class="slide level2">
+<h2>SIMILAR TO</h2>
 <pre class="{sql}"><code>SELECT name, power 
 FROM   supers_w_powers
 WHERE  power like '%speed%'
 OR     power like '%strength%'
 OR     power like '%flight%'
 ORDER BY power, name;</code></pre>
-</section>
-<section class="slide level2">
-
 <aside class="notes">
-<p>similar-to.sql</p>
+<p>27-many-to-many-problem.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1672,11 +1682,27 @@ ORDER BY power, name;</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level2">
+
 <pre class="{sql}"><code>
 SELECT name, power 
 FROM   supers_w_powers
 WHERE  power similar to '%(speed|strength|flight)%'
 ORDER BY power, name;</code></pre>
+<aside class="notes">
+<p>28-similar-to.sql</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>… or POSIX regular expressions</p>
 <aside class="notes">
 <p>LIKE OR… LIKE OR</p>
@@ -1684,8 +1710,10 @@ ORDER BY power, name;</code></pre>
 <p>But you can think of them as multiple-like</p>
 <section id="distinct-on" class="slide level2">
 <h2>DISTINCT ON</h2>
+<pre class="{sql}"><code>select distinct on (based_in) name, based_in from supers order by based_in, name;
+</code></pre>
 <aside class="notes">
-<p>distinct-on.sql</p>
+<p>29-distinct-on.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1697,8 +1725,6 @@ ORDER BY power, name;</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<pre class="{sql}"><code>select distinct on (based_in) name, based_in from supers order by based_in, name;
-</code></pre>
 </section>
 <style type="text/css">
         span.MJX_Assistive_MathML {

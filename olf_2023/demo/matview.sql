@@ -1,4 +1,4 @@
-CREATE OR REPLACE MATERIALIZED VIEW supers_w_powers_mv AS
+CREATE MATERIALIZED VIEW supers_w_powers_mv AS
 SELECT * 
 FROM   supers_w_powers;
 
