@@ -1,7 +1,6 @@
 LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
 
-
 SELECT * FROM  
 cypher('knowledge', $$
   MATCH (g:Group { name: "Innovators of Iniquity"})

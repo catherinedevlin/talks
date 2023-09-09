@@ -1,1 +1,1 @@
-CREATE INDEX ON battles ((battle->>'venue'));
+CREATE INDEX ON battles ((battle ->> 'venue'));

@@ -1,7 +1,8 @@
 CREATE OR REPLACE VIEW supers_w_powers AS
-select s.name,
-       s.tagline,
-       p.name AS power
-from supers s
-join powers p on (p.super_id = s.id)
-order by s.id;
+SELECT
+    s.name,
+    s.tagline,
+    p.name AS power
+FROM supers s
+JOIN powers p ON (p.super_id = s.id)
+ORDER BY s.id;

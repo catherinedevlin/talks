@@ -1,1 +1,1 @@
-SELECT * FROM powers_mtm; 
+SELECT * FROM powers_mtm;

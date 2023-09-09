@@ -1,6 +1,9 @@
-SELECT name, power 
-FROM   supers_w_powers
-WHERE  power like '%speed%'
-OR     power like '%strength%'
-OR     power like '%flight%'
+SELECT
+    name,
+    power
+FROM supers_w_powers
+WHERE
+    power LIKE '%speed%'
+    OR power LIKE '%strength%'
+    OR power LIKE '%flight%'
 ORDER BY power, name;

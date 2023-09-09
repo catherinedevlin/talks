@@ -1,11 +1,7 @@
 load 'age';
-
 SET search_path = ag_catalog, "$user", public;
-
 select drop_graph('knowledge', true);
-
 select create_graph('knowledge');
-
 
 SELECT * FROM  
 cypher('knowledge', $$

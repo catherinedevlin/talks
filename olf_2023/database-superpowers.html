@@ -552,11 +552,9 @@ Catherine Devlin
 </section>
 <section id="relationships" class="slide level2">
 <h2>Relationships</h2>
-<pre class="{sql}"><code>
-select * from powers;
+<pre class="{ sql }"><code>select * from powers;
 
 select * from supers;
-
 </code></pre>
 <aside class="notes">
 <p>00-foreign-keys.sql</p>
@@ -574,12 +572,14 @@ select * from supers;
 </section>
 <section id="join" class="slide level2">
 <h2>Join</h2>
-<pre class="{sql}"><code>select s.name,
-       s.tagline,
-       p.name AS power
+<pre class="{ sql }"><code>select
+    s.name,
+    s.tagline,
+    p.name as power
 from supers s
 join powers p on (p.super_id = s.id)
-order by s.id;</code></pre>
+order by s.id;
+</code></pre>
 <aside class="notes">
 <p>01-join.sql</p>
 <p>Well now you’ve got a rectangle again. But at least it isn’t stored this way.</p>
@@ -597,13 +597,15 @@ order by s.id;</code></pre>
 </section>
 <section id="view" class="slide level2">
 <h2>View</h2>
-<pre class="{sql}"><code>CREATE OR REPLACE VIEW supers_w_powers AS
-select s.name,
-       s.tagline,
-       p.name AS power
-from supers s
-join powers p on (p.super_id = s.id)
-order by s.id;</code></pre>
+<pre class="{ sql }"><code>CREATE OR REPLACE VIEW supers_w_powers AS
+SELECT
+    s.name,
+    s.tagline,
+    p.name AS power
+FROM supers s
+JOIN powers p ON (p.super_id = s.id)
+ORDER BY s.id;
+</code></pre>
 <aside class="notes">
 <p>02-view.sql</p>
 <style type="text/css">
@@ -620,9 +622,10 @@ order by s.id;</code></pre>
 </section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>SELECT * 
-FROM   supers_w_powers
-WHERE  tagline IS NOT NULL;</code></pre>
+<pre class="{ sql }"><code>SELECT *
+FROM supers_w_powers
+WHERE tagline IS NOT NULL;
+</code></pre>
 <aside class="notes">
 <p>03-use_view.sql</p>
 <style type="text/css">
@@ -639,17 +642,16 @@ WHERE  tagline IS NOT NULL;</code></pre>
 </section>
 <section id="materialized-view" class="slide level2">
 <h2>Materialized view</h2>
-<pre class="{sql}"><code>CREATE MATERIALIZED VIEW supers_w_powers_mv AS
-SELECT * 
-FROM   supers_w_powers;
-
+<pre class="{ sql }"><code>CREATE MATERIALIZED VIEW supers_w_powers_mv AS
+SELECT *
+FROM supers_w_powers;
 REFRESH MATERIALIZED VIEW supers_w_powers_mv;
-
 CREATE INDEX ON supers_w_powers_mv (name);
 
-SELECT * 
-FROM   supers_w_powers_mv
-WHERE  name LIKE 'Captain%';</code></pre>
+SELECT *
+FROM supers_w_powers_mv
+WHERE name LIKE 'Captain%';
+</code></pre>
 <aside class="notes">
 <p>04-matview.sql</p>
 <style type="text/css">
@@ -667,12 +669,16 @@ WHERE  name LIKE 'Captain%';</code></pre>
 </section>
 <section id="many-to-many" class="slide level2">
 <h2>Many-to-many</h2>
-<pre class="{sql}"><code>SELECT name, power 
-FROM   supers_w_powers
-WHERE  power like '%speed%'
-OR     power like '%strength%'
-OR     power like '%flight%'
-ORDER BY power, name;</code></pre>
+<pre class="{ sql }"><code>SELECT
+    name,
+    power
+FROM supers_w_powers
+WHERE
+    power LIKE '%speed%'
+    OR power LIKE '%strength%'
+    OR power LIKE '%flight%'
+ORDER BY power, name;
+</code></pre>
 <aside class="notes">
 <p>05-many-to-many-problem.sql</p>
 <p>Store powers more than once</p>
@@ -695,7 +701,7 @@ ORDER BY power, name;</code></pre>
 </section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>SELECT * FROM powers_mtm; 
+<pre class="{ sql }"><code>SELECT * FROM powers_mtm;
 </code></pre>
 <aside class="notes">
 <p>06-display_powers_mtm.sql</p>
@@ -710,7 +716,7 @@ ORDER BY power, name;</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<pre class="{sql}"><code>SELECT * FROM super_to_power;
+<pre class="{ sql }"><code>SELECT * FROM super_to_power;
 </code></pre>
 <aside class="notes">
 <p>07-display_super_to_power.sql</p>
@@ -777,13 +783,16 @@ powers_mtm-&gt;super_to_power_mtm
 </section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>
-SELECT s.id, s.name, s.tagline, 
-       p.name 
-FROM   supers s 
-JOIN   super_to_power sp ON (sp.super_id = s.id)
-JOIN   powers_mtm p ON (sp.power_id = p.id)
-ORDER BY s.id, p.id;</code></pre>
+<pre class="{ sql }"><code>SELECT
+    s.id,
+    s.name,
+    s.tagline,
+    p.name
+FROM supers s
+JOIN super_to_power sp ON (sp.super_id = s.id)
+JOIN powers_mtm p ON (sp.power_id = p.id)
+ORDER BY s.id, p.id;
+</code></pre>
 <aside class="notes">
 <p>08-many-to-many-query.sql</p>
 <p>This can also be wrapped in a view.</p>
@@ -861,8 +870,89 @@ ORDER BY s.id, p.id;</code></pre>
 </section>
 <section id="store-in-postgresql" class="slide level2">
 <h2>Store in PostgreSQL</h2>
-<p><a href="prep/doc-in-pg.sql">doc-in-pg.sql</a></p>
+<pre class="{ sql }"><code>DROP TABLE IF EXISTS battles CASCADE;
+create table battles (id serial primary key, battle jsonb);
+insert into battles (battle)
+values ('
+{
+  "issue": 1,
+  "venue": "Air Force museum",
+  "sides": {
+    "villains": {
+      "objective": "Steal B-52",
+      "success": false,
+      "participants": {
+        "Orville Wrong": {
+          "consequences": {
+            "captured": false,
+            "injuries": [
+              "black eye"
+            ]
+          }
+        },
+        "Wilbur Wrong": {
+          "consequences": {
+            "captured": false
+          }
+        }
+      }
+    },
+    "heroes": {
+      "participants": {
+        "Captain Columbus": {
+          "consequences": []
+        },
+        "Cardinal Virtue": {
+          "consequences": [
+            "sprained wing",
+            "ruffled feathers"
+          ]
+        }
+      }
+    },
+    "property loss": [
+      "B-52 damaged",
+      "SPAD VII stolen"
+    ]
+  }
+}'
+  ),
+  ('
+{
+  "issue": 2,
+  "venue": "Purple People Bridge",
+  "sides": {
+    "heroes": {
+      "objective": "learn villains'' plans",
+      "success": true,
+      "participants": {
+        "Ohio Gosaimasu": {
+          "consequences": {
+            "captured": true
+          }
+        }
+      }
+    },
+    "villains": {
+      "objective": "capture hero",
+      "success": true,
+      "participants": {
+        "Nell Strongarm": {
+          "consequences": []
+        },
+        "Henry Fnord": {
+          "consequences": []
+        }
+      }
+    },
+    "property loss": [
+      "Segway thrown into Ohio river"
+    ]
+  }
+}'
+  );</code></pre>
 <aside class="notes">
+<p>09-doc-in-pg.sql</p>
 <p>Stuck a SQL string into a text field?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -878,14 +968,15 @@ ORDER BY s.id, p.id;</code></pre>
 </section>
 <section id="query" class="slide level2">
 <h2>Query</h2>
-<pre class="{sql}"><code>select battle-&gt;'venue' AS venue,
-       battle-&gt;'sides'-&gt;'villains'-&gt;'participants' AS villains,
-       battle-&gt;'property loss'
-from   battles
-where  battle-&gt;'sides'-&gt;'villains'-&gt;&gt;'success' = 'false';
+<pre class="{ sql }"><code>select
+    battle -&gt; 'venue' as venue,
+    battle -&gt; 'sides' -&gt; 'villains' -&gt; 'participants' as villains,
+    battle -&gt; 'property loss'
+from battles
+where battle -&gt; 'sides' -&gt; 'villains' -&gt;&gt; 'success' = 'false';
 </code></pre>
 <aside class="notes">
-<p>09-json-query.sql</p>
+<p>10-json-query.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -901,9 +992,10 @@ where  battle-&gt;'sides'-&gt;'villains'-&gt;&gt;'success' = 'false';
 </section>
 <section id="index" class="slide level2">
 <h2>Index</h2>
-<pre class="{sql}"><code>CREATE INDEX ON battles ((battle-&gt;&gt;'venue'));</code></pre>
+<pre class="{ sql }"><code>CREATE INDEX ON battles ((battle -&gt;&gt; 'venue'));
+</code></pre>
 <aside class="notes">
-<p>10-json-index.sql</p>
+<p>11-json-index.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -921,10 +1013,10 @@ where  battle-&gt;'sides'-&gt;'villains'-&gt;&gt;'success' = 'false';
 </section>
 <section id="document-database" class="slide level2">
 <h2>Document database</h2>
-<pre class="{sql}"><code>mongosh mongodb://$PGUSER:$PGPASSWORD@127.0.0.1/ferretdb?authMechanism=PLAIN
+<pre class="{ sh }"><code>mongosh mongodb://$PGUSER:$PGPASSWORD@127.0.0.1/ferretdb?authMechanism=PLAIN
 </code></pre>
 <aside class="notes">
-<p>11-mongo-connect.sh</p>
+<p>12-mongo-connect.sh</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -936,9 +1028,9 @@ where  battle-&gt;'sides'-&gt;'villains'-&gt;&gt;'success' = 'false';
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<pre class="{sql}"><code>db.battles.find({venue: 'Air Force museum'})</code></pre>
+<pre class="{ js }"><code>db.battles.find({venue: 'Air Force museum'})</code></pre>
 <aside class="notes">
-<p>12-battles.js</p>
+<p>13-battles.js</p>
 <p>You like the MongoDB API, Mongo query-by-example</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1066,11 +1158,10 @@ node 1-&gt;node 5
 <img data-src="img/innovators.png" alt="Innovators of Iniquity" class="r-stretch quarto-figure-center"></section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>
-SELECT * FROM group_or_member;
+<pre class="{ sql }"><code>SELECT * FROM group_or_member;
 </code></pre>
 <aside class="notes">
-<p>13-group_or_member.sql</p>
+<p>14-group_or_member.sql</p>
 <p>Models the nesting</p>
 <p>But each row can be a super, or not - awkward</p>
 <style type="text/css">
@@ -1087,20 +1178,21 @@ SELECT * FROM group_or_member;
 </section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>SELECT s.*
-FROM   group_or_member i
-JOIN   group_or_member i_mem
-ON     (i_mem.belongs_to = i.id)
-LEFT JOIN   group_or_member i_subgrp_mem 
-ON     (i_subgrp_mem.belongs_to = i_mem.id)
-JOIN   supers s 
-ON     (   s.id = i_mem.super_id 
-    OR s.id = i_subgrp_mem.super_id) 
-WHERE  i.name = 'Innovators of Iniquity';
-
+<pre class="{ sql }"><code>SELECT s.*
+FROM group_or_member i
+JOIN group_or_member i_mem
+    ON (i_mem.belongs_to = i.id)
+LEFT JOIN group_or_member i_subgrp_mem
+    ON (i_subgrp_mem.belongs_to = i_mem.id)
+JOIN supers s
+    ON (
+        s.id = i_mem.super_id
+        OR s.id = i_subgrp_mem.super_id
+    )
+WHERE i.name = 'Innovators of Iniquity';
 </code></pre>
 <aside class="notes">
-<p>14-innovators-rel.sql</p>
+<p>15-innovators-rel.sql</p>
 <p>What if it were nested more deeply?</p>
 <p>What if it were arbitrarily nested?</p>
 <style type="text/css">
@@ -1127,17 +1219,13 @@ WHERE  i.name = 'Innovators of Iniquity';
 <h2><a href="https://age.apache.org/">Apache AGE</a></h2>
 <p>Learn Cyper from <a href="https://neo4j.com/developer/cypher/">Neo4j</a></p>
 
-<img data-src="img/apache-age.png" alt="Apacheh AGE webpage" class="r-stretch quarto-figure-center"></section>
+<img data-src="img/apache_age.png" alt="Apache AGE webpage" class="r-stretch quarto-figure-center"></section>
 <section id="define-graph" class="slide level2">
 <h2>Define graph</h2>
-<pre class="{sql}"><code>load 'age';
-
+<pre class="{ sql }"><code>load 'age';
 SET search_path = ag_catalog, "$user", public;
-
 select drop_graph('knowledge', true);
-
 select create_graph('knowledge');
-
 
 SELECT * FROM  
 cypher('knowledge', $$
@@ -1693,7 +1781,7 @@ SET search_path = "$user", public;
 
 </code></pre>
 <aside class="notes">
-<p>15-age-setup.sql</p>
+<p>16-age-setup.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1708,57 +1796,8 @@ SET search_path = "$user", public;
 </section>
 <section id="query-1" class="slide level2">
 <h2>Query</h2>
-<pre class="{sql}"><code>LOAD 'age';
+<pre class="{ sql }"><code>LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
-
-
-SELECT * FROM  
-cypher('knowledge', $$
-  MATCH (g:Group { name: "Innovators of Iniquity"})
-  MATCH (g)-[i:INCLUDES*1..]-&gt;(e)
-  RETURN g, i, e
- $$) AS (g agtype, i agtype, e agtype);
-</code></pre>
-<aside class="notes">
-<p>16-membership-graph.sql</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="age-viewer" class="title-slide slide level1 center">
-<h1>AGE-Viewer</h1>
-<p>podman run –publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest</p>
-<pre><code>podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest</code></pre>
-<aside class="notes">
-<p>LOAD THIS BEFORE</p>
-<p>export PGPORT=5455 database name justice</p>
-<p>running in docker - must use ifconfig!</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="query-through-viewer" class="slide level2">
-<h2>Query through viewer</h2>
-<pre class="{sql}"><code>LOAD 'age';
-SET search_path = ag_catalog, "$user", public;
-
 
 SELECT * FROM  
 cypher('knowledge', $$
@@ -1780,12 +1819,58 @@ cypher('knowledge', $$
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section></section>
+<section>
+<section id="age-viewer" class="title-slide slide level1 center">
+<h1>AGE-Viewer</h1>
+<pre><code>podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest</code></pre>
+<p><a href="http://localhost:3001">localhost:3001</a></p>
+<aside class="notes">
+<p>LOAD THIS BEFORE</p>
+<p>running in docker - must use ifconfig!</p>
+<p>export PGPORT=5455 database name justice</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="query-through-viewer" class="slide level2">
+<h2>Query through viewer</h2>
+<pre class="{ sql }"><code>LOAD 'age';
+SET search_path = ag_catalog, "$user", public;
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Innovators of Iniquity"})
+  MATCH (g)-[i:INCLUDES*1..]-&gt;(e)
+  RETURN g, i, e
+ $$) AS (g agtype, i agtype, e agtype);
+</code></pre>
+<aside class="notes">
+<p>18-membership-graph.sql</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="easy-recursive-search" class="slide level2">
 <h2>Easy recursive search</h2>
-<pre class="{sql}"><code>LOAD 'age';
+<pre class="{ sql }"><code>LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
-
 
 SELECT * FROM  
 cypher('knowledge', $$
@@ -1795,7 +1880,7 @@ cypher('knowledge', $$
  $$) AS (result1 agtype, a agtype, s2 agtype);
 </code></pre>
 <aside class="notes">
-<p>18-friend-of-friend2.sql</p>
+<p>19-friend-of-friend2.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1810,7 +1895,7 @@ cypher('knowledge', $$
 </section>
 <section id="enemy-of-my-enemy" class="slide level2">
 <h2>Enemy of my enemy</h2>
-<pre class="{sql}"><code>LOAD 'age';
+<pre class="{ sql }"><code>LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
 
 SELECT * FROM  
@@ -1822,7 +1907,7 @@ cypher('knowledge', $$
 
 </code></pre>
 <aside class="notes">
-<p>19-enemy-of-enemy.sql</p>
+<p>20-enemy-of-enemy.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1838,15 +1923,16 @@ cypher('knowledge', $$
 <section class="slide level2">
 
 
-<img data-src="img/cardinal-virtue.png" alt="Cardinal Virtue" class="r-stretch quarto-figure-center"></section>
+<img data-src="img/cardinal-virtue.png" alt="Cardinal Virtue" class="r-stretch quarto-figure-center"><p class="caption">Cardinal Virtue, the Redbird of Righteousness</p></section>
 <section class="slide level2">
 
 
-<img data-src="img/o-go.png" alt="Ohio Gosaimasu" class="r-stretch quarto-figure-center"></section>
+<img data-src="img/o-go.png" alt="Ohio Gosaimasu" class="r-stretch quarto-figure-center"><p class="caption">Ohio Gosaimasu, the Sandusky Samurai</p></section>
 <section id="sqlite" class="slide level2">
 <h2>SQLite?</h2>
 <p><a href="https://github.com/dpapathanasiou/simple-graph">simple-graph</a></p>
-</section>
+
+<img data-src="img/simple-graph.png" alt="simple-graph" class="r-stretch quarto-figure-center"></section>
 <section id="neo4j_fdw" class="slide level2">
 <h2>neo4j_fdw</h2>
 
@@ -1965,7 +2051,7 @@ cypher('knowledge', $$
 </section>
 <section id="object-relational-mappers" class="slide level2">
 <h2>Object-Relational Mappers</h2>
-<pre class="{sql}"><code>from models import Super, Power  
+<pre class="{ py }"><code>from models import Super, Power  
 import sqlalchemy as sa 
 
 engine = sa.create_engine(
@@ -1976,7 +2062,7 @@ with sa.orm.Session(engine) as session:
         power_list = ', '.join(p.name for p in super.powers)
         print(f'{super.name} has {power_list}')</code></pre>
 <aside class="notes">
-<p>20-orm-qry.py</p>
+<p>21-orm-qry.py</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1991,7 +2077,7 @@ with sa.orm.Session(engine) as session:
 </section>
 <section id="orms-the-bad-news" class="slide level2">
 <h2>ORMs: the bad news</h2>
-<pre class="{sql}"><code>from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, MappedAsDataclass
+<pre class="{ py }"><code>from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, MappedAsDataclass
 from sqlalchemy import String, ForeignKey
 from typing import Optional, List 
 
@@ -2023,7 +2109,7 @@ class Power(Base):
     hero: Mapped["Super"] = relationship(back_populates="powers",)
 </code></pre>
 <aside class="notes">
-<p>21-models.py</p>
+<p>22-models.py</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2046,18 +2132,20 @@ class Power(Base):
 </section>
 <section id="dataclass-integration" class="slide level2">
 <h2>Dataclass integration</h2>
-<pre class="{sql}"><code>from models import Super, Power  
+<pre class="{ py }"><code>from models import Super, Power  
 import sqlalchemy as sa 
 from pprint import pprint
 
 engine = sa.create_engine(
-    'postgresql://captcbus:forohio@localhost:5455/justice')
+    'postgresql://captcbus:forohio'
+    '@localhost:5455/justice')
 with sa.orm.Session(engine) as session:
 
-    stmt = sa.select(Super).where(Super.name == 'Ohio Gosaimasu')
+    stmt = sa.select(Super).where(
+        Super.name == 'Ohio Gosaimasu')
     pprint(session.execute(stmt).first()[0])</code></pre>
 <aside class="notes">
-<p>22-orm-dataclass.py</p>
+<p>23-orm-dataclass.py</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2072,21 +2160,19 @@ with sa.orm.Session(engine) as session:
 </section>
 <section id="query-builders" class="slide level2">
 <h2>Query builders</h2>
-<pre class="{sql}"><code>import pypika as pk
+<pre class="{ py }"><code>import pypika as pk
 
 supers, powers = pk.Tables('supers', 'powers')
-q = (pk.Query 
+print (pk.Query 
     .from_(supers) 
     .select(supers.star, powers.name)
     .where(supers.align == 'hero')
     .on(powers.super_id == supers.id)
     .join(powers) 
-    .where(supers.name &gt; 'M')
-    )
-print(q)
+    .where(supers.name &gt; 'M'))
 </code></pre>
 <aside class="notes">
-<p>23-query-builder.py</p>
+<p>24-query-builder.py</p>
 <p>At the border between writing raw SQL and an ORM, consider a query builder.</p>
 <p>SQL-based syntax (so, yes, another syntax to learn) - all the same concepts and keywords</p>
 <p>SQL syntax is picky - this is more freeform and composable</p>
@@ -2109,15 +2195,21 @@ print(q)
 </section>
 <section id="hugsql-pugsql" class="slide level2">
 <h2>HugSQL / <a href="https://pugsql.org/">PugSQL</a></h2>
-<pre class="{sql}"><code>import pugsql
+<p>pugsql_queries/supers_by_power.py:</p>
+</section>
+<section class="slide level2">
+
+<pre class="{ py }"><code>import pugsql
 
 queries = pugsql.module('pugsql_queries/')
-queries.connect('postgresql://captcbus:forohio@localhost:5455/justice')
+queries.connect(
+    'postgresql://captcbus:forohio'
+    '@localhost:5455/justice')
 for row in queries.supers_by_power(power='%light'):
     print(row)
 </code></pre>
 <aside class="notes">
-<p>24-use-pugsql.py</p>
+<p>25-use-pugsql.py</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2133,7 +2225,16 @@ for row in queries.supers_by_power(power='%light'):
 </section>
 <section id="migrations-agnostic" class="slide level2">
 <h2>Migrations: <a href="https://agnostic.readthedocs.io">Agnostic</a></h2>
-<pre><code>agnostic -t postgres -u $PGUSER -p $PGPASSWORD -d $PGDATABASE -p $PGPORT migrate</code></pre>
+<pre><code>$ cat migrations/add_weaknesses.sql
+create table weaknesses (
+    id serial primary key,
+    super_id integer references supers (id),
+    name text not null
+);
+
+$ agnostic -t postgres -u $PGUSER \
+   -p $PGPASSWORD -d $PGDATABASE \
+   -p $PGPORT migrate</code></pre>
 <aside class="notes">
 <p>Track database structure changes Associate them to commit in your VC history</p>
 <p>Not running this one live!</p>
@@ -2175,17 +2276,16 @@ for row in queries.supers_by_power(power='%light'):
           display:block!important;
       }</style></aside>
 </section>
-<section id="sql-functions" class="slide level2">
-<h2>SQL functions</h2>
+<section id="advanced-sql-functions" class="slide level2">
+<h2>Advanced SQL functions</h2>
 
 <img data-src="img/trilobite.png" alt="The Trilobite, the Caped Cambrian" class="r-stretch quarto-figure-center"></section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>SELECT * FROM raw_locations;
-
+<pre class="{ sql }"><code>SELECT * FROM raw_locations;
 </code></pre>
 <aside class="notes">
-<p>25-raw-locations.sql</p>
+<p>26-raw-locations.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2200,13 +2300,14 @@ for row in queries.supers_by_power(power='%light'):
 </section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>
-SELECT city, 
-       string_to_array(loc_list, ', ')
-FROM   raw_locations;
+<pre class="{ sql }"><code>SELECT
+    city,
+    string_to_array(
+        loc_list, ', ')
+FROM raw_locations;
 </code></pre>
 <aside class="notes">
-<p>26-raw-loc-to-array.sql</p>
+<p>27-raw-loc-to-array.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2221,13 +2322,15 @@ FROM   raw_locations;
 </section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>
-SELECT city, 
-       unnest(string_to_array(loc_list, ', '))
-FROM   raw_locations;
+<pre class="{ sql }"><code>SELECT
+    city,
+    unnest(
+        string_to_array(
+            loc_list, ', '))
+FROM raw_locations;
 </code></pre>
 <aside class="notes">
-<p>27-raw-loc-to-rows.sql</p>
+<p>28-raw-loc-to-rows.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2242,14 +2345,18 @@ FROM   raw_locations;
 </section>
 <section id="similar-to" class="slide level2">
 <h2>SIMILAR TO</h2>
-<pre class="{sql}"><code>SELECT name, power 
-FROM   supers_w_powers
-WHERE  power like '%speed%'
-OR     power like '%strength%'
-OR     power like '%flight%'
-ORDER BY power, name;</code></pre>
+<pre class="{ sql }"><code>SELECT
+    name,
+    power
+FROM supers_w_powers
+WHERE
+    power LIKE '%speed%'
+    OR power LIKE '%strength%'
+    OR power LIKE '%flight%'
+ORDER BY power, name;
+</code></pre>
 <aside class="notes">
-<p>28-many-to-many-problem.sql</p>
+<p>29-many-to-many-problem.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2264,13 +2371,16 @@ ORDER BY power, name;</code></pre>
 </section>
 <section class="slide level2">
 
-<pre class="{sql}"><code>
-SELECT name, power 
-FROM   supers_w_powers
-WHERE  power similar to '%(speed|strength|flight)%'
-ORDER BY power, name;</code></pre>
+<pre class="{ sql }"><code>SELECT
+    name,
+    power
+FROM supers_w_powers
+WHERE power SIMILAR TO 
+    '%(speed|strength|flight)%'
+ORDER BY power, name;
+</code></pre>
 <aside class="notes">
-<p>29-similar-to.sql</p>
+<p>30-similar-to.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2289,10 +2399,14 @@ ORDER BY power, name;</code></pre>
 <p>But you can think of them as multiple-like</p>
 <section id="distinct-on" class="slide level2">
 <h2>DISTINCT ON</h2>
-<pre class="{sql}"><code>select distinct on (based_in) name, based_in from supers order by based_in, name;
+<pre class="{ sql }"><code>select distinct on (based_in)
+    name,
+    based_in
+from supers
+order by based_in, name;
 </code></pre>
 <aside class="notes">
-<p>30-distinct-on.sql</p>
+<p>31-distinct-on.sql</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2318,19 +2432,12 @@ ORDER BY power, name;</code></pre>
       }</style></aside>
 </section></section>
 <section>
-<section id="sqlite-1" class="title-slide slide level1 center">
-<h1>SQLite?</h1>
+<section id="what-about-sqlite" class="title-slide slide level1 center">
+<h1>What about SQLite</h1>
 <p>Yes:</p>
-<ul>
-<li>ORMs</li>
-<li>Pandas, jupysql</li>
-<li>PugSQL, Agnostic</li>
-</ul>
+<p>ORMs, Pandas, jupysql, PugSQL, Agnostic</p>
 <p>No:</p>
-<ul>
-<li>dbt</li>
-<li>advanced SQL</li>
-</ul>
+<p>dbt, advanced SQL</p>
 <aside class="notes">
 <p>No cute animal logo</p>
 <p>But let’s sing its praises anyway</p>

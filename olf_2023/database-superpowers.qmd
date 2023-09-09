@@ -143,12 +143,10 @@ Which col to search?
 
 
 
-```{sql}
-
+```{ sql }
 select * from powers;
 
 select * from supers;
-
 
 ```
 
@@ -163,13 +161,15 @@ select * from supers;
 
 
 
-```{sql}
-select s.name,
-       s.tagline,
-       p.name AS power
+```{ sql }
+select
+    s.name,
+    s.tagline,
+    p.name as power
 from supers s
 join powers p on (p.super_id = s.id)
 order by s.id;
+
 ```
 
 ::: { .notes }
@@ -184,14 +184,16 @@ Well now you've got a rectangle again.  But at least it isn't stored this way.
 
 
 
-```{sql}
+```{ sql }
 CREATE OR REPLACE VIEW supers_w_powers AS
-select s.name,
-       s.tagline,
-       p.name AS power
-from supers s
-join powers p on (p.super_id = s.id)
-order by s.id;
+SELECT
+    s.name,
+    s.tagline,
+    p.name AS power
+FROM supers s
+JOIN powers p ON (p.super_id = s.id)
+ORDER BY s.id;
+
 ```
 
 ::: { .notes }
@@ -204,10 +206,11 @@ order by s.id;
 
 
 
-```{sql}
-SELECT * 
-FROM   supers_w_powers
-WHERE  tagline IS NOT NULL;
+```{ sql }
+SELECT *
+FROM supers_w_powers
+WHERE tagline IS NOT NULL;
+
 ```
 
 ::: { .notes }
@@ -221,18 +224,17 @@ WHERE  tagline IS NOT NULL;
 
 
 
-```{sql}
+```{ sql }
 CREATE MATERIALIZED VIEW supers_w_powers_mv AS
-SELECT * 
-FROM   supers_w_powers;
-
+SELECT *
+FROM supers_w_powers;
 REFRESH MATERIALIZED VIEW supers_w_powers_mv;
-
 CREATE INDEX ON supers_w_powers_mv (name);
 
-SELECT * 
-FROM   supers_w_powers_mv
-WHERE  name LIKE 'Captain%';
+SELECT *
+FROM supers_w_powers_mv
+WHERE name LIKE 'Captain%';
+
 ```
 
 ::: { .notes }
@@ -247,13 +249,17 @@ WHERE  name LIKE 'Captain%';
 
 
 
-```{sql}
-SELECT name, power 
-FROM   supers_w_powers
-WHERE  power like '%speed%'
-OR     power like '%strength%'
-OR     power like '%flight%'
+```{ sql }
+SELECT
+    name,
+    power
+FROM supers_w_powers
+WHERE
+    power LIKE '%speed%'
+    OR power LIKE '%strength%'
+    OR power LIKE '%flight%'
 ORDER BY power, name;
+
 ```
 
 ::: { .notes }
@@ -272,8 +278,8 @@ Store powers more than once
 
 
 
-```{sql}
-SELECT * FROM powers_mtm; 
+```{ sql }
+SELECT * FROM powers_mtm;
 
 ```
 
@@ -285,7 +291,7 @@ SELECT * FROM powers_mtm;
 
 
 
-```{sql}
+```{ sql }
 SELECT * FROM super_to_power;
 
 ```
@@ -316,14 +322,17 @@ join table, bridging table
 
 
 
-```{sql}
-
-SELECT s.id, s.name, s.tagline, 
-       p.name 
-FROM   supers s 
-JOIN   super_to_power sp ON (sp.super_id = s.id)
-JOIN   powers_mtm p ON (sp.power_id = p.id)
+```{ sql }
+SELECT
+    s.id,
+    s.name,
+    s.tagline,
+    p.name
+FROM supers s
+JOIN super_to_power sp ON (sp.super_id = s.id)
+JOIN powers_mtm p ON (sp.power_id = p.id)
 ORDER BY s.id, p.id;
+
 ```
 
 ::: { .notes }
@@ -381,9 +390,95 @@ JSON format
 
 ## Store in PostgreSQL
 
-[doc-in-pg.sql](prep/doc-in-pg.sql)
 
-::: {.notes}
+
+```{ sql }
+DROP TABLE IF EXISTS battles CASCADE;
+create table battles (id serial primary key, battle jsonb);
+insert into battles (battle)
+values ('
+{
+  "issue": 1,
+  "venue": "Air Force museum",
+  "sides": {
+    "villains": {
+      "objective": "Steal B-52",
+      "success": false,
+      "participants": {
+        "Orville Wrong": {
+          "consequences": {
+            "captured": false,
+            "injuries": [
+              "black eye"
+            ]
+          }
+        },
+        "Wilbur Wrong": {
+          "consequences": {
+            "captured": false
+          }
+        }
+      }
+    },
+    "heroes": {
+      "participants": {
+        "Captain Columbus": {
+          "consequences": []
+        },
+        "Cardinal Virtue": {
+          "consequences": [
+            "sprained wing",
+            "ruffled feathers"
+          ]
+        }
+      }
+    },
+    "property loss": [
+      "B-52 damaged",
+      "SPAD VII stolen"
+    ]
+  }
+}'
+  ),
+  ('
+{
+  "issue": 2,
+  "venue": "Purple People Bridge",
+  "sides": {
+    "heroes": {
+      "objective": "learn villains'' plans",
+      "success": true,
+      "participants": {
+        "Ohio Gosaimasu": {
+          "consequences": {
+            "captured": true
+          }
+        }
+      }
+    },
+    "villains": {
+      "objective": "capture hero",
+      "success": true,
+      "participants": {
+        "Nell Strongarm": {
+          "consequences": []
+        },
+        "Henry Fnord": {
+          "consequences": []
+        }
+      }
+    },
+    "property loss": [
+      "Segway thrown into Ohio river"
+    ]
+  }
+}'
+  );
+```
+
+::: { .notes }
+09-doc-in-pg.sql
+
 
 Stuck a SQL string into a text field?
 
@@ -394,17 +489,18 @@ Stuck a SQL string into a text field?
 
 
 
-```{sql}
-select battle->'venue' AS venue,
-       battle->'sides'->'villains'->'participants' AS villains,
-       battle->'property loss'
-from   battles
-where  battle->'sides'->'villains'->>'success' = 'false';
+```{ sql }
+select
+    battle -> 'venue' as venue,
+    battle -> 'sides' -> 'villains' -> 'participants' as villains,
+    battle -> 'property loss'
+from battles
+where battle -> 'sides' -> 'villains' ->> 'success' = 'false';
 
 ```
 
 ::: { .notes }
-09-json-query.sql
+10-json-query.sql
 :::
 
 
@@ -415,12 +511,13 @@ jq-like [jsonpath: SQL/JSON](https://github.com/obartunov/sqljsondoc/blob/master
 
 
 
-```{sql}
-CREATE INDEX ON battles ((battle->>'venue'));
+```{ sql }
+CREATE INDEX ON battles ((battle ->> 'venue'));
+
 ```
 
 ::: { .notes }
-10-json-index.sql
+11-json-index.sql
 :::
 
 
@@ -431,25 +528,25 @@ CREATE INDEX ON battles ((battle->>'venue'));
 
 
 
-```{sql}
+```{ sh }
 mongosh mongodb://$PGUSER:$PGPASSWORD@127.0.0.1/ferretdb?authMechanism=PLAIN
 
 ```
 
 ::: { .notes }
-11-mongo-connect.sh
+12-mongo-connect.sh
 :::
 
 
 
 
 
-```{sql}
+```{ js }
 db.battles.find({venue: 'Air Force museum'})
 ```
 
 ::: { .notes }
-12-battles.js
+13-battles.js
 
 
 You like the MongoDB API, Mongo query-by-example 
@@ -520,14 +617,13 @@ digraph P {
 
 
 
-```{sql}
-
+```{ sql }
 SELECT * FROM group_or_member;
 
 ```
 
 ::: { .notes }
-13-group_or_member.sql
+14-group_or_member.sql
 
 
 Models the nesting
@@ -540,23 +636,24 @@ But each row can be a super, or not - awkward
 
 
 
-```{sql}
+```{ sql }
 SELECT s.*
-FROM   group_or_member i
-JOIN   group_or_member i_mem
-ON     (i_mem.belongs_to = i.id)
-LEFT JOIN   group_or_member i_subgrp_mem 
-ON     (i_subgrp_mem.belongs_to = i_mem.id)
-JOIN   supers s 
-ON     (   s.id = i_mem.super_id 
-	OR s.id = i_subgrp_mem.super_id) 
-WHERE  i.name = 'Innovators of Iniquity';
-
+FROM group_or_member i
+JOIN group_or_member i_mem
+    ON (i_mem.belongs_to = i.id)
+LEFT JOIN group_or_member i_subgrp_mem
+    ON (i_subgrp_mem.belongs_to = i_mem.id)
+JOIN supers s
+    ON (
+        s.id = i_mem.super_id
+        OR s.id = i_subgrp_mem.super_id
+    )
+WHERE i.name = 'Innovators of Iniquity';
 
 ```
 
 ::: { .notes }
-14-innovators-rel.sql
+15-innovators-rel.sql
 
 
 What if it were nested more deeply?
@@ -579,21 +676,17 @@ What if it were arbitrarily nested?
 
 Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
 
-![](img/apache-age.png){fig-alt="Apacheh AGE webpage" fig-align="center"}
+![](img/apache_age.png){fig-alt="Apache AGE webpage" fig-align="center"}
 
 ## Define graph
 
 
 
-```{sql}
+```{ sql }
 load 'age';
-
 SET search_path = ag_catalog, "$user", public;
-
 select drop_graph('knowledge', true);
-
 select create_graph('knowledge');
-
 
 SELECT * FROM  
 cypher('knowledge', $$
@@ -1151,7 +1244,7 @@ SET search_path = "$user", public;
 ```
 
 ::: { .notes }
-15-age-setup.sql
+16-age-setup.sql
 :::
 
 
@@ -1162,51 +1255,9 @@ SET search_path = "$user", public;
 
 
 
-```{sql}
+```{ sql }
 LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
-
-
-SELECT * FROM  
-cypher('knowledge', $$
-  MATCH (g:Group { name: "Innovators of Iniquity"})
-  MATCH (g)-[i:INCLUDES*1..]->(e)
-  RETURN g, i, e
- $$) AS (g agtype, i agtype, e agtype);
-
-```
-
-::: { .notes }
-16-membership-graph.sql
-:::
-
-
-
-
-# AGE-Viewer
- podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
-
-    podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
-
-::: {.notes}
-
-LOAD THIS BEFORE 
-
-export PGPORT=5455
-database name justice 
-
-running in docker - must use ifconfig!
-
-:::
-
-## Query through viewer
-
-
-
-```{sql}
-LOAD 'age';
-SET search_path = ag_catalog, "$user", public;
-
 
 SELECT * FROM  
 cypher('knowledge', $$
@@ -1224,16 +1275,56 @@ cypher('knowledge', $$
 
 
 
+# AGE-Viewer
+
+    podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
+
+[localhost:3001](http://localhost:3001)
+
+::: {.notes}
+
+LOAD THIS BEFORE 
+
+running in docker - must use ifconfig!
+
+export PGPORT=5455
+database name justice 
+
+:::
+
+## Query through viewer
+
+
+
+```{ sql }
+LOAD 'age';
+SET search_path = ag_catalog, "$user", public;
+
+SELECT * FROM  
+cypher('knowledge', $$
+  MATCH (g:Group { name: "Innovators of Iniquity"})
+  MATCH (g)-[i:INCLUDES*1..]->(e)
+  RETURN g, i, e
+ $$) AS (g agtype, i agtype, e agtype);
+
+```
+
+::: { .notes }
+18-membership-graph.sql
+:::
+
+
+
+
 -----
 
 ## Easy recursive search
 
 
 
-```{sql}
+```{ sql }
 LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
-
 
 SELECT * FROM  
 cypher('knowledge', $$
@@ -1245,7 +1336,7 @@ cypher('knowledge', $$
 ```
 
 ::: { .notes }
-18-friend-of-friend2.sql
+19-friend-of-friend2.sql
 :::
 
 
@@ -1257,7 +1348,7 @@ cypher('knowledge', $$
 
 
 
-```{sql}
+```{ sql }
 LOAD 'age';
 SET search_path = ag_catalog, "$user", public;
 
@@ -1272,22 +1363,24 @@ cypher('knowledge', $$
 ```
 
 ::: { .notes }
-19-enemy-of-enemy.sql
+20-enemy-of-enemy.sql
 :::
 
 
 
 ---
 
-![](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="center"}
+![Cardinal Virtue, the Redbird of Righteousness](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="center"}
 
 ---
 
-![](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="center"}
+![Ohio Gosaimasu, the Sandusky Samurai](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="center"}
 
 ## SQLite?
 
 [simple-graph](https://github.com/dpapathanasiou/simple-graph)
+
+![](img/simple-graph.png){fig-alt="simple-graph" fig-align="center"}
 
 ## neo4j_fdw 
 
@@ -1340,7 +1433,7 @@ Reason the Mighty Rectangle prevails
 
 
 
-```{sql}
+```{ py }
 from models import Super, Power  
 import sqlalchemy as sa 
 
@@ -1354,7 +1447,7 @@ with sa.orm.Session(engine) as session:
 ```
 
 ::: { .notes }
-20-orm-qry.py
+21-orm-qry.py
 :::
 
 
@@ -1363,7 +1456,7 @@ with sa.orm.Session(engine) as session:
 
 
 
-```{sql}
+```{ py }
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, MappedAsDataclass
 from sqlalchemy import String, ForeignKey
 from typing import Optional, List 
@@ -1398,7 +1491,7 @@ class Power(Base):
 ```
 
 ::: { .notes }
-21-models.py
+22-models.py
 :::
 
 
@@ -1413,21 +1506,23 @@ class Power(Base):
 
 
 
-```{sql}
+```{ py }
 from models import Super, Power  
 import sqlalchemy as sa 
 from pprint import pprint
 
 engine = sa.create_engine(
-    'postgresql://captcbus:forohio@localhost:5455/justice')
+    'postgresql://captcbus:forohio'
+    '@localhost:5455/justice')
 with sa.orm.Session(engine) as session:
 
-    stmt = sa.select(Super).where(Super.name == 'Ohio Gosaimasu')
+    stmt = sa.select(Super).where(
+        Super.name == 'Ohio Gosaimasu')
     pprint(session.execute(stmt).first()[0])
 ```
 
 ::: { .notes }
-22-orm-dataclass.py
+23-orm-dataclass.py
 :::
 
 
@@ -1436,24 +1531,22 @@ with sa.orm.Session(engine) as session:
 
 
 
-```{sql}
+```{ py }
 import pypika as pk
 
 supers, powers = pk.Tables('supers', 'powers')
-q = (pk.Query 
+print (pk.Query 
     .from_(supers) 
     .select(supers.star, powers.name)
     .where(supers.align == 'hero')
     .on(powers.super_id == supers.id)
     .join(powers) 
-    .where(supers.name > 'M')
-    )
-print(q)
+    .where(supers.name > 'M'))
 
 ```
 
 ::: { .notes }
-23-query-builder.py
+24-query-builder.py
 
 
 At the border between writing raw SQL and an ORM, consider a 
@@ -1475,20 +1568,28 @@ Ask what it can do for you
 
 ## HugSQL / [PugSQL](https://pugsql.org/)
 
+pugsql_queries/supers_by_power.py:
 
 
-```{sql}
+
+----
+
+
+
+```{ py }
 import pugsql
 
 queries = pugsql.module('pugsql_queries/')
-queries.connect('postgresql://captcbus:forohio@localhost:5455/justice')
+queries.connect(
+    'postgresql://captcbus:forohio'
+    '@localhost:5455/justice')
 for row in queries.supers_by_power(power='%light'):
     print(row)
 
 ```
 
 ::: { .notes }
-24-use-pugsql.py
+25-use-pugsql.py
 :::
 
 
@@ -1497,8 +1598,16 @@ Also: HugSQL (Clojure), HugSQLx (Rust), hugsql.js
 
 ## Migrations: [Agnostic](https://agnostic.readthedocs.io)
 
-    agnostic -t postgres -u $PGUSER -p $PGPASSWORD -d $PGDATABASE -p $PGPORT migrate
+    $ cat migrations/add_weaknesses.sql
+    create table weaknesses (
+        id serial primary key,
+        super_id integer references supers (id),
+        name text not null
+    );
 
+    $ agnostic -t postgres -u $PGUSER \
+       -p $PGPASSWORD -d $PGDATABASE \
+       -p $PGPORT migrate
 
 ::: {.notes}
 
@@ -1526,7 +1635,7 @@ PostgreSQL only
 
 :::
 
-## SQL functions
+## Advanced SQL functions
 
 
 ![](img/trilobite.png){fig-alt="The Trilobite, the Caped Cambrian" fig-align="center"}
@@ -1535,14 +1644,13 @@ PostgreSQL only
 
 
 
-```{sql}
+```{ sql }
 SELECT * FROM raw_locations;
-
 
 ```
 
 ::: { .notes }
-25-raw-locations.sql
+26-raw-locations.sql
 :::
 
 
@@ -1551,16 +1659,17 @@ SELECT * FROM raw_locations;
 
 
 
-```{sql}
-
-SELECT city, 
-       string_to_array(loc_list, ', ')
-FROM   raw_locations;
+```{ sql }
+SELECT
+    city,
+    string_to_array(
+        loc_list, ', ')
+FROM raw_locations;
 
 ```
 
 ::: { .notes }
-26-raw-loc-to-array.sql
+27-raw-loc-to-array.sql
 :::
 
 
@@ -1569,16 +1678,18 @@ FROM   raw_locations;
 
 
 
-```{sql}
-
-SELECT city, 
-       unnest(string_to_array(loc_list, ', '))
-FROM   raw_locations;
+```{ sql }
+SELECT
+    city,
+    unnest(
+        string_to_array(
+            loc_list, ', '))
+FROM raw_locations;
 
 ```
 
 ::: { .notes }
-27-raw-loc-to-rows.sql
+28-raw-loc-to-rows.sql
 :::
 
 
@@ -1587,17 +1698,21 @@ FROM   raw_locations;
 
 
 
-```{sql}
-SELECT name, power 
-FROM   supers_w_powers
-WHERE  power like '%speed%'
-OR     power like '%strength%'
-OR     power like '%flight%'
+```{ sql }
+SELECT
+    name,
+    power
+FROM supers_w_powers
+WHERE
+    power LIKE '%speed%'
+    OR power LIKE '%strength%'
+    OR power LIKE '%flight%'
 ORDER BY power, name;
+
 ```
 
 ::: { .notes }
-28-many-to-many-problem.sql
+29-many-to-many-problem.sql
 :::
 
 
@@ -1607,16 +1722,19 @@ ORDER BY power, name;
 
 
 
-```{sql}
-
-SELECT name, power 
-FROM   supers_w_powers
-WHERE  power similar to '%(speed|strength|flight)%'
+```{ sql }
+SELECT
+    name,
+    power
+FROM supers_w_powers
+WHERE power SIMILAR TO 
+    '%(speed|strength|flight)%'
 ORDER BY power, name;
+
 ```
 
 ::: { .notes }
-29-similar-to.sql
+30-similar-to.sql
 :::
 
 
@@ -1636,31 +1754,32 @@ But you can think of them as multiple-like
 
 
 
-```{sql}
-select distinct on (based_in) name, based_in from supers order by based_in, name;
+```{ sql }
+select distinct on (based_in)
+    name,
+    based_in
+from supers
+order by based_in, name;
 
 ```
 
 ::: { .notes }
-30-distinct-on.sql
+31-distinct-on.sql
 :::
 
 
 
 :::
 
-# SQLite?
+# What about SQLite
 
 Yes:
 
-- ORMs
-- Pandas, jupysql
-- PugSQL, Agnostic
+ORMs, Pandas, jupysql, PugSQL, Agnostic
 
 No:
 
-- dbt
-- advanced SQL
+dbt, advanced SQL
 
 ::: {.notes}
 

@@ -3,7 +3,7 @@ title: "Database Superpowers"
 subtitle: "OLF 2023"
 date: "2023-09-08"
 author: "Catherine Devlin"
-fediverse: "https://github.com/catherinedevlin/talks"
+fediverse: "catherinedevlin@tech.lgbt"
 format: 
   revealjs:
     code-line-numbers: false
@@ -275,7 +275,8 @@ JSON format
 
 ## Store in PostgreSQL
 
-[doc-in-pg.sql](prep/doc-in-pg.sql)
+[[[cog fileinsert.insert('prep/doc-in-pg.sql')]]]
+[[[end]]]
 
 ::: {.notes}
 
@@ -413,7 +414,7 @@ What if it were arbitrarily nested?
 
 Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
 
-![](img/apache-age.png){fig-alt="Apacheh AGE webpage" fig-align="center"}
+![](img/apache_age.png){fig-alt="Apache AGE webpage" fig-align="center"}
 
 ## Define graph
 
@@ -429,18 +430,19 @@ Learn Cyper from [Neo4j](https://neo4j.com/developer/cypher/)
 
 
 # AGE-Viewer
- podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
 
     podman run --publish=3001:3001 docker.io/joefagan/incubator-age-viewer:latest
+
+[localhost:3001](http://localhost:3001)
 
 ::: {.notes}
 
 LOAD THIS BEFORE 
 
+running in docker - must use ifconfig!
+
 export PGPORT=5455
 database name justice 
-
-running in docker - must use ifconfig!
 
 :::
 
@@ -467,15 +469,17 @@ running in docker - must use ifconfig!
 
 ---
 
-![](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="center"}
+![Cardinal Virtue, the Redbird of Righteousness](img/cardinal-virtue.png){fig-alt="Cardinal Virtue" fig-align="center"}
 
 ---
 
-![](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="center"}
+![Ohio Gosaimasu, the Sandusky Samurai](img/o-go.png){fig-alt="Ohio Gosaimasu" fig-align="center"}
 
 ## SQLite?
 
 [simple-graph](https://github.com/dpapathanasiou/simple-graph)
+
+![](img/simple-graph.png){fig-alt="simple-graph" fig-align="center"}
 
 ## neo4j_fdw 
 
@@ -571,6 +575,12 @@ Ask what it can do for you
 
 ## HugSQL / [PugSQL](https://pugsql.org/)
 
+pugsql_queries/supers_by_power.py:
+
+
+
+----
+
 [[[cog fileinsert.insert('use-pugsql.py')]]]
 [[[end]]]
 
@@ -578,8 +588,16 @@ Also: HugSQL (Clojure), HugSQLx (Rust), hugsql.js
 
 ## Migrations: [Agnostic](https://agnostic.readthedocs.io)
 
-    agnostic -t postgres -u $PGUSER -p $PGPASSWORD -d $PGDATABASE -p $PGPORT migrate
+    $ cat migrations/add_weaknesses.sql
+    create table weaknesses (
+        id serial primary key,
+        super_id integer references supers (id),
+        name text not null
+    );
 
+    $ agnostic -t postgres -u $PGUSER \
+       -p $PGPASSWORD -d $PGDATABASE \
+       -p $PGPORT migrate
 
 ::: {.notes}
 
@@ -607,7 +625,7 @@ PostgreSQL only
 
 :::
 
-## SQL functions
+## Advanced SQL functions
 
 
 ![](img/trilobite.png){fig-alt="The Trilobite, the Caped Cambrian" fig-align="center"}
@@ -656,18 +674,15 @@ But you can think of them as multiple-like
 
 :::
 
-# SQLite?
+# What about SQLite
 
 Yes:
 
-- ORMs
-- Pandas, jupysql
-- PugSQL, Agnostic
+ORMs, Pandas, jupysql, PugSQL, Agnostic
 
 No:
 
-- dbt
-- advanced SQL
+dbt, advanced SQL
 
 ::: {.notes}
 
