@@ -804,6 +804,9 @@ Installed 1 package in 51ms
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<div class="footer">
+<p>why - workflows - <strong>project</strong> - script - ephemeral - versions</p>
+</div>
 </section></section>
 <section>
 <section id="script-workflow" class="title-slide slide level1 center">
@@ -811,6 +814,20 @@ Installed 1 package in 51ms
 <div class="footer">
 <p>why - workflows - project - <strong>script</strong> - ephemeral - versions</p>
 </div>
+<aside class="notes">
+<p>You could leave now</p>
+<p>Complete, always works, often ideal</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="too-heavy" class="slide level2">
 <h2>Too heavy?</h2>
@@ -859,8 +876,8 @@ Installed 1 package in 92ms
 # ///
 import numpy as np
 
-a = np.arange(15).reshape(3, 5)
-print(a)</code></pre>
+arr = np.arange(15).reshape(3, 5)
+print(arr)</code></pre>
 <div class="footer">
 <p>why - workflows - project - <strong>script</strong> - ephemeral - versions</p>
 </div>
@@ -962,7 +979,10 @@ print(a)</code></pre>
 <section id="with" class="slide level2">
 <h2>--with</h2>
 <p>Adds a temporary requirement</p>
-<pre><code>uv run --with itrm python -i npdemo.py </code></pre>
+<pre><code>uv run --with itrm python -i npdemo.py 
+
+&gt;&gt;&gt; import polars as pl 
+&gt;&gt;&gt; pl.DataFrame(arr)</code></pre>
 <aside class="notes">
 <p>Uses all the requirements from pyproject.toml or from the script header, PLUS any <code>--with</code> clause(s)</p>
 <style type="text/css">
@@ -1144,26 +1164,74 @@ uv tool upgrade tldr</code></pre>
           display:block!important;
       }</style></aside>
 <pre><code>uv add "itrm&gt;=1.4"</code></pre>
+<p><a href="https://pypi.org/project/itrm/">itrm</a>: command-line data viz</p>
+<aside class="notes">
+<p>itrm by David Woodburn</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="footer">
 <p>why - workflows - project - script - ephemeral - **versions*</p>
 </div>
 </section>
 <section id="check-whats-outdated" class="slide level2">
 <h2>Check what’s outdated</h2>
-<pre><code>uv tree --outdated 
-Resolved 3 packages in 2ms
-outdated v0.1.0
-└── itrm v1.4.15
-    └── numpy v2.1.0 (latest: v2.2.4)</code></pre>
+<pre><code>$ uv tree --outdated
+Resolved 3 packages in 1ms
+demo v0.1.0
+├── itrm v1.4.21
+│   └── numpy v2.1.1 (latest: v2.3.2)
+└── numpy v2.1.1</code></pre>
 <div class="footer">
 <p>why - workflows - project - script - ephemeral - **versions*</p>
 </div>
+<aside class="notes">
+<p>When should you upgrade?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="upgrade" class="slide level2">
 <h2>Upgrade</h2>
-<pre><code>% uv lock --upgrade 
-Resolved 3 packages in 157ms
-Updated numpy v2.1.0 -&gt; v2.2.4</code></pre>
+<pre><code>$ uv lock --upgrade
+Resolved 3 packages in 65ms
+Updated numpy v2.1.1 -&gt; v2.3.2
+
+$ uv tree --outdated 
+Resolved 3 packages in 3ms
+demo v0.1.0
+├── itrm v1.4.21
+│   └── numpy v2.3.2
+└── numpy v2.3.2</code></pre>
+<aside class="notes">
+<p>But, if your pyproject.toml is specific, using == instead of &gt;=, like if you used <code>==</code> with <code>uv add</code>, then <code>lock --upgrade</code> will not overrule it; you must hand-edit pyproject.toml, or uv remove then uv add.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="footer">
 <p>why - workflows - project - script - ephemeral - **versions*</p>
 </div>

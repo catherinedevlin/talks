@@ -11,10 +11,13 @@ format:
     theme: sky 
     auto-animate-duration: 0.5
     logo: images/pyohio.jpeg
+    copy-button: true
   markdown: default
 ---
 
 # Material online
+
+https://github.com/catherinedevlin/talks
 
 ::: {.footer}
 why - workflows - project - script - ephemeral - versions
@@ -357,10 +360,21 @@ why - workflows - **project** - script - ephemeral - versions
 It's there - you don't have to care 
 :::
 
+::: {.footer}
+why - workflows - **project** - script - ephemeral - versions
+:::
+
+
 # Script workflow 
 
 ::: {.footer}
 why - workflows - project - **script** - ephemeral - versions
+:::
+
+::: {.notes}
+You could leave now
+
+Complete, always works, often ideal
 :::
 
 ## Too heavy?
@@ -404,8 +418,8 @@ why - workflows - project - **script** - ephemeral - versions
     # ///
     import numpy as np
 
-    a = np.arange(15).reshape(3, 5)
-    print(a)
+    arr = np.arange(15).reshape(3, 5)
+    print(arr)
 
 
 ::: {.footer}
@@ -481,6 +495,9 @@ why - workflows - project - script - **ephemeral** - versions
 Adds a temporary requirement 
 
     uv run --with itrm python -i npdemo.py 
+
+    >>> import polars as pl 
+    >>> pl.DataFrame(arr)
 
 ::: {.notes}
 Uses all the requirements from pyproject.toml or from 
@@ -621,33 +638,66 @@ Specify version while adding:
 
     uv add "itrm>=1.4"
 
+[itrm](https://pypi.org/project/itrm/): command-line data viz
+
+::: {.notes}
+itrm by David Woodburn
+:::
+
 ::: {.footer}
 why - workflows - project - script - ephemeral - **versions*
 :::
 
 ## Check what's outdated
 
-    uv tree --outdated 
-    Resolved 3 packages in 2ms
-    outdated v0.1.0
-    └── itrm v1.4.15
-        └── numpy v2.1.0 (latest: v2.2.4)
-    
+    $ uv tree --outdated
+    Resolved 3 packages in 1ms
+    demo v0.1.0
+    ├── itrm v1.4.21
+    │   └── numpy v2.1.1 (latest: v2.3.2)
+    └── numpy v2.1.1
+
 ::: {.footer}
 why - workflows - project - script - ephemeral - **versions*
+:::
+
+::: {.notes}
+When should you upgrade?
 :::
 
 ## Upgrade 
 
-    % uv lock --upgrade 
-    Resolved 3 packages in 157ms
-    Updated numpy v2.1.0 -> v2.2.4
+
+    $ uv lock --upgrade
+    Resolved 3 packages in 65ms
+    Updated numpy v2.1.1 -> v2.3.2
+
+    $ uv tree --outdated 
+    Resolved 3 packages in 3ms
+    demo v0.1.0
+    ├── itrm v1.4.21
+    │   └── numpy v2.3.2
+    └── numpy v2.3.2
+
+::: {.notes}
+But, if your pyproject.toml is specific, 
+using == instead of >=, like if you used 
+`==` with `uv add`, 
+then `lock --upgrade`
+will not overrule it; you must hand-edit 
+pyproject.toml, or uv remove then uv add.
+:::
 
 ::: {.footer}
 why - workflows - project - script - ephemeral - **versions*
 :::
 
-## More help 
+
+## More 
+
+[uv by Astral](https://docs.astral.sh/uv/)
+
+https://github.com/catherinedevlin/talks
 
 catherine.devlin@gmail.com
 

@@ -1,84 +1,78 @@
-
 ---
-title: "uv: Ultimate Victory" 
-subtitle: "over Installation and Dependency Chaos"
-author: "Catherine Devlin" 
-place: "PyOhio 2025"
-date: 2025-07-27 
-url: https://github.com/catherinedevlin/talks 
-format: 
-  revealjs:
-    theme: sky 
-    auto-animate-duration: 0.5
-    logo: images/pyohio.jpeg
-  markdown: default
+author:
+- Catherine Devlin
+authors:
+- Catherine Devlin
+date: 2025-07-27
+place: PyOhio 2025
+subtitle: over Installation and Dependency Chaos
+title: "uv: Ultimate Victory"
+toc-title: Table of contents
+url: "https://github.com/catherinedevlin/talks"
 ---
 
 # Material online
 
-::: {.footer}
+::: footer
 why - workflows - project - script - ephemeral - versions
 :::
 
-## Teaser 
+## Teaser
 
-{{< video images/raccoon-from-scratch.mp4 >}}
+[images/raccoon-from-scratch.mp4](images/raccoon-from-scratch.mp4)
 
-::: {.notes}
+::: notes
 Clean machine, no Python, no admin rights
-::: 
+:::
 
-# Why 
+# Why
 
-::: {.notes}
+::: notes
 Well, you did come to this session.
 
 But maybe reluctantly - not AGAIN!
 
-Enemies to lovers trope 
+Enemies to lovers trope
 :::
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
 ## Problems
 
-- Install Python 
-- Install packages 
-  - Where? 
-- What versions?
-- Admin rights, PATH
+-   Install Python
+-   Install packages
+    -   Where?
+-   What versions?
+-   Admin rights, PATH
 
-::: {.notes}
-Python is wonderful!  Simple, understandable,
-clean!
+::: notes
+Python is wonderful! Simple, understandable, clean!
 
-But these challenges are terrible.
-They spoil the joy of introducing people to Python. 
-
+But these challenges are terrible. They spoil the joy of introducing
+people to Python.
 :::
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
 ## Solutions?
 
-- `python -m pip`  
-- `python -m virtualenv` 
-- conda / mamba
-- pipx 
-- hatch
-- poetry
-- rye
+-   `python -m pip`\
+-   `python -m virtualenv`
+-   conda / mamba
+-   pipx
+-   hatch
+-   poetry
+-   rye
 
-::: {.notes}
-People have been working on these problems 
-literally for decades.
+::: notes
+People have been working on these problems literally for decades.
 :::
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
@@ -86,207 +80,199 @@ literally for decades.
 
 > There should be one-- and preferably only one --obvious way to do it.
 
-::: {.notes}
-Each available tool covers *some* of the needs, 
-to varying levels of satisfaction 
+::: notes
+Each available tool covers *some* of the needs, to varying levels of
+satisfaction
 
-Each programmer assembles a favorite toolkit 
+Each programmer assembles a favorite toolkit
 
 Balkanized advice
 :::
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
-## Gallows humor 
+## Gallows humor
 
 ![](https://imgs.xkcd.com/comics/python_environment.png){fig-alt="xkcd: complex Python environment"}
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
-## Just one tool 
+## Just one tool
 
 ![](https://imgs.xkcd.com/comics/standards.png){fig-alt="xkcd: comic about proliferation of standards"}
 
-::: {.notes}
+::: notes
 Skepticism acknowledged
 :::
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
-## why uv? 
+## why uv?
 
 ![](images/uv-logo.png){fig-alt="uv logo"}
 
-::: {.notes}
-- Boring logo 
-- No cute animal
+::: notes
+-   Boring logo
+-   No cute animal
 :::
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
-## unique virtues 
+## unique virtues
 
-- Comprehensive
-- Easy to install and use
-- Transparent virtualenvs 
-- Unbelievable Velocity 
+-   Comprehensive
+-   Easy to install and use
+-   Transparent virtualenvs
+-   Unbelievable Velocity
 
-::: {.notes}
+::: notes
+Installation: - quick one-liner - does not require admin rights -
+installer handles PATH
 
-Installation:
-- quick one-liner
-- does not require admin rights
-- installer handles PATH
+Speed matters
+:::
 
-Speed matters 
-::: 
-
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
-## Low commitment 
+## Low commitment
 
-[documented uninstallation](https://docs.astral.sh/uv/getting-started/installation/#uninstallation)
+[documented
+uninstallation](https://docs.astral.sh/uv/getting-started/installation/#uninstallation)
 
     rm $HOME\.local\bin\uv.exe
     rm $HOME\.local\bin\uvx.exe
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
 ## Future-proof?
 
-::: {.notes}
-But what if some future even more awesome tool replaces uv?
-Will your work in learning uv be lost?
+::: notes
+But what if some future even more awesome tool replaces uv? Will your
+work in learning uv be lost?
 :::
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
-## Evolution 
+## Evolution
 
-::: {.notes}
-uv did not come from thin air - it was inspired by tools like Poetry, 
-and represents the latest step in a fairly continuous evolutionary path 
+::: notes
+uv did not come from thin air - it was inspired by tools like Poetry,
+and represents the latest step in a fairly continuous evolutionary path
 of Python tools.
 
-Thus, even if future tools replace uv, 
-they will probably draw heavily from it.
+Thus, even if future tools replace uv, they will probably draw heavily
+from it.
 
-Time you invest in learning uv will pay off even if eventually 
-you move to some yet-to-be-developed alternate tool.
+Time you invest in learning uv will pay off even if eventually you move
+to some yet-to-be-developed alternate tool.
 :::
 
 Builds on
 
-- pyproject.toml [PEP 621](https://peps.python.org/pep-0621/)
-- hatch
-- Poetry 
-- rye
+-   pyproject.toml [PEP 621](https://peps.python.org/pep-0621/)
+-   hatch
+-   Poetry
+-   rye
 
-::: {.footer}
+::: footer
 **why** - workflows - project - script - ephemeral - versions
 :::
 
-## pixi 
+## pixi
 
-- Condaforge-based (like mamba)
-- Includes non-Python 
-- Shares uv concepts
+-   Condaforge-based (like mamba)
+-   Includes non-Python
+-   Shares uv concepts
 
 ::: notes
-
-Pixi is an example of a different technology that shares many uv concepts. 
-If you decide to use pixi, your familiarity with uv will help.
-
+Pixi is an example of a different technology that shares many uv
+concepts. If you decide to use pixi, your familiarity with uv will help.
 :::
 
-# uv workflows 
+# uv workflows
 
-::: {.footer}
+::: footer
 why - workflows - project - script - ephemeral - versions
 :::
 
-## Install uv 
+## Install uv
 
-[Astral instructions](https://docs.astral.sh/uv/getting-started/installation/)
+[Astral
+instructions](https://docs.astral.sh/uv/getting-started/installation/)
 
     powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-or 
+or
 
     curl -LsSf https://astral.sh/uv/install.sh | sh
 
-::: {.notes}
+::: notes
 Every workflow begins here!
 :::
 
-::: {.footer}
+::: footer
 why - **workflows** - project - script - ephemeral - versions
 :::
 
-## legacy workflows 
+## legacy workflows
 
-Replacing old tools 
+Replacing old tools
 
-- Replace `pip` 
-- Replace `virtualenv` 
+-   Replace `pip`
+-   Replace `virtualenv`
 
-::: {.notes}
-uv developers started with being able to emulate 
-old tools
+::: notes
+uv developers started with being able to emulate old tools
 
-You'll find plenty of advice online about how to use uv, 
-but often it's written by people who prefer workflows 
-based on older tools.
+You'll find plenty of advice online about how to use uv, but often it's
+written by people who prefer workflows based on older tools.
 
-These can be confusing if you just want the simplest 
-possible workflows.  
+These can be confusing if you just want the simplest possible workflows.
 :::
 
-::: {.footer}
+::: footer
 why - **workflows** - project - script - ephemeral - versions
 :::
 
 ## Opinion: don't
 
-::: {.notes}
-
-Today's opinionated tutorial is based on the premise that 
-uv is much easier if you use it to its full potential by 
-using simple, uv-specific workflows.
+::: notes
+Today's opinionated tutorial is based on the premise that uv is much
+easier if you use it to its full potential by using simple, uv-specific
+workflows.
 :::
 
-::: {.footer}
+::: footer
 why - **workflows** - project - script - ephemeral - versions
 :::
 
-# Project workflow 
+# Project workflow
 
-1. Initialize project 
-2. Specify requirements 
-3. Run with uv
+1.  Initialize project
+2.  Specify requirements
+3.  Run with uv
 
-Project == directory with pyproject.toml 
+Project == directory with pyproject.toml
 
-
-::: {.footer}
+::: footer
 why - workflows - **project** - script - ephemeral - versions
 :::
 
-## `init` a project 
+## `init` a project
 
     $ uv init --bare 
     Initialized project `demo`
@@ -297,13 +283,12 @@ why - workflows - **project** - script - ephemeral - versions
     requires-python = ">=3.13"
     dependencies = []
 
-::: {.notes}
-Without --bare, extra files useful 
-for creating a package.  
+::: notes
+Without --bare, extra files useful for creating a package.\
 Fine to ignore them.
 :::
 
-::: {.footer}
+::: footer
 why - workflows - **project** - script - ephemeral - versions
 :::
 
@@ -316,35 +301,35 @@ why - workflows - **project** - script - ephemeral - versions
     Installed 1 package in 51ms
     + numpy==2.3.1
 
-::: {.footer}
+::: footer
 why - workflows - **project** - script - ephemeral - versions
 :::
 
-## `run` 
+## `run`
 
     $ uv run tutorial.py 
     [[ 0  1  2  3  4]
     [ 5  6  7  8  9]
     [10 11 12 13 14]]
 
-::: {.notes}
+::: notes
 Remember run with uv
 
 Can make alias
 :::
 
-::: {.footer}
+::: footer
 why - workflows - **project** - script - ephemeral - versions
 :::
 
 ## Did not (explicitly)
 
-- Install Python 
-- Set up venv
-- Install packages 
-- Activate venv 
+-   Install Python
+-   Set up venv
+-   Install packages
+-   Activate venv
 
-::: {.footer}
+::: footer
 why - workflows - **project** - script - ephemeral - versions
 :::
 
@@ -353,14 +338,24 @@ why - workflows - **project** - script - ephemeral - versions
     $ ls -a 
     .  ..  pyproject.toml  tutorial.py  uv.lock  .venv
 
-::: {.notes}
-It's there - you don't have to care 
+::: notes
+It's there - you don't have to care
 :::
 
-# Script workflow 
+::: footer
+why - workflows - **project** - script - ephemeral - versions
+:::
 
-::: {.footer}
+# Script workflow
+
+::: footer
 why - workflows - project - **script** - ephemeral - versions
+:::
+
+::: notes
+You could leave now
+
+Complete, always works, often ideal
 :::
 
 ## Too heavy?
@@ -368,16 +363,15 @@ why - workflows - project - **script** - ephemeral - versions
     $ ls -a
     .  ..  pyproject.toml  tutorial.py  uv.lock  .venv
 
-::: {.notes}
-For one file, we've added two more, 
-plus a .venv directory
+::: notes
+For one file, we've added two more, plus a .venv directory
 :::
 
-::: {.footer}
+::: footer
 why - workflows - project - **script** - ephemeral - versions
 :::
 
-## Start over 
+## Start over
 
     $ mkdir ../demo2; cd ../demo2
     $ cp ../demo/tutorial.py .
@@ -389,11 +383,11 @@ why - workflows - project - **script** - ephemeral - versions
     [ 5  6  7  8  9]
     [10 11 12 13 14]]
 
-::: {.footer}
+::: footer
 why - workflows - project - **script** - ephemeral - versions
 :::
 
-## Updated `tutorial.py` 
+## Updated `tutorial.py`
 
     $ head tutorial.py 
     # /// script
@@ -404,21 +398,20 @@ why - workflows - project - **script** - ephemeral - versions
     # ///
     import numpy as np
 
-    a = np.arange(15).reshape(3, 5)
-    print(a)
+    arr = np.arange(15).reshape(3, 5)
+    print(arr)
 
-
-::: {.footer}
+::: footer
 why - workflows - project - **script** - ephemeral - versions
 :::
 
 ## [PEP 723](https://peps.python.org/pep-0723/)
 
-Specially-formatted header matter comment 
+Specially-formatted header matter comment
 
 Defines requirements
 
-::: {.footer}
+::: footer
 why - workflows - project - **script** - ephemeral - versions
 :::
 
@@ -427,83 +420,85 @@ why - workflows - project - **script** - ephemeral - versions
     $ ls -a
     .  ..  tutorial.py
 
-::: {.notes}
+::: notes
 The script ran, but where's the virtual environment?
 :::
 
-::: {.footer}
+::: footer
 why - workflows - project - **script** - ephemeral - versions
 :::
 
-
 # Ephemeral
 
-::: {.notes}
-The virtual environment is *gone* 
+::: notes
+The virtual environment is *gone*
 
-Ephemeral virtual environments - created at runtime, for that runtime alone 
+Ephemeral virtual environments - created at runtime, for that runtime
+alone
 
 Wasteful?
 
 Great-grandmother got through Depression!
 :::
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## It's OK 
+## It's OK
 
-- Aggressive caching 
-- Links (hardlink or copy-on-write)
+-   Aggressive caching
+-   Links (hardlink or copy-on-write)
 
-::: {.notes}
-uv builds them by linking to cached packages... so they're virtually instant 
-to create, and harmless to discard.
+::: notes
+uv builds them by linking to cached packages... so they're virtually
+instant to create, and harmless to discard.
 :::
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
 ## Possibilities!
 
-::: {.notes}
+::: notes
 cheap
 :::
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## \-\-with 
+## \--with
 
-Adds a temporary requirement 
+Adds a temporary requirement
 
     uv run --with itrm python -i npdemo.py 
 
-::: {.notes}
-Uses all the requirements from pyproject.toml or from 
-the script header, PLUS any `--with` clause(s)
+    >>> import polars as pl 
+    >>> pl.DataFrame(arr)
+
+::: notes
+Uses all the requirements from pyproject.toml or from the script header,
+PLUS any `--with` clause(s)
 :::
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## Quick exploration 
+## Quick exploration
 
     uv run --with cowsay python 
 
     >>> import cowsay
     >>> cowsay.cow('moo')
 
-
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## Other environments 
+## Other environments
 
     uv run --with cowsay --with ipython ipython 
 
@@ -511,147 +506,169 @@ why - workflows - project - script - **ephemeral** - versions
 
     uv run --with cowsay --with marimo marimo 
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## uvx: self-contained Python applications 
+## uvx: self-contained Python applications
 
-Globally available 
+Globally available
 
-Isolated, ephemeral, on-demand environments 
+Isolated, ephemeral, on-demand environments
 
-Replaces pipx 
+Replaces pipx
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## Examples 
+## Examples
 
-- ruff
-- black 
-- isort 
-- flake8 
-- tldr
-- cowsay 
+-   ruff
+-   black
+-   isort
+-   flake8
+-   tldr
+-   cowsay
 
-::: {.notes}
-Imagine using these tools without ever thinking about 
-whether or not you have the tool installed!
+::: notes
+Imagine using these tools without ever thinking about whether or not you
+have the tool installed!
 :::
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## Ex: tldr 
+## Ex: tldr
 
     uvx tldr curl 
 
-::: {.footer}
+::: footer
 why - workflows - project - script - **ephemeral** - versions
 :::
 
-## Committing with uv tool 
+## Committing with uv tool
 
     uv tool install tldr 
 
     uv tool list
     uv tool upgrade tldr
 
-::: {.notes}
+::: notes
 Think of this like an alias.
 :::
 
 # Versions
 
-- of uv 
-- of Python 
-- of package requirements 
+-   of uv
+-   of Python
+-   of package requirements
 
-
-::: {.footer}
-why - workflows - project - script - ephemeral - **versions*
+::: footer
+why - workflows - project - script - ephemeral - \*\*versions\*
 :::
 
-## Updating uv 
+## Updating uv
 
     uv self update 
-    
-::: {.footer}
-why - workflows - project - script - ephemeral - **versions*
+
+::: footer
+why - workflows - project - script - ephemeral - \*\*versions\*
 :::
 
 ## Available python versions
 
     uv python list 
 
-::: {.notes}
-Easy chance to experiment with new Python versions 
-(even alpha and beta) and pypy 
+::: notes
+Easy chance to experiment with new Python versions (even alpha and beta)
+and pypy
 :::
 
-::: {.footer}
-why - workflows - project - script - ephemeral - **versions*
+::: footer
+why - workflows - project - script - ephemeral - \*\*versions\*
 :::
 
-##  Specifying Python version 
+## Specifying Python version
 
     uv init -p 3.12 --bare 
 
 To change an existing project:
 
-- edit `pyproject.toml` 
-- `uv sync` 
+-   edit `pyproject.toml`
+-   `uv sync`
 
-::: {.notes}
+::: notes
 This `-p` or `--python` argument works with `--script` as well.
 :::
 
-::: {.footer}
-why - workflows - project - script - ephemeral - **versions*
+::: footer
+why - workflows - project - script - ephemeral - \*\*versions\*
 :::
 
-## Requirements versions 
+## Requirements versions
 
-::: {.notes}
+::: notes
 Specify version while adding:
 :::
 
     uv add "itrm>=1.4"
 
-::: {.footer}
-why - workflows - project - script - ephemeral - **versions*
+[itrm](https://pypi.org/project/itrm/): command-line data viz
+
+::: notes
+itrm by David Woodburn
+:::
+
+::: footer
+why - workflows - project - script - ephemeral - \*\*versions\*
 :::
 
 ## Check what's outdated
 
-    uv tree --outdated 
-    Resolved 3 packages in 2ms
-    outdated v0.1.0
-    └── itrm v1.4.15
-        └── numpy v2.1.0 (latest: v2.2.4)
-    
-::: {.footer}
-why - workflows - project - script - ephemeral - **versions*
+    $ uv tree --outdated
+    Resolved 3 packages in 1ms
+    demo v0.1.0
+    ├── itrm v1.4.21
+    │   └── numpy v2.1.1 (latest: v2.3.2)
+    └── numpy v2.1.1
+
+::: footer
+why - workflows - project - script - ephemeral - \*\*versions\*
 :::
 
-## Upgrade 
-
-    % uv lock --upgrade 
-    Resolved 3 packages in 157ms
-    Updated numpy v2.1.0 -> v2.2.4
-
-::: {.footer}
-why - workflows - project - script - ephemeral - **versions*
+::: notes
+When should you upgrade?
 :::
 
-## More help 
+## Upgrade
+
+    $ uv lock --upgrade
+    Resolved 3 packages in 65ms
+    Updated numpy v2.1.1 -> v2.3.2
+
+    $ uv tree --outdated 
+    Resolved 3 packages in 3ms
+    demo v0.1.0
+    ├── itrm v1.4.21
+    │   └── numpy v2.3.2
+    └── numpy v2.3.2
+
+::: notes
+But, if your pyproject.toml is specific, using == instead of \>=, like
+if you used `==` with `uv add`, then `lock --upgrade` will not overrule
+it; you must hand-edit pyproject.toml, or uv remove then uv add.
+:::
+
+::: footer
+why - workflows - project - script - ephemeral - \*\*versions\*
+:::
+
+## More help
 
 catherine.devlin@gmail.com
 
-@catherinedevlin@tech.lgbt 
+@catherinedevlin@tech.lgbt
 
 d8ndl.org
-
