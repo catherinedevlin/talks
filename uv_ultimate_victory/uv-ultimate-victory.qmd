@@ -216,10 +216,15 @@ If you decide to use pixi, your familiarity with uv will help.
 
 :::
 
+::: {.footer}
+**why** - workflows - project - script - ephemeral - versions
+:::
+
+
 # uv workflows 
 
 ::: {.footer}
-why - workflows - project - script - ephemeral - versions
+why - **workflows** - project - script - ephemeral - versions
 :::
 
 ## Install uv 
@@ -494,7 +499,7 @@ why - workflows - project - script - **ephemeral** - versions
 
 Adds a temporary requirement 
 
-    uv run --with itrm python -i npdemo.py 
+    uv run --with polars python -i npdemo.py 
 
     >>> import polars as pl 
     >>> pl.DataFrame(arr)

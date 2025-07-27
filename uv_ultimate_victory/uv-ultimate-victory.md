@@ -13,6 +13,8 @@ url: "https://github.com/catherinedevlin/talks"
 
 # Material online
 
+https://github.com/catherinedevlin/talks
+
 ::: footer
 why - workflows - project - script - ephemeral - versions
 :::
@@ -665,7 +667,11 @@ it; you must hand-edit pyproject.toml, or uv remove then uv add.
 why - workflows - project - script - ephemeral - \*\*versions\*
 :::
 
-## More help
+## More
+
+[uv by Astral](https://docs.astral.sh/uv/)
+
+https://github.com/catherinedevlin/talks
 
 catherine.devlin@gmail.com
 
